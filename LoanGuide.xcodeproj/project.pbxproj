@@ -10,6 +10,7 @@
 		0E5809374FDD054CEE2192BC /* Pods_LoanGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59662C5D04089F1B2208BDD1 /* Pods_LoanGuide.framework */; };
 		E03F88B8201B665400862C53 /* LGHomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F88B7201B665400862C53 /* LGHomeTableHeaderView.swift */; };
 		E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F88BA201B6D6500862C53 /* LGRecommendTableViewCell.swift */; };
+		E04BAB64201CC7BA00DB5421 /* LGLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04BAB63201CC7BA00DB5421 /* LGLoginViewController.swift */; };
 		E053F3AF201B276A0066FD1E /* LGNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3AE201B276A0066FD1E /* LGNavigationController.swift */; };
 		E053F3B1201B27910066FD1E /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3B0201B27910066FD1E /* Define.swift */; };
 		E053F3B3201B2AD90066FD1E /* LGLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3B2201B2AD90066FD1E /* LGLoanViewController.swift */; };
@@ -18,6 +19,8 @@
 		E072DB93201B2DA000368FD3 /* LGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072DB92201B2DA000368FD3 /* LGViewController.swift */; };
 		E08E8D2C201C1F2E008A4FCC /* LGMineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2B201C1F2E008A4FCC /* LGMineTableViewCell.swift */; };
 		E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */; };
+		E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */; };
+		E08E8D32201C6F18008A4FCC /* LGHotProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */; };
 		E0C8BBD6201B112F000D56F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C8BBD5201B112F000D56F1 /* AppDelegate.swift */; };
 		E0C8BBDD201B112F000D56F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0C8BBDC201B112F000D56F1 /* Assets.xcassets */; };
 		E0C8BBE0201B112F000D56F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0C8BBDE201B112F000D56F1 /* LaunchScreen.storyboard */; };
@@ -31,6 +34,7 @@
 		8486B5F612A0B340D9DAD6BB /* Pods-LoanGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoanGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide.release.xcconfig"; sourceTree = "<group>"; };
 		E03F88B7201B665400862C53 /* LGHomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeTableHeaderView.swift; sourceTree = "<group>"; };
 		E03F88BA201B6D6500862C53 /* LGRecommendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendTableViewCell.swift; sourceTree = "<group>"; };
+		E04BAB63201CC7BA00DB5421 /* LGLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoginViewController.swift; sourceTree = "<group>"; };
 		E053F3AE201B276A0066FD1E /* LGNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNavigationController.swift; sourceTree = "<group>"; };
 		E053F3B0201B27910066FD1E /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		E053F3B2201B2AD90066FD1E /* LGLoanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoanViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +43,8 @@
 		E072DB92201B2DA000368FD3 /* LGViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGViewController.swift; sourceTree = "<group>"; };
 		E08E8D2B201C1F2E008A4FCC /* LGMineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineTableViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckTableViewCell.swift; sourceTree = "<group>"; };
+		E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHotProductTableViewCell.swift; sourceTree = "<group>"; };
 		E0C8BBD2201B112F000D56F1 /* LoanGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoanGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0C8BBD5201B112F000D56F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0C8BBDC201B112F000D56F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				E03F88BA201B6D6500862C53 /* LGRecommendTableViewCell.swift */,
+				E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */,
+				E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -114,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				E053F3B6201B2B090066FD1E /* LGMineViewController.swift */,
+				E04BAB63201CC7BA00DB5421 /* LGLoginViewController.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -418,8 +427,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E053F3B7201B2B090066FD1E /* LGMineViewController.swift in Sources */,
+				E04BAB64201CC7BA00DB5421 /* LGLoginViewController.swift in Sources */,
 				E03F88B8201B665400862C53 /* LGHomeTableHeaderView.swift in Sources */,
 				E0C8BBF0201B1489000D56F1 /* LGTabBarController.swift in Sources */,
+				E08E8D32201C6F18008A4FCC /* LGHotProductTableViewCell.swift in Sources */,
 				E072DB93201B2DA000368FD3 /* LGViewController.swift in Sources */,
 				E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */,
 				E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */,
@@ -427,6 +438,7 @@
 				E0C8BBF3201B14BD000D56F1 /* LGHomeViewController.swift in Sources */,
 				E053F3AF201B276A0066FD1E /* LGNavigationController.swift in Sources */,
 				E053F3B3201B2AD90066FD1E /* LGLoanViewController.swift in Sources */,
+				E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */,
 				E053F3B1201B27910066FD1E /* Define.swift in Sources */,
 				E0C8BBD6201B112F000D56F1 /* AppDelegate.swift in Sources */,
 				E08E8D2C201C1F2E008A4FCC /* LGMineTableViewCell.swift in Sources */,

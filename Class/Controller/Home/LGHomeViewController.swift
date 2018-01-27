@@ -30,7 +30,10 @@ class LGHomeViewController: LGViewController {
         homeTableView = UITableView(frame: CGRect.zero,
                                     style: .grouped)
         homeTableView.separatorStyle = .none
+        homeTableView.backgroundColor = kColorSeperatorBackground
         homeTableView.register(LGRecommendTableViewCell.self, forCellReuseIdentifier: LGRecommendTableViewCell.identifier)
+        homeTableView.register(LGCreditCheckTableViewCell.self, forCellReuseIdentifier: LGCreditCheckTableViewCell.identifier)
+        homeTableView.register(LGHotProductTableViewCell.self, forCellReuseIdentifier: LGHotProductTableViewCell.identifier)
         homeTableView.delegate = self
         homeTableView.dataSource = self
         view.addSubview(homeTableView)
@@ -58,7 +61,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "急速好贷")
+            return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "极速好贷")
         } else {
             return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "热门产品")
         }
@@ -73,11 +76,18 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             } else {
                 // 信用知多少
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCheckTableViewCell.identifier)!
+                return cell
             }
         } else {
             // 热门产品
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
+            cell.configCell(icon: nil,
+                            title: "马上金融",
+                            adString: "送苹果X",
+                            moneyString: "日利率0%",
+                            describeString: "凭身份证贷款")
+            return cell
         }
     }
     
@@ -87,5 +97,9 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
-    }    
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
