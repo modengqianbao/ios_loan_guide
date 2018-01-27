@@ -9,6 +9,10 @@
 import UIKit
 import UIColor_Hex_Swift
 
+//MARK:- 应用
+let kScreenWidth = UIScreen.main.bounds.size.width
+let kScreenHeight = UIScreen.main.bounds.size.height
+
 //MARK:- 颜色
 /// 主色调
 let kColorMainTone = UIColor("#448EEC")
@@ -38,4 +42,4 @@ let kColorAssistText = UIColor("#999")
 let kColorHintText = UIColor("#C3C3C3")
 
 //MARK:- 字体
-///
+/// 
