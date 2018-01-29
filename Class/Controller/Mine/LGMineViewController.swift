@@ -29,6 +29,9 @@ class LGMineViewController: LGViewController {
         // 顶部视图
         let topView = UIImageView(image: UIImage(named: "bg_my"))
         topView.backgroundColor = UIColor.blue
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(topViewOnTouch))
+        topView.isUserInteractionEnabled = true
+        topView.addGestureRecognizer(tapGR)
         view.addSubview(topView)
         topView.snp.makeConstraints { [weak self] make in
             make.left.top.right.equalTo(self!.view)
@@ -105,6 +108,12 @@ class LGMineViewController: LGViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    @objc private func topViewOnTouch() {
+        let loginVC = LGLoginViewController()
+        let nc = LGNavigationController(rootViewController: loginVC)
+        present(nc, animated: true, completion: nil)
     }
 }
 
