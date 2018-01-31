@@ -18,6 +18,14 @@ class LGHomeViewController: LGViewController {
 
         setup()
         setupSubviews()
+        test()
+    }
+    
+    private func test() {
+        let test = 1
+        let recommendDetailVC = LGRecommendDetailViewController()
+        recommendDetailVC.hidesBottomBarWhenPushed = true
+        show(recommendDetailVC, sender: nil)
     }
     
     private func setup() {
