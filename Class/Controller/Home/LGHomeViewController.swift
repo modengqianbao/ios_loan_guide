@@ -18,15 +18,15 @@ class LGHomeViewController: LGViewController {
 
         setup()
         setupSubviews()
-        test()
+//        test()
     }
     
-    private func test() {
-        let test = 1
-        let recommendDetailVC = LGRecommendDetailViewController()
-        recommendDetailVC.hidesBottomBarWhenPushed = true
-        show(recommendDetailVC, sender: nil)
-    }
+//    private func test() {
+//        let test = 1
+//        let recommendDetailVC = LGRecommendDetailViewController()
+//        recommendDetailVC.hidesBottomBarWhenPushed = true
+//        show(recommendDetailVC, sender: nil)
+//    }
     
     private func setup() {
         navigationItem.title = "莫等钱包"

@@ -24,9 +24,12 @@
 		E053F3B7201B2B090066FD1E /* LGMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3B6201B2B090066FD1E /* LGMineViewController.swift */; };
 		E05BA3D12020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05BA3D02020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift */; };
 		E05BA3D32020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05BA3D22020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift */; };
+		E0600C2C2021E3980007B732 /* LGDropMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0600C2B2021E3980007B732 /* LGDropMenuTableViewCell.swift */; };
 		E067CF52201F5B0E001193FD /* LGRecommendCheckDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E067CF51201F5B0E001193FD /* LGRecommendCheckDetailTableViewCell.swift */; };
 		E072DB93201B2DA000368FD3 /* LGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072DB92201B2DA000368FD3 /* LGViewController.swift */; };
 		E077C79620215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077C79520215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift */; };
+		E077C7982021A1D400DDEDC0 /* LGDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077C7972021A1D400DDEDC0 /* LGDropDownMenu.swift */; };
+		E077C79A2021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077C7992021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift */; };
 		E08E8D2C201C1F2E008A4FCC /* LGMineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2B201C1F2E008A4FCC /* LGMineTableViewCell.swift */; };
 		E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */; };
 		E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */; };
@@ -58,9 +61,12 @@
 		E053F3B6201B2B090066FD1E /* LGMineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineViewController.swift; sourceTree = "<group>"; };
 		E05BA3D02020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendTitleTableViewCell.swift; sourceTree = "<group>"; };
 		E05BA3D22020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E0600C2B2021E3980007B732 /* LGDropMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGDropMenuTableViewCell.swift; sourceTree = "<group>"; };
 		E067CF51201F5B0E001193FD /* LGRecommendCheckDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendCheckDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E072DB92201B2DA000368FD3 /* LGViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGViewController.swift; sourceTree = "<group>"; };
 		E077C79520215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailCreditTableViewCell.swift; sourceTree = "<group>"; };
+		E077C7972021A1D400DDEDC0 /* LGDropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGDropDownMenu.swift; sourceTree = "<group>"; };
+		E077C7992021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGDropBarCollectionViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2B201C1F2E008A4FCC /* LGMineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineTableViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckTableViewCell.swift; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 		E053F3A6201B273D0066FD1E /* Loan */ = {
 			isa = PBXGroup;
 			children = (
+				E077C79B2021ADAA00DDEDC0 /* DropDownMenu */,
 			);
 			path = Loan;
 			sourceTree = "<group>";
@@ -219,6 +226,16 @@
 			children = (
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		E077C79B2021ADAA00DDEDC0 /* DropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E077C7972021A1D400DDEDC0 /* LGDropDownMenu.swift */,
+				E077C7992021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift */,
+				E0600C2B2021E3980007B732 /* LGDropMenuTableViewCell.swift */,
+			);
+			path = DropDownMenu;
 			sourceTree = "<group>";
 		};
 		E08E8D2A201C1F16008A4FCC /* Cell */ = {
@@ -477,6 +494,8 @@
 				E05BA3D12020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift in Sources */,
 				E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */,
 				E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */,
+				E077C7982021A1D400DDEDC0 /* LGDropDownMenu.swift in Sources */,
+				E0600C2C2021E3980007B732 /* LGDropMenuTableViewCell.swift in Sources */,
 				E02AB1B8201F0D9E00F90E69 /* LGNormalDetailViewController.swift in Sources */,
 				E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */,
 				E053F3B5201B2B010066FD1E /* LGCreditCardViewController.swift in Sources */,
@@ -489,6 +508,7 @@
 				E02AB1B6201F0D5000F90E69 /* LGRecommendDetailViewController.swift in Sources */,
 				E077C79620215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift in Sources */,
 				E053F3B1201B27910066FD1E /* Define.swift in Sources */,
+				E077C79A2021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift in Sources */,
 				E0C8BBD6201B112F000D56F1 /* AppDelegate.swift in Sources */,
 				E02AB1BB201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift in Sources */,
 				E08E8D2C201C1F2E008A4FCC /* LGMineTableViewCell.swift in Sources */,
