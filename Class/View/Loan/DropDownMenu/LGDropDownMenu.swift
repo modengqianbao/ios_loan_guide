@@ -102,6 +102,9 @@ class LGDropDownMenu: UIView {
     }
     
     private func hideMenu() {
+        if menuTableView == nil {
+            setupMenuTableView()
+        }
         menuTableView.isHidden = true
     }
     
@@ -135,12 +138,21 @@ extension LGDropDownMenu: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        currentSection = indexPath.row
         if let source = dataSource {
             if source.dropMenu(self, numberOfRowsInSection: indexPath.row) > 1 {
-                showMenu()
+                if menuTableView == nil {
+                    currentSection = indexPath.row
+                    showMenu()
+                } else if currentSection == indexPath.row && menuTableView.isHidden == false {
+                    currentSection = indexPath.row
+                    hideMenu()
+                } else {
+                    currentSection = indexPath.row
+                    showMenu()
+                }
             } else {
                 delegate?.dropMenu(self, didSelectAtSecion: indexPath.row, atRow: 0)
+                currentSection = indexPath.row
                 hideMenu()
             }
         }
