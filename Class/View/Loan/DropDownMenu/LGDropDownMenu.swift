@@ -13,6 +13,7 @@ protocol LGDropDownMenuDataSource: class {
     func numberOfSectionFor(dropMenu: LGDropDownMenu) -> Int
     func dropMenu(_ dropMenu: LGDropDownMenu, numberOfRowsInSection section: Int) -> Int
     func dropMenu(_ dropMenu: LGDropDownMenu, titleForRow row: Int, inSection section: Int) -> String
+    func dropMenu(_ dropMenu: LGDropDownMenu, contentForRow row: Int, inSection section: Int) -> String?
     func dropMenu(_ dropMenu: LGDropDownMenu, selectedRowForSection section: Int) -> Int
     func dropMenu(_ dropMenu: LGDropDownMenu, setHighLightedForSection section: Int) -> Bool
     func menuHeightFor(dropMenu: LGDropDownMenu) -> CGFloat
@@ -177,7 +178,8 @@ extension LGDropDownMenu: UITableViewDelegate, UITableViewDataSource {
         if let source = dataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: LGDropMenuTableViewCell.identifier) as! LGDropMenuTableViewCell
             let title = source.dropMenu(self, titleForRow: indexPath.row, inSection: currentSection)
-            cell.configCell(title: title)
+            let content = source.dropMenu(self, contentForRow: indexPath.row, inSection: currentSection)
+            cell.configCell(title: title, content: content)
             return cell
         } else {
             return UITableViewCell()

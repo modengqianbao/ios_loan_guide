@@ -41,5 +41,8 @@ let kColorAssistText = UIColor("#999")
 /// 提示文字
 let kColorHintText = UIColor("#C3C3C3")
 
+/// 框框红色
+let kColorExtraBorder = UIColor(red:0.85, green:0.13, blue:0.16, alpha:1.00)
+
 //MARK:- 字体
 /// 

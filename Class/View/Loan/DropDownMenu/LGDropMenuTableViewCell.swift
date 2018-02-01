@@ -13,6 +13,7 @@ class LGDropMenuTableViewCell: UITableViewCell {
     static let identifier = "LGDropMenuTableViewCell"
     
     private var titleLabel: UILabel!
+    private var contentLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,9 +39,20 @@ class LGDropMenuTableViewCell: UITableViewCell {
             make.top.equalTo(self!).offset(12)
             make.bottom.equalTo(self!).offset(-12)
         }
+        
+        // 内容
+        contentLabel = UILabel()
+        contentLabel.textColor = kColorAssistText
+        contentLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        addSubview(contentLabel)
+        contentLabel.snp.makeConstraints { [weak self] make in
+            make.centerY.equalTo(self!)
+            make.right.equalTo(self!).offset(-8)            
+        }
     }
     
-    func configCell(title: String) {
+    func configCell(title: String, content: String?) {
         titleLabel.text = title
+        contentLabel.text = content
     }
 }

@@ -56,7 +56,7 @@ class LGHotProductTableViewCell: UITableViewCell {
         }
         
         // 广告和广告框框
-        let redColor = UIColor(red:0.85, green:0.13, blue:0.16, alpha:1.00)
+        let redColor = kColorExtraBorder
         adLabel = UILabel()
         adLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
 //        adLabel.layer.cornerRadius = 3

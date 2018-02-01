@@ -124,6 +124,10 @@ extension LGLoanViewController: LGDropDownMenuDelegate, LGDropDownMenuDataSource
         }
     }
     
+    func dropMenu(_ dropMenu: LGDropDownMenu, contentForRow row: Int, inSection section: Int) -> String? {
+        return nil
+    }
+    
     func dropMenu(_ dropMenu: LGDropDownMenu, setHighLightedForSection section: Int) -> Bool {
         if section == 0 {
             return sortWithRate

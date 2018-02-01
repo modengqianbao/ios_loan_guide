@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E5809374FDD054CEE2192BC /* Pods_LoanGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59662C5D04089F1B2208BDD1 /* Pods_LoanGuide.framework */; };
 		E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00EFB9E201D76610022F77D /* LGSignupViewController.swift */; };
+		E017C4582022A55800884929 /* LGCreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E017C4572022A55800884929 /* LGCreditCardTableViewCell.swift */; };
 		E02AB1B2201F088F00F90E69 /* LGVericationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B1201F088F00F90E69 /* LGVericationViewController.swift */; };
 		E02AB1B4201F09F300F90E69 /* LGVericationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B3201F09F300F90E69 /* LGVericationTableViewCell.swift */; };
 		E02AB1B6201F0D5000F90E69 /* LGRecommendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */; };
@@ -46,6 +47,7 @@
 		59662C5D04089F1B2208BDD1 /* Pods_LoanGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoanGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8486B5F612A0B340D9DAD6BB /* Pods-LoanGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoanGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide.release.xcconfig"; sourceTree = "<group>"; };
 		E00EFB9E201D76610022F77D /* LGSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSignupViewController.swift; sourceTree = "<group>"; };
+		E017C4572022A55800884929 /* LGCreditCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		E02AB1B1201F088F00F90E69 /* LGVericationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGVericationViewController.swift; sourceTree = "<group>"; };
 		E02AB1B3201F09F300F90E69 /* LGVericationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGVericationTableViewCell.swift; sourceTree = "<group>"; };
 		E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailViewController.swift; sourceTree = "<group>"; };
@@ -184,11 +186,12 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
-		E053F3A8201B273D0066FD1E /* Credit */ = {
+		E053F3A8201B273D0066FD1E /* CreditCard */ = {
 			isa = PBXGroup;
 			children = (
+				E017C4572022A55800884929 /* LGCreditCardTableViewCell.swift */,
 			);
-			path = Credit;
+			path = CreditCard;
 			sourceTree = "<group>";
 		};
 		E053F3A9201B273D0066FD1E /* Home */ = {
@@ -305,7 +308,7 @@
 			children = (
 				E053F3A9201B273D0066FD1E /* Home */,
 				E053F3A6201B273D0066FD1E /* Loan */,
-				E053F3A8201B273D0066FD1E /* Credit */,
+				E053F3A8201B273D0066FD1E /* CreditCard */,
 				E053F3A7201B273D0066FD1E /* Mine */,
 			);
 			path = View;
@@ -488,6 +491,7 @@
 				E02AB1B2201F088F00F90E69 /* LGVericationViewController.swift in Sources */,
 				E03F88B8201B665400862C53 /* LGHomeTableHeaderView.swift in Sources */,
 				E067CF52201F5B0E001193FD /* LGRecommendCheckDetailTableViewCell.swift in Sources */,
+				E017C4582022A55800884929 /* LGCreditCardTableViewCell.swift in Sources */,
 				E0C8BBF0201B1489000D56F1 /* LGTabBarController.swift in Sources */,
 				E08E8D32201C6F18008A4FCC /* LGHotProductTableViewCell.swift in Sources */,
 				E072DB93201B2DA000368FD3 /* LGViewController.swift in Sources */,
