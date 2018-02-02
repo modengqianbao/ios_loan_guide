@@ -10,5 +10,6 @@ target 'LoanGuide' do
 	pod 'SwiftyJSON'
 	pod 'Kingfisher', '~> 4.0'
 	pod 'MJRefresh'
-	
+	pod 'MBProgressHUD', '~> 1.1.0'
+	pod 'CocoaSecurity'
 end

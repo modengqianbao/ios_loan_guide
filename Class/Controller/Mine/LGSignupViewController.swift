@@ -9,12 +9,19 @@
 import UIKit
 import SnapKit
 import TPKeyboardAvoiding
+import MBProgressHUD
+import CocoaSecurity
 
 class LGSignupViewController: LGViewController {
     private var phoneTextField: UITextField!
     private var passwordTextField: UITextField!
     private var vericationTextField: UITextField!
+    private var vericationButton: UIButton!
     private var signupButton: UIButton!
+    
+    private var countDownSecond = 0
+    private var timer: Timer!
+    private var smsToken: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +35,19 @@ class LGSignupViewController: LGViewController {
         view.backgroundColor = kColorBackground
         
         let font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        
+        // 背景图片
+        let backgroundImage1 = UIImageView(image: UIImage(named: "login_pic2"))
+        let backgroundImage2 = UIImageView(image: UIImage(named: "login_pic1"))
+        view.addSubview(backgroundImage1)
+        view.addSubview(backgroundImage2)
+        backgroundImage1.snp.makeConstraints { [weak self] make in
+            make.left.top.equalTo(self!.view)
+        }
+        backgroundImage2.snp.makeConstraints { [weak self] make in
+            make.right.equalTo(self!.view)
+            make.top.equalTo(self!.view).offset(400)
+        }
         
         // logo
         let loginImageView = UIImageView(image: UIImage(named: "login_logo"))
@@ -63,6 +83,9 @@ class LGSignupViewController: LGViewController {
         phoneTextField = UITextField()
         phoneTextField.font = font
         phoneTextField.placeholder = "请输入11位手机号"
+        phoneTextField.keyboardType = .phonePad
+        phoneTextField.returnKeyType = .continue
+        phoneTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         phoneTextField.setContentHuggingPriority(UILayoutPriority(rawValue: 200), for: .horizontal)
         view.addSubview(phoneTextField)
         phoneTextField.snp.makeConstraints { make in
@@ -84,7 +107,9 @@ class LGSignupViewController: LGViewController {
         
         passwordTextField = UITextField()
         passwordTextField.font = font
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         passwordTextField.placeholder = "请输入至少6位密码"
+        passwordTextField.returnKeyType = .continue
         passwordTextField.isSecureTextEntry = true
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
@@ -103,23 +128,27 @@ class LGSignupViewController: LGViewController {
             make.height.equalTo(1)
         }
         
-        let vericationButton = UIButton(type: .custom)
+        vericationButton = UIButton(type: .custom)
+        vericationButton.isEnabled = false
         vericationButton.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        vericationButton.backgroundColor = kColorMainTone
-        vericationButton.layer.cornerRadius = 2
+        vericationButton.backgroundColor = kColorGrey
+        vericationButton.layer.cornerRadius = 14
         vericationButton.layer.masksToBounds = true
         vericationButton.setTitle("获取验证码", for: .normal)
         vericationButton.addTarget(self, action: #selector(vericationButtonOnClick(button:)), for: .touchUpInside)
         view.addSubview(vericationButton)
         vericationButton.snp.makeConstraints { make in
             make.right.equalTo(vericationLine)
-            make.size.equalTo(CGSize(width: 80, height: 24))
+            make.size.equalTo(CGSize(width: 100, height: 28))
             make.bottom.equalTo(vericationLine.snp.top).offset(-12)
         }
         
         vericationTextField = UITextField()
         vericationTextField.font = font
         vericationTextField.placeholder = "请输入验证码"
+        vericationTextField.returnKeyType = .done
+        vericationTextField.keyboardType = .numberPad
+        vericationTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.addSubview(vericationTextField)
         vericationTextField.snp.makeConstraints { make in
             make.left.equalTo(vericationLine)
@@ -128,12 +157,14 @@ class LGSignupViewController: LGViewController {
             make.height.equalTo(24)
         }
         
-        // 注册
+        // 注册按钮
         signupButton = UIButton(type: .custom)
+        signupButton.isEnabled = false
         signupButton.setTitle("注册", for: .normal)
-        signupButton.backgroundColor = kColorMainTone
+        signupButton.backgroundColor = kColorGrey
         signupButton.layer.cornerRadius = 3
         signupButton.layer.masksToBounds = true
+        signupButton.addTarget(self, action: #selector(signupButtonOnClick), for: .touchUpInside)
         view.addSubview(signupButton)
         signupButton.snp.makeConstraints { make in
             make.left.right.equalTo(vericationLine)
@@ -155,7 +186,7 @@ class LGSignupViewController: LGViewController {
             make.top.equalTo(self!.view).offset(topOffset)
             make.height.equalTo(labelHeight)
         }
-
+        
         let agreementButton = UIButton()
         agreementButton.setTitleColor(kColorMainTone, for: .normal)
         let buttonTitle = "用户注册协议"
@@ -175,14 +206,95 @@ class LGSignupViewController: LGViewController {
     }
     
     @objc private func vericationButtonOnClick(button: UIButton) {
-        
+        // 发送请求
+        view.endEditing(true)
+        MBProgressHUD.showAdded(to: view, animated: true)
+        LGUserService.sharedService.sendSMSCode(phoneNumber: phoneTextField.text!, type: 1) { [weak self] smsToken, error in
+            if self != nil {
+                MBProgressHUD.hide(for: self!.view, animated: true)
+                if error == nil {
+                    // 发送成功，开始倒计时
+                    button.isEnabled = false
+                    button.backgroundColor = kColorGrey
+                    self!.countDownSecond = 60
+                    self!.smsToken = smsToken
+                    self!.timer = Timer.scheduledTimer(timeInterval: 1, target: self!, selector: #selector(self!.minusOneSecond), userInfo: nil, repeats: true)
+                } else {
+                    // 发送失败，提示
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        }
+    }
+    
+    @objc private func minusOneSecond() {
+        countDownSecond -= 1
+        if countDownSecond < 1 {
+            timer.invalidate()
+            vericationButton.setTitle("获取验证码", for: .normal)
+            textFieldDidChange()
+        } else {
+            vericationButton.setTitle("重新获取(\(countDownSecond)s)", for: .normal)
+        }
     }
     
     @objc private func signupButtonOnClick() {
-        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        view.endEditing(true)
+        if smsToken != nil {
+            let password = CocoaSecurity.md5(passwordTextField.text!)
+            LGUserService.sharedService.signup(withPhone: phoneTextField.text!, password: password!.hex, smsCode: vericationTextField.text!, smsToken: smsToken!) { [weak self] error in
+                if self != nil {
+                    if error == nil {
+                        // 注册成功
+                        self!.navigationController?.popViewController(animated: true)
+                    } else {
+                        LGHud.show(in: self!.view, animated: true, text: error)
+                    }
+                }
+            }
+        } else {
+            LGHud.show(in: view, animated: true, text: "请先获取验证码")
+        }
     }
     
     @objc private func agreementButtonOnClick() {
         
+    }
+    
+    @objc private func textFieldDidChange() {
+        // 获取验证码按钮
+        if phoneTextField.text!.count == 11 && countDownSecond < 1 {
+            vericationButton.isEnabled = true
+            vericationButton.backgroundColor = kColorMainTone
+        } else {
+            vericationButton.isEnabled = false
+            vericationButton.backgroundColor = kColorGrey
+        }
+        
+        // 注册按钮
+        if phoneTextField.text!.count == 11
+            && passwordTextField.text!.count >= 6
+            && vericationTextField.text!.count == 6 {
+            signupButton.isEnabled = true
+            signupButton.backgroundColor = kColorMainTone
+        } else {
+            signupButton.isEnabled = false
+            signupButton.backgroundColor = kColorGrey
+        }
+    }
+}
+
+//MARK:- UITextField delegate
+extension LGSignupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == phoneTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            vericationTextField.becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
+        return true
     }
 }

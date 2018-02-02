@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import CocoaSecurity
+import MBProgressHUD
 import TPKeyboardAvoiding
 
 class LGLoginViewController: LGViewController {
@@ -21,12 +23,31 @@ class LGLoginViewController: LGViewController {
         setup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        phoneTextField.becomeFirstResponder()
+    }
+    
     private func setup() {
         title = "登录"
         view = TPKeyboardAvoidingScrollView(frame: view.frame)
         view.backgroundColor = kColorBackground
-        
+
         let font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        
+        // 背景图片
+        let backgroundImage1 = UIImageView(image: UIImage(named: "login_pic2"))
+        let backgroundImage2 = UIImageView(image: UIImage(named: "login_pic1"))
+        view.addSubview(backgroundImage1)
+        view.addSubview(backgroundImage2)
+        backgroundImage1.snp.makeConstraints { [weak self] make in
+            make.left.top.equalTo(self!.view)
+        }
+        backgroundImage2.snp.makeConstraints { [weak self] make in
+            make.right.equalTo(self!.view)
+            make.top.equalTo(self!.view).offset(400)
+        }
         
         // 返回键
         let backButton = UIButton(type: .custom)
@@ -88,9 +109,11 @@ class LGLoginViewController: LGViewController {
         
         phoneTextField = UITextField()
         phoneTextField.font = font
+        phoneTextField.keyboardType = .phonePad
         phoneTextField.placeholder = "请输入手机号"
+        phoneTextField.delegate = self
         phoneTextField.setContentHuggingPriority(.init(200), for: .horizontal)
-//        phoneTextField.setContentCompressionResistancePriority(.d, for: .horizontal)
+        phoneTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.addSubview(phoneTextField)
         phoneTextField.snp.makeConstraints { make in
             make.height.equalTo(24)
@@ -112,6 +135,9 @@ class LGLoginViewController: LGViewController {
         passwordTextField = UITextField()
         passwordTextField.font = font
         passwordTextField.placeholder = "请输入登录密码"
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.delegate = self
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
             make.left.right.equalTo(passwordLine)
@@ -121,6 +147,7 @@ class LGLoginViewController: LGViewController {
         
         // 登录
         loginButton = UIButton(type: .custom)
+        loginButton.isEnabled = false
         loginButton.backgroundColor = kColorGrey
         loginButton.setTitle("登录", for: .normal)
         loginButton.addTarget(self, action: #selector(loginButtonOnClick), for: .touchUpInside)
@@ -155,10 +182,48 @@ class LGLoginViewController: LGViewController {
     }
     
     @objc private func loginButtonOnClick() {
-        
+        view.endEditing(true)
+        MBProgressHUD.showAdded(to: view, animated: false)
+        let password = CocoaSecurity.md5(passwordTextField.text!)
+        print(password!.hex)
+        LGUserService.sharedService.login(withPhone: phoneTextField.text!, password: password!.hex) { [weak self] error in
+            if self != nil {
+                MBProgressHUD.hide(for: self!.view, animated: true)
+                if error == nil {
+                    // 登录成功
+                    let te = 2
+                    print("登录成功")
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        }
     }
     
     @objc private func forgetButtonOnClick() {
         
+    }
+    
+    // 判断输入长度
+    @objc private func textFieldDidChange() {
+        if phoneTextField.text!.count == 11 && passwordTextField.text!.count > 0 {
+            loginButton.backgroundColor = kColorMainTone
+            loginButton.isEnabled = true
+        } else {
+            loginButton.backgroundColor = kColorGrey
+            loginButton.isEnabled = false
+        }
+    }
+}
+
+//MARK:- UITextField delegate
+extension LGLoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == phoneTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            view.endEditing(true)
+        }
+        return true
     }
 }

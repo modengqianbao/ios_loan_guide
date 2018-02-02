@@ -15,7 +15,7 @@ class LGHttpService {
     
     private init() {}
     
-    func get(urlString: String, parameters: [String: Any]?, complete: @escaping (_ data: JSON?, _ error: String?) -> Void) {
+    func get(urlString: String, parameters: [String: Any]?, complete: @escaping (_ json: JSON?, _ error: String?) -> Void) {
         guard let url = URL(string: urlString) else {
             complete(nil, "url error")
             return
@@ -24,7 +24,11 @@ class LGHttpService {
         Alamofire.request(url, method: .get, parameters: parameters, headers: header).responseJSON { response in
             if let data = response.result.value {
                 let json = JSON(data)
-                complete(json, nil)
+                if json["msg"].stringValue.isEmpty {
+                    complete(json, nil)
+                } else {
+                    complete(nil, json["msg"].stringValue)
+                }
             } else {
                 complete(nil, "request error")
             }
@@ -41,7 +45,11 @@ class LGHttpService {
         Alamofire.request(url, method: .post, parameters: parameters, headers: header).responseJSON { response in
             if let data = response.result.value {
                 let json = JSON(data)
-                complete(json, nil)
+                if json["msg"].stringValue.isEmpty {
+                    complete(json, nil)
+                } else {
+                    complete(nil, json["msg"].stringValue)
+                }
             } else {
                 complete(nil, "request error")
             }

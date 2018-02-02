@@ -97,11 +97,6 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                             adString: item.labelString,
                             moneyString: "\(item.loanMax)",
                             describeString: item.introduction)
-//            cell.configCell(icon: nil,
-//                            title: "马上金融",
-//                            adString: "送苹果X",
-//                            moneyString: "日利率0%",
-//                            describeString: "凭身份证贷款")
             return cell
         }
     }

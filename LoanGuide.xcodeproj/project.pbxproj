@@ -37,6 +37,7 @@
 		E077C79620215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077C79520215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift */; };
 		E077C7982021A1D400DDEDC0 /* LGDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077C7972021A1D400DDEDC0 /* LGDropDownMenu.swift */; };
 		E077C79A2021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E077C7992021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift */; };
+		E08496F920245AAE00AF701F /* LGHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08496F820245AAE00AF701F /* LGHud.swift */; };
 		E08E8D2C201C1F2E008A4FCC /* LGMineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2B201C1F2E008A4FCC /* LGMineTableViewCell.swift */; };
 		E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */; };
 		E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */; };
@@ -49,6 +50,9 @@
 		E0C8BBE0201B112F000D56F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0C8BBDE201B112F000D56F1 /* LaunchScreen.storyboard */; };
 		E0C8BBF0201B1489000D56F1 /* LGTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C8BBEF201B1489000D56F1 /* LGTabBarController.swift */; };
 		E0C8BBF3201B14BD000D56F1 /* LGHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C8BBF2201B14BD000D56F1 /* LGHomeViewController.swift */; };
+		E0E93A2D20242EE800992FB3 /* LGUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2C20242EE800992FB3 /* LGUserService.swift */; };
+		E0E93A2F20242F1300992FB3 /* LGUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2E20242F1300992FB3 /* LGUserModel.swift */; };
+		E0E93A312024316900992FB3 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A302024316900992FB3 /* Notification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +88,7 @@
 		E077C79520215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailCreditTableViewCell.swift; sourceTree = "<group>"; };
 		E077C7972021A1D400DDEDC0 /* LGDropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGDropDownMenu.swift; sourceTree = "<group>"; };
 		E077C7992021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGDropBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		E08496F820245AAE00AF701F /* LGHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHud.swift; sourceTree = "<group>"; };
 		E08E8D2B201C1F2E008A4FCC /* LGMineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineTableViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +103,9 @@
 		E0C8BBE1201B112F000D56F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0C8BBEF201B1489000D56F1 /* LGTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGTabBarController.swift; sourceTree = "<group>"; };
 		E0C8BBF2201B14BD000D56F1 /* LGHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeViewController.swift; sourceTree = "<group>"; };
+		E0E93A2C20242EE800992FB3 /* LGUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserService.swift; sourceTree = "<group>"; };
+		E0E93A2E20242F1300992FB3 /* LGUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserModel.swift; sourceTree = "<group>"; };
+		E0E93A302024316900992FB3 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +276,7 @@
 		E053F3AD201B27490066FD1E /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				E0E93A2E20242F1300992FB3 /* LGUserModel.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -280,6 +289,14 @@
 				E0600C2B2021E3980007B732 /* LGDropMenuTableViewCell.swift */,
 			);
 			path = DropDownMenu;
+			sourceTree = "<group>";
+		};
+		E08496F720245A9300AF701F /* Hud */ = {
+			isa = PBXGroup;
+			children = (
+				E08496F820245AAE00AF701F /* LGHud.swift */,
+			);
+			path = Hud;
 			sourceTree = "<group>";
 		};
 		E08E8D2A201C1F16008A4FCC /* Cell */ = {
@@ -304,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				E0B2139C2023F866000DEA4F /* LGHomeService.swift */,
+				E0E93A2C20242EE800992FB3 /* LGUserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -368,6 +386,7 @@
 				E053F3A6201B273D0066FD1E /* Loan */,
 				E053F3A8201B273D0066FD1E /* CreditCard */,
 				E053F3A7201B273D0066FD1E /* Mine */,
+				E08496F720245A9300AF701F /* Hud */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -387,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				E053F3B0201B27910066FD1E /* Define.swift */,
+				E0E93A302024316900992FB3 /* Notification.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -491,7 +511,9 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -501,7 +523,9 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -586,12 +610,16 @@
 				E0380F9F2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift in Sources */,
 				E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */,
 				E02AB1B6201F0D5000F90E69 /* LGRecommendDetailViewController.swift in Sources */,
+				E0E93A2F20242F1300992FB3 /* LGUserModel.swift in Sources */,
+				E0E93A2D20242EE800992FB3 /* LGUserService.swift in Sources */,
 				E077C79620215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift in Sources */,
 				E053F3B1201B27910066FD1E /* Define.swift in Sources */,
 				E077C79A2021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift in Sources */,
+				E0E93A312024316900992FB3 /* Notification.swift in Sources */,
 				E0C8BBD6201B112F000D56F1 /* AppDelegate.swift in Sources */,
 				E02AB1BB201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift in Sources */,
 				E08E8D2C201C1F2E008A4FCC /* LGMineTableViewCell.swift in Sources */,
+				E08496F920245AAE00AF701F /* LGHud.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,3 +52,5 @@ let kColorExtraBorder = UIColor(red:0.85, green:0.13, blue:0.16, alpha:1.00)
 var isTesting = true
 /// 域名
 let domain = isTesting ? "http://creditproduct.test.cdecube.com/api/android/" : "http://wallet.cdxiaoshudian.com/api/android/"
+let userAgreementURLString = "http://wallet.cdxiaoshudian.com/agreement"
+
