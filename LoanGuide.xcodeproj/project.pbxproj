@@ -41,6 +41,9 @@
 		E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */; };
 		E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */; };
 		E08E8D32201C6F18008A4FCC /* LGHotProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */; };
+		E0B213992023F7DF000DEA4F /* LGHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B213982023F7DF000DEA4F /* LGHomeModel.swift */; };
+		E0B2139D2023F866000DEA4F /* LGHomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2139C2023F866000DEA4F /* LGHomeService.swift */; };
+		E0B2139F202401D4000DEA4F /* LGLoanProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2139E202401D4000DEA4F /* LGLoanProductModel.swift */; };
 		E0C8BBD6201B112F000D56F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C8BBD5201B112F000D56F1 /* AppDelegate.swift */; };
 		E0C8BBDD201B112F000D56F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0C8BBDC201B112F000D56F1 /* Assets.xcassets */; };
 		E0C8BBE0201B112F000D56F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0C8BBDE201B112F000D56F1 /* LaunchScreen.storyboard */; };
@@ -85,6 +88,9 @@
 		E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckTableViewCell.swift; sourceTree = "<group>"; };
 		E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHotProductTableViewCell.swift; sourceTree = "<group>"; };
+		E0B213982023F7DF000DEA4F /* LGHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeModel.swift; sourceTree = "<group>"; };
+		E0B2139C2023F866000DEA4F /* LGHomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeService.swift; sourceTree = "<group>"; };
+		E0B2139E202401D4000DEA4F /* LGLoanProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoanProductModel.swift; sourceTree = "<group>"; };
 		E0C8BBD2201B112F000D56F1 /* LoanGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoanGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0C8BBD5201B112F000D56F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0C8BBDC201B112F000D56F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,7 +167,8 @@
 		E04C75BD2023032400F56F0B /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				E04C75BE2023035600F56F0B /* LGHttpService.swift */,
+				E0B2139B2023F85A000DEA4F /* Service */,
+				E0B2139A2023F84B000DEA4F /* BaseService */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -238,6 +245,8 @@
 		E053F3AA201B27490066FD1E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E0B213982023F7DF000DEA4F /* LGHomeModel.swift */,
+				E0B2139E202401D4000DEA4F /* LGLoanProductModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -281,6 +290,22 @@
 				E02AB1B3201F09F300F90E69 /* LGVericationTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		E0B2139A2023F84B000DEA4F /* BaseService */ = {
+			isa = PBXGroup;
+			children = (
+				E04C75BE2023035600F56F0B /* LGHttpService.swift */,
+			);
+			path = BaseService;
+			sourceTree = "<group>";
+		};
+		E0B2139B2023F85A000DEA4F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E0B2139C2023F866000DEA4F /* LGHomeService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		E0C8BBC9201B112F000D56F1 = {
@@ -466,6 +491,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
@@ -474,6 +501,8 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
@@ -538,6 +567,7 @@
 				E05BA3D12020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift in Sources */,
 				E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */,
 				E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */,
+				E0B2139F202401D4000DEA4F /* LGLoanProductModel.swift in Sources */,
 				E077C7982021A1D400DDEDC0 /* LGDropDownMenu.swift in Sources */,
 				E011E5F22023092F00FC3BF0 /* LGProductDetailViewController.swift in Sources */,
 				E0600C2C2021E3980007B732 /* LGDropMenuTableViewCell.swift in Sources */,
@@ -550,7 +580,9 @@
 				E053F3AF201B276A0066FD1E /* LGNavigationController.swift in Sources */,
 				E053F3B3201B2AD90066FD1E /* LGLoanViewController.swift in Sources */,
 				E05BA3D32020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift in Sources */,
+				E0B2139D2023F866000DEA4F /* LGHomeService.swift in Sources */,
 				E04C75BC2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift in Sources */,
+				E0B213992023F7DF000DEA4F /* LGHomeModel.swift in Sources */,
 				E0380F9F2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift in Sources */,
 				E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */,
 				E02AB1B6201F0D5000F90E69 /* LGRecommendDetailViewController.swift in Sources */,

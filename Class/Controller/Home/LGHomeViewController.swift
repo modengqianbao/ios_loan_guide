@@ -12,21 +12,22 @@ import SnapKit
 class LGHomeViewController: LGViewController {
     
     private var homeTableView: UITableView!
+    
+    private let model = LGHomeModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
         setupSubviews()
-//        test()
+        loadData()
     }
     
-//    private func test() {
-//        let test = 2
-//        let vc = LGProductDetailViewController()
-//        vc.hidesBottomBarWhenPushed = true
-//        show(vc, sender: nil)
-//    }
+    private func loadData() {
+        model.reloadLoanProduct { [weak self] in
+            self!.homeTableView.reloadData()
+        }
+    }
     
     private func setup() {
         navigationItem.title = "莫等钱包"
@@ -63,7 +64,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             return 2
         } else {
             // 热门产品
-            return 5
+            return model.loanProductArray.count
         }
     }
     
@@ -90,11 +91,17 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             // 热门产品
             let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
-            cell.configCell(icon: nil,
-                            title: "马上金融",
-                            adString: "送苹果X",
-                            moneyString: "日利率0%",
-                            describeString: "凭身份证贷款")
+            let item = model.loanProductArray[indexPath.row]
+            cell.configCell(iconURLString: item.logoString,
+                            title: item.name,
+                            adString: item.labelString,
+                            moneyString: "\(item.loanMax)",
+                            describeString: item.introduction)
+//            cell.configCell(icon: nil,
+//                            title: "马上金融",
+//                            adString: "送苹果X",
+//                            moneyString: "日利率0%",
+//                            describeString: "凭身份证贷款")
             return cell
         }
     }

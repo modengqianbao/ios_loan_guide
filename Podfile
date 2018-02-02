@@ -8,5 +8,7 @@ target 'LoanGuide' do
 	pod 'TPKeyboardAvoiding', '~> 1.3.2'
 	pod 'Alamofire', '~> 4.5'
 	pod 'SwiftyJSON'
+	pod 'Kingfisher', '~> 4.0'
+	pod 'MJRefresh'
 	
 end

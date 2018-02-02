@@ -67,7 +67,7 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
-        cell.configCell(icon: nil, title: "马上金融", adString: "送苹果X", moneyString: "5000", describeString: "2")
+        cell.configCell(iconURLString: nil, title: "马上金融", adString: "送苹果X", moneyString: "5000", describeString: "2")
         return cell
     }
     

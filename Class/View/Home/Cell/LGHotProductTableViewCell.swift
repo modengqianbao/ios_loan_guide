@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class LGHotProductTableViewCell: UITableViewCell {
     static let identifier = "LGHotProductTableViewCell"
@@ -59,9 +60,6 @@ class LGHotProductTableViewCell: UITableViewCell {
         let redColor = kColorExtraBorder
         adLabel = UILabel()
         adLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
-//        adLabel.layer.cornerRadius = 3
-//        adLabel.layer.borderColor = redColor.cgColor
-//        adLabel.layer.borderWidth = 1
         adLabel.textColor = redColor
         addSubview(adLabel)
         adLabel.snp.makeConstraints { make in
@@ -77,8 +75,10 @@ class LGHotProductTableViewCell: UITableViewCell {
         adBorderView.layer.masksToBounds = true
         adLabel.addSubview(adBorderView)
         adBorderView.snp.makeConstraints { make in
-            make.top.left.equalTo(adLabel).offset(-2)
-            make.right.bottom.equalTo(adLabel).offset(2)
+            make.top.equalTo(adLabel).offset(-2)
+            make.bottom.equalTo(adLabel).offset(2)
+            make.left.equalTo(adLabel).offset(-4)
+            make.right.equalTo(adLabel).offset(4)
         }
         
         // 利率
@@ -91,27 +91,31 @@ class LGHotProductTableViewCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(6)
         }
         
+        // 申请按钮
+        applyButton = UIButton(type: .custom)
+        applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        applyButton.layer.cornerRadius = 3
+        applyButton.backgroundColor = kColorMainTone
+        applyButton.layer.masksToBounds = true
+        applyButton.setTitle("申请", for: .normal)
+        addSubview(applyButton)
+        applyButton.snp.makeConstraints { [weak self] make in
+            make.centerY.equalTo(self!)
+            make.right.equalTo(self!).offset(-12)
+            make.size.equalTo(CGSize(width: 50, height: 30))
+        }
+        
         // 介绍
         describeLabel = UILabel()
         describeLabel.textColor = kColorAssistText
+        describeLabel.setContentHuggingPriority(.init(200), for: .horizontal)
         describeLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         addSubview(describeLabel)
         describeLabel.snp.makeConstraints { [weak self] make in
             make.left.equalTo(titleLabel)
             make.top.equalTo(moneyLabel.snp.bottom).offset(4)
             make.bottom.equalTo(self!).offset(-12)
-        }
-        
-        // 申请按钮
-        applyButton = UIButton(type: .custom)
-        applyButton.layer.cornerRadius = 2
-        applyButton.backgroundColor = kColorMainTone
-        applyButton.layer.masksToBounds = true
-        addSubview(applyButton)
-        applyButton.snp.makeConstraints { [weak self] make in
-            make.centerY.equalTo(self!)
-            make.right.equalTo(self!).offset(-12)
-            make.size.equalTo(CGSize(width: 50, height: 30))
+            make.right.lessThanOrEqualTo(applyButton.snp.left).offset(-12)
         }
         
         // 分割线
@@ -125,8 +129,11 @@ class LGHotProductTableViewCell: UITableViewCell {
         
     }
 
-    func configCell(icon: UIImage?, title: String, adString: String?, moneyString: String, describeString: String) {
-        iconImageView.image = icon
+    func configCell(iconURLString: String?, title: String, adString: String?, moneyString: String, describeString: String) {
+        if iconURLString != nil {
+            let url = URL(string: iconURLString!)
+            iconImageView.kf.setImage(with: url)
+        }
         titleLabel.text = title
         adLabel.text = adString
         moneyLabel.text = moneyString
