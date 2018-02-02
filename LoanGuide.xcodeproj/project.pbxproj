@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0E5809374FDD054CEE2192BC /* Pods_LoanGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59662C5D04089F1B2208BDD1 /* Pods_LoanGuide.framework */; };
 		E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00EFB9E201D76610022F77D /* LGSignupViewController.swift */; };
+		E011E5F22023092F00FC3BF0 /* LGProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */; };
+		E011E5F42023419100FC3BF0 /* LGProductDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */; };
 		E017C4582022A55800884929 /* LGCreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E017C4572022A55800884929 /* LGCreditCardTableViewCell.swift */; };
 		E02AB1B2201F088F00F90E69 /* LGVericationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B1201F088F00F90E69 /* LGVericationViewController.swift */; };
 		E02AB1B4201F09F300F90E69 /* LGVericationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B3201F09F300F90E69 /* LGVericationTableViewCell.swift */; };
@@ -21,6 +23,7 @@
 		E04BAB64201CC7BA00DB5421 /* LGLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04BAB63201CC7BA00DB5421 /* LGLoginViewController.swift */; };
 		E04C75BA2022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C75B92022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift */; };
 		E04C75BC2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C75BB2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift */; };
+		E04C75BF2023035600F56F0B /* LGHttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C75BE2023035600F56F0B /* LGHttpService.swift */; };
 		E053F3AF201B276A0066FD1E /* LGNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3AE201B276A0066FD1E /* LGNavigationController.swift */; };
 		E053F3B1201B27910066FD1E /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3B0201B27910066FD1E /* Define.swift */; };
 		E053F3B3201B2AD90066FD1E /* LGLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3B2201B2AD90066FD1E /* LGLoanViewController.swift */; };
@@ -50,6 +53,8 @@
 		59662C5D04089F1B2208BDD1 /* Pods_LoanGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoanGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8486B5F612A0B340D9DAD6BB /* Pods-LoanGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoanGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide.release.xcconfig"; sourceTree = "<group>"; };
 		E00EFB9E201D76610022F77D /* LGSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSignupViewController.swift; sourceTree = "<group>"; };
+		E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGProductDetailViewController.swift; sourceTree = "<group>"; };
+		E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGProductDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E017C4572022A55800884929 /* LGCreditCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		E02AB1B1201F088F00F90E69 /* LGVericationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGVericationViewController.swift; sourceTree = "<group>"; };
 		E02AB1B3201F09F300F90E69 /* LGVericationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGVericationTableViewCell.swift; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 		E04BAB63201CC7BA00DB5421 /* LGLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoginViewController.swift; sourceTree = "<group>"; };
 		E04C75B92022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailContentTableViewCell.swift; sourceTree = "<group>"; };
 		E04C75BB2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailApplyTableViewCell.swift; sourceTree = "<group>"; };
+		E04C75BE2023035600F56F0B /* LGHttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHttpService.swift; sourceTree = "<group>"; };
 		E053F3AE201B276A0066FD1E /* LGNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNavigationController.swift; sourceTree = "<group>"; };
 		E053F3B0201B27910066FD1E /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		E053F3B2201B2AD90066FD1E /* LGLoanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoanViewController.swift; sourceTree = "<group>"; };
@@ -147,8 +153,17 @@
 				E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */,
 				E02AB1B9201F11F000F90E69 /* RecommendDetail */,
 				E0380F9D2022B2010029EF12 /* NormalDetail */,
+				E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		E04C75BD2023032400F56F0B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E04C75BE2023035600F56F0B /* LGHttpService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		E053F3A2201B26E60066FD1E /* Other */ = {
@@ -293,6 +308,7 @@
 				E0C8BBE8201B1319000D56F1 /* Controller */,
 				E0C8BBEB201B1375000D56F1 /* View */,
 				E0C8BBEC201B137D000D56F1 /* Model */,
+				E04C75BD2023032400F56F0B /* Service */,
 				E0C8BBEE201B139A000D56F1 /* Frame */,
 				E0C8BBED201B1385000D56F1 /* Util */,
 				E0C8BBE7201B124F000D56F1 /* App */,
@@ -366,6 +382,7 @@
 				E0C8BBF2201B14BD000D56F1 /* LGHomeViewController.swift */,
 				E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */,
 				E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */,
+				E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -448,13 +465,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 			);
@@ -511,11 +532,14 @@
 				E017C4582022A55800884929 /* LGCreditCardTableViewCell.swift in Sources */,
 				E0C8BBF0201B1489000D56F1 /* LGTabBarController.swift in Sources */,
 				E08E8D32201C6F18008A4FCC /* LGHotProductTableViewCell.swift in Sources */,
+				E011E5F42023419100FC3BF0 /* LGProductDetailTableViewCell.swift in Sources */,
+				E04C75BF2023035600F56F0B /* LGHttpService.swift in Sources */,
 				E072DB93201B2DA000368FD3 /* LGViewController.swift in Sources */,
 				E05BA3D12020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift in Sources */,
 				E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */,
 				E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */,
 				E077C7982021A1D400DDEDC0 /* LGDropDownMenu.swift in Sources */,
+				E011E5F22023092F00FC3BF0 /* LGProductDetailViewController.swift in Sources */,
 				E0600C2C2021E3980007B732 /* LGDropMenuTableViewCell.swift in Sources */,
 				E02AB1B8201F0D9E00F90E69 /* LGNormalDetailViewController.swift in Sources */,
 				E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */,
