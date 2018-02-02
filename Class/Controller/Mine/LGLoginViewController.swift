@@ -201,7 +201,9 @@ class LGLoginViewController: LGViewController {
     }
     
     @objc private func forgetButtonOnClick() {
-        
+        let changeVC = LGChangePasswordViewController()
+        changeVC.phoneNumber = phoneTextField.text
+        show(changeVC, sender: nil)
     }
     
     // 判断输入长度

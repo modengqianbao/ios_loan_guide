@@ -43,11 +43,23 @@ class LGUserService {
     /// 注册
     func signup(withPhone phone: String, password: String, smsCode: String, smsToken: String, complete: @escaping (_ error: String?) -> Void) {
         let urlString = domain.appending("register")
-        let paramters = ["phone": phone,
+        let parameters = ["phone": phone,
                          "password": password,
                          "smsCode": smsCode,
                          "smsToken": smsToken]
-        service.post(urlString: urlString, parameters: paramters) { (json, error) in
+        service.post(urlString: urlString, parameters: parameters) { (json, error) in
+            complete(error)
+        }
+    }
+    
+    /// 修改密码
+    func changePassword(with phone: String, newPassword password: String, smsCode: String, smsToken: String, complete: @escaping (_ error: String?) -> Void) {
+        let urlString = domain.appending("change_password")
+        let parameters = ["phone": phone,
+                          "password": password,
+                          "smsCode": smsCode,
+                          "smsToken": smsToken]
+        service.post(urlString: urlString, parameters: parameters) { (json, error) in
             complete(error)
         }
     }
