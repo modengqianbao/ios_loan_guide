@@ -44,9 +44,10 @@ class LGHomeViewController: LGViewController {
         homeTableView.register(LGHotProductTableViewCell.self, forCellReuseIdentifier: LGHotProductTableViewCell.identifier)
         homeTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             self!.model.reloadLoanProduct { hasMore, error in
+                self!.homeTableView.mj_footer.isHidden = false
                 self!.homeTableView.mj_header.endRefreshing()
+                self!.homeTableView.reloadData()
                 if error == nil {
-                    self!.homeTableView.reloadData()
                     if hasMore {
                         self!.homeTableView.mj_footer.endRefreshing()
                     } else {
@@ -72,6 +73,7 @@ class LGHomeViewController: LGViewController {
                 }
             })
         })
+        homeTableView.mj_footer.isHidden = true
         homeTableView.delegate = self
         homeTableView.dataSource = self
         view.addSubview(homeTableView)

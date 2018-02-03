@@ -42,4 +42,24 @@ class LGMineService {
             }
         }
     }
+    
+    /// 获取消息
+    func getMessage(page: Int, count: Int, complete: @escaping (_ array: [LGMessageModel]?, _ error: String?) -> Void) {
+        let urlString = domain.appending("new_center")
+        let parameters = ["count": count,
+                          "page": page]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let jsonArray = json!["data"]["newList"].arrayValue
+                var array = [LGMessageModel]()
+                for jsonItem in jsonArray {
+                    let item = LGMessageModel(json: jsonItem)
+                    array.append(item)
+                }
+                complete(array, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
 }

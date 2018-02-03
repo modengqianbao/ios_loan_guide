@@ -204,4 +204,18 @@ extension LGMineViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            // 信用知多少
+        } else if indexPath.row == 1 {
+            // 申请记录
+        } else {
+            // 消息中心
+            let messageVC = LGMessageViewController()
+            messageVC.hidesBottomBarWhenPushed = true
+            messageVC.model = model            
+            show(messageVC, sender: nil)
+        }
+    }
 }
