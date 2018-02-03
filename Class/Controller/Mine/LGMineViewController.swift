@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class LGMineViewController: LGViewController {
+    
+    private let model = LGMineModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,7 +167,17 @@ extension LGMineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            
+            if indexPath.row == 0 {
+                // 常见问题
+                let questionVC = LGQuestionViewController()
+                questionVC.model = model
+                questionVC.hidesBottomBarWhenPushed = true
+                show(questionVC, sender: nil)
+            } else if indexPath.row == 1 {
+                
+            } else {
+                
+            }
         } else {
             let settingVC = LGSettingViewController()
             settingVC.hidesBottomBarWhenPushed = true

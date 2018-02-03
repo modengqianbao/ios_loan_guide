@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class LGMineService {
     static let sharedService = LGMineService()
@@ -21,6 +22,24 @@ class LGMineService {
         let parameters = ["info": content]
         service.post(urlString: urlString, parameters: parameters) { _, error in
             complete(error)
+        }
+    }
+    
+    /// 获取问题
+    func getQuestions(complete: @escaping (_ array: [LGQuestionModel]?, _ error: String?) -> Void) {
+        let urlString = domain.appending("questions")
+        service.post(urlString: urlString, parameters: nil) { json, error in
+            if error == nil {
+                let jsonArray = json!["data"]["askList"].arrayValue
+                var array = [LGQuestionModel]()
+                for jsonItem in jsonArray {
+                    let item = LGQuestionModel(json: jsonItem)
+                    array.append(item)
+                }
+                complete(array, nil)
+            } else {
+                complete(nil, error)
+            }
         }
     }
 }

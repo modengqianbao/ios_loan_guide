@@ -14,7 +14,7 @@ class LGMineTableViewCell: UITableViewCell {
     
     private var iconImageView: UIImageView!
     private var titleLabel: UILabel!
-    private var separatorLine: UIView!
+    private var separatorLine: UIView!        
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
