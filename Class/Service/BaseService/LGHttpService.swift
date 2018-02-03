@@ -13,15 +13,17 @@ import SwiftyJSON
 class LGHttpService {
     static let sharedService = LGHttpService()
     
-    private init() {}
+    private init() {
+        loadCookies()
+    }
     
     func get(urlString: String, parameters: [String: Any]?, complete: @escaping (_ json: JSON?, _ error: String?) -> Void) {
         guard let url = URL(string: urlString) else {
             complete(nil, "url error")
             return
         }
-        let header = ["fsd": "fdshkl"]
-        Alamofire.request(url, method: .get, parameters: parameters, headers: header).responseJSON { response in
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if let data = response.result.value {
                 let json = JSON(data)
                 if json["msg"].stringValue.isEmpty {
@@ -41,8 +43,7 @@ class LGHttpService {
             return
         }
         
-        let header = ["fsd": "fdshkl"]
-        Alamofire.request(url, method: .post, parameters: parameters, headers: header).responseJSON { response in
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { response in
             if let data = response.result.value {
                 let json = JSON(data)
                 if json["msg"].stringValue.isEmpty {
@@ -52,6 +53,32 @@ class LGHttpService {
                 }
             } else {
                 complete(nil, "request error")
+            }
+            
+            // 持久化cookie
+            self.saveCookies(response: response)
+        }
+    }
+    
+    private func saveCookies(response: DataResponse<Any>) {
+        let headerFields = response.response?.allHeaderFields as! [String: String]
+        let url = response.response?.url
+        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
+        var cookieArray = [[HTTPCookiePropertyKey: Any]]()
+        for cookie in cookies {
+            cookieArray.append(cookie.properties!)
+        }
+        if cookieArray.count > 0 {
+            UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    private func loadCookies() {
+        guard let cookieArray = UserDefaults.standard.array(forKey: "savedCookies") as? [[HTTPCookiePropertyKey: Any]] else { return }
+        for cookieProperties in cookieArray {
+            if let cookie = HTTPCookie(properties: cookieProperties) {
+                HTTPCookieStorage.shared.setCookie(cookie)
             }
         }
     }

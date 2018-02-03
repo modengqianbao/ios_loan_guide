@@ -19,8 +19,8 @@ class LGHomeService {
     /// 信用卡产品推荐
     func getCreditGroom(count: Int, page: Int, complete:@escaping (_ data: [LGLoanProductModel]?, _ error: String?) -> Void) {
         let urlString = domain.appending("loan_groom")
-        let parameters = ["count": 10,
-                          "page": 1]
+        let parameters = ["count": count,
+                          "page": page]
         service.post(urlString: urlString, parameters: parameters) { (json, error) in
             if error == nil {
                 let jsonArray = json!["data"]["loans"].arrayValue

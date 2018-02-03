@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
 class LGHomeViewController: LGViewController {
     
@@ -24,9 +25,7 @@ class LGHomeViewController: LGViewController {
     }
     
     private func loadData() {
-        model.reloadLoanProduct { [weak self] in
-            self!.homeTableView.reloadData()
-        }
+        homeTableView.mj_header.beginRefreshing()
     }
     
     private func setup() {
@@ -43,6 +42,36 @@ class LGHomeViewController: LGViewController {
         homeTableView.register(LGRecommendTableViewCell.self, forCellReuseIdentifier: LGRecommendTableViewCell.identifier)
         homeTableView.register(LGCreditCheckTableViewCell.self, forCellReuseIdentifier: LGCreditCheckTableViewCell.identifier)
         homeTableView.register(LGHotProductTableViewCell.self, forCellReuseIdentifier: LGHotProductTableViewCell.identifier)
+        homeTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            self!.model.reloadLoanProduct { hasMore, error in
+                self!.homeTableView.mj_header.endRefreshing()
+                if error == nil {
+                    self!.homeTableView.reloadData()
+                    if hasMore {
+                        self!.homeTableView.mj_footer.endRefreshing()
+                    } else {
+                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
+                    }
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        })
+        homeTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
+            self!.model.loadMoreLoanProduct(complete: { hasMore, error in
+                if error == nil {
+                    self!.homeTableView.reloadData()
+                    if hasMore {
+                        self!.homeTableView.mj_footer.endRefreshing()
+                    } else {
+                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
+                    }
+                } else {
+                    self!.homeTableView.mj_footer.endRefreshing()
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            })
+        })
         homeTableView.delegate = self
         homeTableView.dataSource = self
         view.addSubview(homeTableView)
