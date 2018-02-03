@@ -164,6 +164,13 @@ extension LGMineViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            
+        } else {
+            let settingVC = LGSettingViewController()
+            settingVC.hidesBottomBarWhenPushed = true
+            show(settingVC, sender: nil)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

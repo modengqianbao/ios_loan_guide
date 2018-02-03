@@ -24,6 +24,7 @@
 		E04C75BA2022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C75B92022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift */; };
 		E04C75BC2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C75BB2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift */; };
 		E04C75BF2023035600F56F0B /* LGHttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C75BE2023035600F56F0B /* LGHttpService.swift */; };
+		E0532D2320259B2300020ED1 /* LGMineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0532D2220259B2300020ED1 /* LGMineService.swift */; };
 		E053F3AF201B276A0066FD1E /* LGNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3AE201B276A0066FD1E /* LGNavigationController.swift */; };
 		E053F3B1201B27910066FD1E /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3B0201B27910066FD1E /* Define.swift */; };
 		E053F3B3201B2AD90066FD1E /* LGLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053F3B2201B2AD90066FD1E /* LGLoanViewController.swift */; };
@@ -54,6 +55,11 @@
 		E0E93A2D20242EE800992FB3 /* LGUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2C20242EE800992FB3 /* LGUserService.swift */; };
 		E0E93A2F20242F1300992FB3 /* LGUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2E20242F1300992FB3 /* LGUserModel.swift */; };
 		E0E93A312024316900992FB3 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A302024316900992FB3 /* Notification.swift */; };
+		E0FBCC182025689E00BC7DCC /* LGSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC172025689E00BC7DCC /* LGSettingViewController.swift */; };
+		E0FBCC1B202569D400BC7DCC /* LGSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC1A202569D400BC7DCC /* LGSettingTableViewCell.swift */; };
+		E0FBCC1D202569DF00BC7DCC /* LGLogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC1C202569DF00BC7DCC /* LGLogoutTableViewCell.swift */; };
+		E0FBCC202025936500BC7DCC /* LGAboutUsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC1F2025936500BC7DCC /* LGAboutUsTableViewController.swift */; };
+		E0FBCC222025937300BC7DCC /* LGFeedBackTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC212025937300BC7DCC /* LGFeedBackTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +82,7 @@
 		E04C75B92022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailContentTableViewCell.swift; sourceTree = "<group>"; };
 		E04C75BB2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailApplyTableViewCell.swift; sourceTree = "<group>"; };
 		E04C75BE2023035600F56F0B /* LGHttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHttpService.swift; sourceTree = "<group>"; };
+		E0532D2220259B2300020ED1 /* LGMineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineService.swift; sourceTree = "<group>"; };
 		E053F3AE201B276A0066FD1E /* LGNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNavigationController.swift; sourceTree = "<group>"; };
 		E053F3B0201B27910066FD1E /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		E053F3B2201B2AD90066FD1E /* LGLoanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoanViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +115,11 @@
 		E0E93A2C20242EE800992FB3 /* LGUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserService.swift; sourceTree = "<group>"; };
 		E0E93A2E20242F1300992FB3 /* LGUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserModel.swift; sourceTree = "<group>"; };
 		E0E93A302024316900992FB3 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E0FBCC172025689E00BC7DCC /* LGSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSettingViewController.swift; sourceTree = "<group>"; };
+		E0FBCC1A202569D400BC7DCC /* LGSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSettingTableViewCell.swift; sourceTree = "<group>"; };
+		E0FBCC1C202569DF00BC7DCC /* LGLogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLogoutTableViewCell.swift; sourceTree = "<group>"; };
+		E0FBCC1F2025936500BC7DCC /* LGAboutUsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGAboutUsTableViewController.swift; sourceTree = "<group>"; };
+		E0FBCC212025937300BC7DCC /* LGFeedBackTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGFeedBackTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +228,7 @@
 				E00EFB9E201D76610022F77D /* LGSignupViewController.swift */,
 				E0B0419A202495DB002F6CDC /* LGChangePasswordViewController.swift */,
 				E02AB1B1201F088F00F90E69 /* LGVericationViewController.swift */,
+				E0FBCC1E2025934D00BC7DCC /* Setting */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -308,6 +321,7 @@
 				E08E8D2B201C1F2E008A4FCC /* LGMineTableViewCell.swift */,
 				E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */,
 				E02AB1B3201F09F300F90E69 /* LGVericationTableViewCell.swift */,
+				E0FBCC19202569BD00BC7DCC /* Setting */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -325,6 +339,7 @@
 			children = (
 				E0B2139C2023F866000DEA4F /* LGHomeService.swift */,
 				E0E93A2C20242EE800992FB3 /* LGUserService.swift */,
+				E0532D2220259B2300020ED1 /* LGMineService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -435,6 +450,25 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		E0FBCC19202569BD00BC7DCC /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E0FBCC1A202569D400BC7DCC /* LGSettingTableViewCell.swift */,
+				E0FBCC1C202569DF00BC7DCC /* LGLogoutTableViewCell.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		E0FBCC1E2025934D00BC7DCC /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E0FBCC172025689E00BC7DCC /* LGSettingViewController.swift */,
+				E0FBCC1F2025936500BC7DCC /* LGAboutUsTableViewController.swift */,
+				E0FBCC212025937300BC7DCC /* LGFeedBackTableViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -515,6 +549,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
+				"${BUILT_PRODUCTS_DIR}/FSTextView/FSTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -527,6 +562,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -588,6 +624,7 @@
 				E017C4582022A55800884929 /* LGCreditCardTableViewCell.swift in Sources */,
 				E0C8BBF0201B1489000D56F1 /* LGTabBarController.swift in Sources */,
 				E08E8D32201C6F18008A4FCC /* LGHotProductTableViewCell.swift in Sources */,
+				E0FBCC1D202569DF00BC7DCC /* LGLogoutTableViewCell.swift in Sources */,
 				E011E5F42023419100FC3BF0 /* LGProductDetailTableViewCell.swift in Sources */,
 				E04C75BF2023035600F56F0B /* LGHttpService.swift in Sources */,
 				E0B0419B202495DB002F6CDC /* LGChangePasswordViewController.swift in Sources */,
@@ -603,19 +640,24 @@
 				E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */,
 				E04C75BA2022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift in Sources */,
 				E053F3B5201B2B010066FD1E /* LGCreditCardViewController.swift in Sources */,
+				E0FBCC1B202569D400BC7DCC /* LGSettingTableViewCell.swift in Sources */,
 				E0C8BBF3201B14BD000D56F1 /* LGHomeViewController.swift in Sources */,
 				E02AB1B4201F09F300F90E69 /* LGVericationTableViewCell.swift in Sources */,
 				E053F3AF201B276A0066FD1E /* LGNavigationController.swift in Sources */,
 				E053F3B3201B2AD90066FD1E /* LGLoanViewController.swift in Sources */,
+				E0FBCC222025937300BC7DCC /* LGFeedBackTableViewController.swift in Sources */,
 				E05BA3D32020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift in Sources */,
 				E0B2139D2023F866000DEA4F /* LGHomeService.swift in Sources */,
 				E04C75BC2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift in Sources */,
 				E0B213992023F7DF000DEA4F /* LGHomeModel.swift in Sources */,
 				E0380F9F2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift in Sources */,
+				E0FBCC202025936500BC7DCC /* LGAboutUsTableViewController.swift in Sources */,
 				E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */,
 				E02AB1B6201F0D5000F90E69 /* LGRecommendDetailViewController.swift in Sources */,
 				E0E93A2F20242F1300992FB3 /* LGUserModel.swift in Sources */,
+				E0FBCC182025689E00BC7DCC /* LGSettingViewController.swift in Sources */,
 				E0E93A2D20242EE800992FB3 /* LGUserService.swift in Sources */,
+				E0532D2320259B2300020ED1 /* LGMineService.swift in Sources */,
 				E077C79620215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift in Sources */,
 				E053F3B1201B27910066FD1E /* Define.swift in Sources */,
 				E077C79A2021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift in Sources */,

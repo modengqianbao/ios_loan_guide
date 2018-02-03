@@ -12,6 +12,7 @@ import UIColor_Hex_Swift
 //MARK:- 应用
 let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
+let version = "1.0.0"
 
 //MARK:- 颜色
 /// 主色调
