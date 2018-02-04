@@ -37,7 +37,6 @@ class LGHotProductTableViewCell: UITableViewCell {
         iconImageView = UIImageView()
         iconImageView.layer.cornerRadius = iconRadius
         iconImageView.layer.masksToBounds = true
-        iconImageView.backgroundColor = UIColor.yellow
         addSubview(iconImageView)
         iconImageView.snp.makeConstraints { [weak self] make in
             make.centerY.equalTo(self!)

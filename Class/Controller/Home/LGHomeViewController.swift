@@ -123,7 +123,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             // 热门产品
             let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
             let item = model.loanProductArray[indexPath.row]
-            cell.configCell(iconURLString: item.logoString,
+            cell.configCell(iconURLString: imageDomaion.appending(item.logoString),
                             title: item.name,
                             adString: item.labelString,
                             moneyString: "\(item.loanMax)",

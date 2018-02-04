@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E5809374FDD054CEE2192BC /* Pods_LoanGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59662C5D04089F1B2208BDD1 /* Pods_LoanGuide.framework */; };
+		E00774DA20269ACF00350BE1 /* LGRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00774D920269ACF00350BE1 /* LGRecordViewController.swift */; };
 		E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00EFB9E201D76610022F77D /* LGSignupViewController.swift */; };
 		E011E5F22023092F00FC3BF0 /* LGProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */; };
 		E011E5F42023419100FC3BF0 /* LGProductDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */; };
@@ -75,6 +76,7 @@
 		0E1300D9DCCA8CBF86015E27 /* Pods-LoanGuide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoanGuide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide.debug.xcconfig"; sourceTree = "<group>"; };
 		59662C5D04089F1B2208BDD1 /* Pods_LoanGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoanGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8486B5F612A0B340D9DAD6BB /* Pods-LoanGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoanGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide.release.xcconfig"; sourceTree = "<group>"; };
+		E00774D920269ACF00350BE1 /* LGRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecordViewController.swift; sourceTree = "<group>"; };
 		E00EFB9E201D76610022F77D /* LGSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSignupViewController.swift; sourceTree = "<group>"; };
 		E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGProductDetailViewController.swift; sourceTree = "<group>"; };
 		E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGProductDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -169,6 +171,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E00774DB20269AFB00350BE1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E04BAB63201CC7BA00DB5421 /* LGLoginViewController.swift */,
+				E00EFB9E201D76610022F77D /* LGSignupViewController.swift */,
+				E0B0419A202495DB002F6CDC /* LGChangePasswordViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		E02AB1B9201F11F000F90E69 /* RecommendDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,12 +264,11 @@
 			isa = PBXGroup;
 			children = (
 				E053F3B6201B2B090066FD1E /* LGMineViewController.swift */,
-				E04BAB63201CC7BA00DB5421 /* LGLoginViewController.swift */,
-				E00EFB9E201D76610022F77D /* LGSignupViewController.swift */,
-				E0B0419A202495DB002F6CDC /* LGChangePasswordViewController.swift */,
 				E02AB1B1201F088F00F90E69 /* LGVericationViewController.swift */,
 				E0532D2420259EAD00020ED1 /* LGQuestionViewController.swift */,
 				E0532D312025DA8900020ED1 /* LGMessageViewController.swift */,
+				E00774D920269ACF00350BE1 /* LGRecordViewController.swift */,
+				E00774DB20269AFB00350BE1 /* Login */,
 				E0FBCC1E2025934D00BC7DCC /* Setting */,
 			);
 			path = Mine;
@@ -585,6 +596,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
 				"${BUILT_PRODUCTS_DIR}/FSTextView/FSTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -598,6 +610,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -671,6 +684,7 @@
 				E0532D2E2025AA2700020ED1 /* LGQuestionContentTableViewCell.swift in Sources */,
 				E05BA3D12020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift in Sources */,
 				E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */,
+				E00774DA20269ACF00350BE1 /* LGRecordViewController.swift in Sources */,
 				E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */,
 				E0532D272025A06400020ED1 /* LGMineModel.swift in Sources */,
 				E0B2139F202401D4000DEA4F /* LGLoanProductModel.swift in Sources */,

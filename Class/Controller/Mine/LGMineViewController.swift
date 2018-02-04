@@ -210,6 +210,10 @@ extension LGMineViewController: UICollectionViewDelegate, UICollectionViewDataSo
             // 信用知多少
         } else if indexPath.row == 1 {
             // 申请记录
+            let recordVC = LGRecordViewController()
+            recordVC.hidesBottomBarWhenPushed = true
+            recordVC.model = model
+            show(recordVC, sender: nil)
         } else {
             // 消息中心
             let messageVC = LGMessageViewController()

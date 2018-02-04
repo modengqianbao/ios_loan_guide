@@ -13,5 +13,6 @@ target 'LoanGuide' do
 	pod 'MBProgressHUD', '~> 1.1.0'
 	pod 'CocoaSecurity'
 	pod 'FSTextView'
+	pod 'HMSegmentedControl'
 	
 end
