@@ -57,6 +57,8 @@ class LGLoanViewController: LGViewController {
         loanTableView.dataSource = self
         loanTableView.register(LGHotProductTableViewCell.self,
                                 forCellReuseIdentifier: LGHotProductTableViewCell.identifier)
+        loanTableView.register(LGEmptyTableViewCell.self,
+                               forCellReuseIdentifier: LGEmptyTableViewCell.identifier)
         view.addSubview(loanTableView)
         loanTableView.snp.makeConstraints { [weak self] make in
             make.left.right.bottom.equalTo(self!.view)
@@ -78,20 +80,30 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.loanArray.count
+        if model.loanArray.count == 0 {
+            return 1
+        } else {
+            return model.loanArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
-        let loanItem = model.loanArray[indexPath.row]
-        let moneyString = "日利率: \(loanItem.rateMax)%, 额度: \(loanItem.loanMax)元"
-        
-        cell.configCell(iconURLString: imageDomaion.appending(loanItem.logoString),
-                        title: loanItem.name,
-                        adString: loanItem.labelString,
-                        moneyString: moneyString,
-                        describeString: loanItem.loanSpec)
-        return cell
+        if model.loanArray.count == 0 {
+            // 空空如也
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGEmptyTableViewCell.identifier)!
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
+            let loanItem = model.loanArray[indexPath.row]
+            let moneyString = "日利率: \(loanItem.rateMax)%, 额度: \(loanItem.loanMax)元"
+            
+            cell.configCell(iconURLString: imageDomaion.appending(loanItem.logoString),
+                            title: loanItem.name,
+                            adString: loanItem.labelString,
+                            moneyString: moneyString,
+                            describeString: loanItem.loanSpec)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

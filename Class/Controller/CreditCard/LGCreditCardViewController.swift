@@ -8,24 +8,19 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
 class LGCreditCardViewController: LGViewController {
     
-    private let bankTypeArray = ["全部银行", "浦发银行", "民生银行"]
-    private var selectedBankType = 0
+    private var creditTableView: UITableView!
     
-    private let levelTypeArray = ["全部等级", "普通卡", "金卡", "白金卡"]
-    private let levelContentArray = ["", "额度普遍在1000-30000元之间", "额度普遍在5000-50000元之间", "白金级消费待遇"]
-    private var selectedLevelType = 0
-    
-    private let usageTypeArray = ["全部用途", "标准卡", "特色主题卡", "网络联名卡", "酒店/商旅/航空卡", "现取卡"]
-    private let usageContentArray = ["", "银行标准服务", "特色主题专享", "qq，淘宝等联名专属优惠", "酒店出行、航空等超值优惠", "超高取现比例"]
-    private var selectedUsageType = 0
+    private let model = LGCreditModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        getCreditCard()
     }
     
     private func setup() {
@@ -48,10 +43,22 @@ class LGCreditCardViewController: LGViewController {
         dropDownMenu.dataSource = self
         
         // 列表
-        let creditTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        creditTableView = UITableView(frame: CGRect.zero, style: .grouped)
         creditTableView.register(LGCreditCardTableViewCell.self,
                                  forCellReuseIdentifier: LGCreditCardTableViewCell.identifier)
+        creditTableView.register(LGEmptyTableViewCell.self,
+                                 forCellReuseIdentifier: LGEmptyTableViewCell.identifier)
         creditTableView.separatorStyle = .none
+        creditTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            self!.model.getCreditCardArray { error in
+                self!.creditTableView.mj_header.endRefreshing()
+                if error == nil {
+                    self!.creditTableView.reloadData()
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        })
         creditTableView.delegate = self
         creditTableView.dataSource = self
         view.addSubview(creditTableView)
@@ -59,6 +66,10 @@ class LGCreditCardViewController: LGViewController {
             make.left.right.bottom.equalTo(self!.view)
             make.top.equalTo(dropDownMenu.snp.bottom)
         }
+    }
+    
+    private func getCreditCard() {
+        creditTableView.mj_header.beginRefreshing()
     }
 }
 
@@ -69,14 +80,28 @@ extension LGCreditCardViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if model.creditCardArray.count == 0 {
+            return 1
+        } else {
+            return model.creditCardArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCardTableViewCell.identifier) as! LGCreditCardTableViewCell
-        cell.configCell(icon: UIImage(), title: "民生标准白金信用卡", content: "免费高尔夫、免费体检", extra: "10万高额")
-        
-        return cell
+        if model.creditCardArray.count == 0 {
+            // 空空如也
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGEmptyTableViewCell.identifier)!
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCardTableViewCell.identifier) as! LGCreditCardTableViewCell
+            let creditItem = model.creditCardArray[indexPath.row]
+            cell.configCell(iconURLString: imageDomaion.appending(creditItem.logoURL),
+                            title: creditItem.name,
+                            content: creditItem.introduce,
+                            extra: creditItem.label)
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -108,28 +133,28 @@ extension LGCreditCardViewController: LGDropDownMenuDelegate, LGDropDownMenuData
     
     func dropMenu(_ dropMenu: LGDropDownMenu, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return bankTypeArray.count
+            return model.bankTypeArray.count
         } else if section == 1 {
-            return levelTypeArray.count
+            return model.levelTypeArray.count
         } else {
-            return usageTypeArray.count
+            return model.usageTypeArray.count
         }
     }
     
     func dropMenu(_ dropMenu: LGDropDownMenu, selectedRowForSection section: Int) -> Int {
         if section == 0 {
-            return selectedBankType
+            return model.selectedBankType
         } else if section == 1 {
-            return selectedLevelType
+            return model.selectedLevelType
         } else {
-            return selectedUsageType
+            return model.selectedUsageType
         }
     }
     
     func dropMenu(_ dropMenu: LGDropDownMenu, setHighLightedForSection section: Int) -> Bool {
-        if (section == 0 && selectedBankType == 0)
-            || (section == 1 && selectedLevelType == 0)
-            || (section == 2 && selectedUsageType == 0) {
+        if (section == 0 && model.selectedBankType == 0)
+            || (section == 1 && model.selectedLevelType == 0)
+            || (section == 2 && model.selectedUsageType == 0) {
             return false
         } else {
             return true
@@ -138,11 +163,11 @@ extension LGCreditCardViewController: LGDropDownMenuDelegate, LGDropDownMenuData
     
     func dropMenu(_ dropMenu: LGDropDownMenu, titleForRow row: Int, inSection section: Int) -> String {
         if section == 0 {
-            return bankTypeArray[row]
+            return model.bankTypeArray[row]
         } else if section == 1 {
-            return levelTypeArray[row]
+            return model.levelTypeArray[row]
         } else {
-            return usageTypeArray[row]
+            return model.usageTypeArray[row]
         }
     }
     
@@ -150,20 +175,21 @@ extension LGCreditCardViewController: LGDropDownMenuDelegate, LGDropDownMenuData
         if section == 0 {
             return nil
         } else if section == 1 {
-            return levelContentArray[row]
+            return model.levelContentArray[row]
         } else {
-            return usageContentArray[row]
+            return model.usageContentArray[row]
         }
     }
     
     func dropMenu(_ dropMenu: LGDropDownMenu, didSelectAtSecion section: Int, atRow row: Int) {
         if section == 0 {
-            selectedBankType = row
+            model.selectedBankType = row
         } else if section == 1 {
-            selectedLevelType = row
+            model.selectedLevelType = row
         } else {
-            selectedUsageType = row
+            model.selectedUsageType = row
         }
         dropMenu.reloadData()
+        creditTableView.mj_header.beginRefreshing()
     }
 }

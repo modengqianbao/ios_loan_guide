@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class LGCreditCardTableViewCell: UITableViewCell {
     static let identifier = "LGCreditCardTableViewCell"
@@ -36,7 +37,6 @@ class LGCreditCardTableViewCell: UITableViewCell {
         // 图片
         iconImageView = UIImageView()
         iconImageView.contentMode = .scaleAspectFit
-        iconImageView.backgroundColor = UIColor.blue
         addSubview(iconImageView)
         iconImageView.snp.makeConstraints { [weak self] make in
             make.left.equalTo(self!).offset(8)
@@ -103,6 +103,7 @@ class LGCreditCardTableViewCell: UITableViewCell {
             make.centerY.equalTo(self!)
             make.right.equalTo(self!).offset(-12)
             make.size.equalTo(CGSize(width: 50, height: 30))
+            make.left.equalTo(contentLabel.snp.right).offset(8)
         }
         
         // 分割线
@@ -119,10 +120,17 @@ class LGCreditCardTableViewCell: UITableViewCell {
         
     }
     
-    func configCell(icon: UIImage, title: String, content: String, extra: String?) {
-        iconImageView.image = icon
+    func configCell(iconURLString: String, title: String, content: String, extra: String?) {
+        let url = URL(string: iconURLString)
+        iconImageView.kf.setImage(with: url)
+
         titleLabel.text = title
         contentLabel.text = content
         extraLabel.text = extra
+        if extra != nil && !extra!.isEmpty {
+            extraLabelBorderView.isHidden = false
+        } else {
+            extraLabelBorderView.isHidden = true
+        }
     }
 }
