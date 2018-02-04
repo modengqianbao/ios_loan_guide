@@ -8,16 +8,18 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
 class LGLoanViewController: LGViewController {
-    private let returnTypeArray = ["不限", "随借随还", "分期付款"]
-    private var currentReturnType = 0
-    private var sortWithRate = true // 默认按贷款利率排序
+    private var loanTableView: UITableView!
+    
+    private let model = LGLoanModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        getLoanList()
     }
     
     private func setup() {
@@ -25,9 +27,9 @@ class LGLoanViewController: LGViewController {
         
         // 顶部排序按钮
         let dropDownMenu = LGDropDownMenu(frame: CGRect(x: 0,
-                                                    y: 0,
-                                                    width: view.frame.size.width,
-                                                    height: 40),
+                                                        y: 0,
+                                                        width: view.frame.size.width,
+                                                        height: 40),
                                           fatherView: view)
         view.addSubview(dropDownMenu)
         dropDownMenu.snp.makeConstraints { [weak self] make in
@@ -39,8 +41,18 @@ class LGLoanViewController: LGViewController {
         dropDownMenu.dataSource = self
         
         // 列表
-        let loanTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        loanTableView = UITableView(frame: CGRect.zero, style: .grouped)
         loanTableView.separatorStyle = .none
+        loanTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            self!.model.reloadLoanList { error in
+                self!.loanTableView.mj_header.endRefreshing()
+                if error == nil {
+                    self!.loanTableView.reloadData()
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        })
         loanTableView.delegate = self
         loanTableView.dataSource = self
         loanTableView.register(LGHotProductTableViewCell.self,
@@ -53,6 +65,10 @@ class LGLoanViewController: LGViewController {
         
         view.bringSubview(toFront: dropDownMenu)
     }
+    
+    private func getLoanList() {
+        loanTableView.mj_header.beginRefreshing()
+    }
 }
 
 //MARK:- UITableView delegate, datasource
@@ -62,12 +78,19 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return model.loanArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
-        cell.configCell(iconURLString: nil, title: "马上金融", adString: "送苹果X", moneyString: "5000", describeString: "2")
+        let loanItem = model.loanArray[indexPath.row]
+        let moneyString = "日利率: \(loanItem.rateMax)%, 额度: \(loanItem.loanMax)元"
+        
+        cell.configCell(iconURLString: imageDomaion.appending(loanItem.logoString),
+                        title: loanItem.name,
+                        adString: loanItem.labelString,
+                        moneyString: moneyString,
+                        describeString: loanItem.loanSpec)
         return cell
     }
     
@@ -108,7 +131,7 @@ extension LGLoanViewController: LGDropDownMenuDelegate, LGDropDownMenuDataSource
     
     func dropMenu(_ dropMenu: LGDropDownMenu, selectedRowForSection section: Int) -> Int {
         if section == 2 {
-            return currentReturnType
+            return model.currentReturnType
         } else {
             return 0
         }
@@ -120,7 +143,7 @@ extension LGLoanViewController: LGDropDownMenuDelegate, LGDropDownMenuDataSource
         } else if section == 1 {
             return "按放款速度"
         } else {
-            return returnTypeArray[row]
+            return model.returnTypeArray[row]
         }
     }
     
@@ -130,22 +153,23 @@ extension LGLoanViewController: LGDropDownMenuDelegate, LGDropDownMenuDataSource
     
     func dropMenu(_ dropMenu: LGDropDownMenu, setHighLightedForSection section: Int) -> Bool {
         if section == 0 {
-            return sortWithRate
+            return model.sortWithRate
         } else if section == 1 {
-            return !sortWithRate
+            return !model.sortWithRate
         } else {
-            return currentReturnType != 0
+            return model.currentReturnType != 0
         }
     }
     
     func dropMenu(_ dropMenu: LGDropDownMenu, didSelectAtSecion section: Int, atRow row: Int) {
         if section == 0 {
-            sortWithRate = true
+            model.sortWithRate = true
         } else if section == 1 {
-            sortWithRate = false
+            model.sortWithRate = false
         }  else {
-            currentReturnType = row
+            model.currentReturnType = row
         }
         dropMenu.reloadData()
+        loanTableView.mj_header.beginRefreshing()
     }
 }

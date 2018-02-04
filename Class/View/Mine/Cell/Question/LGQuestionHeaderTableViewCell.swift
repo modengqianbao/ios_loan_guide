@@ -34,7 +34,7 @@ class LGQuestionHeaderTableViewCell: UITableViewCell {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.edges.equalTo(UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 80))
-        }
+        }                
         
         let lineView = UIView()
         lineView.backgroundColor = kColorSeperatorBackground

@@ -15,6 +15,7 @@ class LGHotProductTableViewCell: UITableViewCell {
     private var iconImageView: UIImageView!
     private var titleLabel: UILabel!
     private var adLabel: UILabel!
+    private var adBorderView: UIView!
     private var moneyLabel: UILabel!
     private var describeLabel: UILabel!
     private var applyButton: UIButton!
@@ -66,7 +67,7 @@ class LGHotProductTableViewCell: UITableViewCell {
             make.left.equalTo(titleLabel.snp.right).offset(8)
         }
         
-        let adBorderView = UIView()
+        adBorderView = UIView()
         adBorderView.backgroundColor = UIColor.clear
         adBorderView.layer.cornerRadius = 3
         adBorderView.layer.borderColor = redColor.cgColor
@@ -135,6 +136,11 @@ class LGHotProductTableViewCell: UITableViewCell {
         }
         titleLabel.text = title
         adLabel.text = adString
+        if adString != nil && !adString!.isEmpty {
+            adBorderView.isHidden = false
+        } else {
+            adBorderView.isHidden = true
+        }
         moneyLabel.text = moneyString
         describeLabel.text = describeString        
     }
