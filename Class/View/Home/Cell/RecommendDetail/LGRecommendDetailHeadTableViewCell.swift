@@ -8,10 +8,33 @@
 
 import UIKit
 
+protocol LGRecommendDetailHeadTableViewCellDelegate: class {
+    func headCellDidClickBack(_ headCell: LGRecommendDetailHeadTableViewCell)
+    func headCellDidClickShare(_ headCell: LGRecommendDetailHeadTableViewCell)
+    func headCellDidClickLoanMoney(_ headCell: LGRecommendDetailHeadTableViewCell)
+    func headCellDidClickLoanTime(_ headCell: LGRecommendDetailHeadTableViewCell)
+    func headCellDidClickLoanUsage(_ headCell: LGRecommendDetailHeadTableViewCell)    
+}
+
 class LGRecommendDetailHeadTableViewCell: UITableViewCell {
     static let identifier = "LGRecommendDetailHeadTableViewCell"
     
+    weak var delegate: LGRecommendDetailHeadTableViewCellDelegate?
+    
+    /// 贷款名
     private var titleLabel: UILabel!
+    /// 当前选择额度
+    private var limitButton: UIButton!
+    /// 额度标签
+    private var limitLabel: UILabel!
+    /// 当前选择分期
+    private var stageButton: UIButton!
+    /// 分期标签
+    private var stageLabel: UILabel!
+    /// 用途
+    private var usageLabel: UILabel!
+    /// 描述标签
+    private var descLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,6 +47,9 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        backgroundColor = kColorBackground
+        selectionStyle = .none
+        
         // 背景图
         let backgroundImageView = UIImageView(image: UIImage(named: "bg_detail"))
         addSubview(backgroundImageView)
@@ -54,7 +80,7 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         
         // 标题
         titleLabel = UILabel()
-        titleLabel.text = "马上金融"
+//        titleLabel.text = "马上金融"
         titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         naviView.addSubview(titleLabel)
@@ -88,9 +114,9 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         }
         
         // 额度
-        let limitButton = UIButton(type: .custom)
+        limitButton = UIButton(type: .custom)
         limitButton.setTitleColor(kColorMainTone, for: .normal)
-        limitButton.setTitle("3000元", for: .normal)
+//        limitButton.setTitle("3000元", for: .normal)
         limitButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
         whiteView.addSubview(limitButton)
         limitButton.snp.makeConstraints { make in
@@ -105,10 +131,10 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
             make.left.equalTo(limitButton.snp.right).offset(2)
         }
         
-        let limitLabel = UILabel()
+        limitLabel = UILabel()
         limitLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         limitLabel.textColor = kColorAssistText
-        limitLabel.text = "额度1000~8000"
+//        limitLabel.text = "额度1000~8000"
         whiteView.addSubview(limitLabel)
         limitLabel.snp.makeConstraints { make in
             make.top.equalTo(limitButton.snp.bottom)
@@ -126,10 +152,10 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         }
         
         // 分期
-        let stageButton = UIButton(type: .custom)
+        stageButton = UIButton(type: .custom)
         stageButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
         stageButton.setTitleColor(kColorMainTone, for: .normal)
-        stageButton.setTitle("180日", for: .normal)
+//        stageButton.setTitle("180日", for: .normal)
         whiteView.addSubview(stageButton)
         stageButton.snp.makeConstraints { make in
             make.centerX.equalTo(whiteView).multipliedBy(1.5).offset(-4)
@@ -143,10 +169,10 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
             make.left.equalTo(stageButton.snp.right).offset(2)
         }
         
-        let stageLabel = UILabel()
+        stageLabel = UILabel()
         stageLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         stageLabel.textColor = kColorAssistText
-        stageLabel.text = "分期90-360期"
+//        stageLabel.text = "分期90-360期"
         whiteView.addSubview(stageLabel)
         stageLabel.snp.makeConstraints { make in
             make.centerX.equalTo(whiteView).multipliedBy(1.5)
@@ -186,10 +212,10 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
             make.size.equalTo(CGSize(width: 1, height: 20))
         }
         
-        let usageLabel = UILabel()
+        usageLabel = UILabel()
         usageLabel.textColor = kColorTitleText
         usageLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        usageLabel.text = "消费"
+        usageLabel.text = "2222"
         usageView.addSubview(usageLabel)
         usageLabel.snp.makeConstraints { make in
             make.left.equalTo(usageLineView).offset(8)
@@ -205,26 +231,26 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         
         
         // 说明文字
-        let descString = " 平均1小时放款   日利率0.02%"
-        let attributedDescString = NSMutableAttributedString(string: descString)
-        let checkImage = UIImage(named: "tick_linear")
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = checkImage
-        imageAttachment.bounds = CGRect(x: 0,
-                                        y: -1,
-                                        width: checkImage!.size.width,
-                                        height: checkImage!.size.height)
-        attributedDescString.addAttribute(NSAttributedStringKey.font,
-                                          value: UIFont.systemFont(ofSize: 14, weight: .regular),
-                                          range: NSRange.init(location: 0, length: descString.count))
-        attributedDescString.addAttribute(NSAttributedStringKey.foregroundColor,
-                                          value: kColorTitleText,
-                                          range: NSRange.init(location: 0, length: descString.count))
-        attributedDescString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
-        attributedDescString.insert(NSAttributedString(attachment: imageAttachment), at: 11)
+//        let descString = " 平均1小时放款   日利率0.02%"
+//        let attributedDescString = NSMutableAttributedString(string: descString)
+//        let checkImage = UIImage(named: "tick_linear")
+//        let imageAttachment = NSTextAttachment()
+//        imageAttachment.image = checkImage
+//        imageAttachment.bounds = CGRect(x: 0,
+//                                        y: -1,
+//                                        width: checkImage!.size.width,
+//                                        height: checkImage!.size.height)
+//        attributedDescString.addAttribute(NSAttributedStringKey.font,
+//                                          value: UIFont.systemFont(ofSize: 14, weight: .regular),
+//                                          range: NSRange.init(location: 0, length: descString.count))
+//        attributedDescString.addAttribute(NSAttributedStringKey.foregroundColor,
+//                                          value: kColorTitleText,
+//                                          range: NSRange.init(location: 0, length: descString.count))
+//        attributedDescString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+//        attributedDescString.insert(NSAttributedString(attachment: imageAttachment), at: 11)
         
-        let descLabel = UILabel()
-        descLabel.attributedText = attributedDescString
+        descLabel = UILabel()
+//        descLabel.attributedText = attributedDescString
         addSubview(descLabel)
         descLabel.snp.makeConstraints { make in
             make.centerX.equalTo(whiteView)
@@ -243,15 +269,42 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         }
     }
     
-    @objc private func back() {
+    private func describeText(_ timeString: String, rateString: String) -> NSMutableAttributedString {
+        let checkImage = UIImage(named: "tick_linear")
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = checkImage
+        imageAttachment.bounds = CGRect(x: 0,
+                                        y: -1,
+                                        width: checkImage!.size.width,
+                                        height: checkImage!.size.height)
         
+        let textAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14, weight: .regular),
+                              NSAttributedStringKey.foregroundColor: kColorTitleText]
+        let attributedTimeString = NSMutableAttributedString(string: timeString, attributes: textAttributes)
+        attributedTimeString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+        let attributedRateString = NSMutableAttributedString(string: rateString, attributes: textAttributes)
+        attributedRateString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+        attributedTimeString.append(attributedRateString)
+        
+        return attributedTimeString
+    }
+    
+    @objc private func back() {
+        delegate?.headCellDidClickBack(self)
     }
     
     @objc private func share() {
         
     }
     
-    func configCell(title: String) {
+    /// 贷款名，当前选择贷款，贷款额度，贷款时间，分期范围，贷款用途，放款时间，日利率
+    func configCell(title: String, currentMoney: Int, limitString: String?, currentStage: String, stageRange: String?, usage: String?, timeString: String, rateString: String) {
         titleLabel.text = title
+        limitButton.setTitle("\(currentMoney)元", for: .normal)
+        limitLabel.text = limitString
+        stageButton.setTitle(currentStage, for: .normal)
+        stageLabel.text = stageRange
+        usageLabel.text = usage
+        descLabel.attributedText = describeText(timeString, rateString: rateString)
     }
 }

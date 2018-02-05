@@ -234,9 +234,9 @@
 				E03F88BA201B6D6500862C53 /* LGRecommendTableViewCell.swift */,
 				E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */,
 				E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */,
+				E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */,
 				E02AB1B9201F11F000F90E69 /* RecommendDetail */,
 				E0380F9D2022B2010029EF12 /* NormalDetail */,
-				E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -627,11 +627,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LoanGuide/Pods-LoanGuide-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
 				"${BUILT_PRODUCTS_DIR}/FSTextView/FSTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/HMSegmentedControl/HMSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/RxWebViewController/RxWebViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -644,11 +646,13 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRPickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxWebViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",

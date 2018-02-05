@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class LGProductDetailViewController: LGViewController {
+    /// 传入
+    var model: LGLoanProductModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,8 @@ class LGProductDetailViewController: LGViewController {
                                  forCellReuseIdentifier: LGNormalDetailContentTableViewCell.identifier)
         detailTableView.register(LGProductDetailFlowTableViewCell.self,
                                  forCellReuseIdentifier: LGProductDetailFlowTableViewCell.identifier)
+        detailTableView.register(LGNormalDetailInfoTableViewCell.self,
+                                 forCellReuseIdentifier: LGNormalDetailInfoTableViewCell.identifier)
         detailTableView.delegate = self
         detailTableView.dataSource = self
         view.addSubview(detailTableView)
@@ -55,7 +59,8 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
         if section == 0 {
             return 2
         } else if section == 1 {
-            return 5
+            // 流程
+            return 1 + model.flowArray!.count
         } else if section == 2 {
             return 2
         } else {
@@ -72,7 +77,7 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailContentTableViewCell.identifier) as! LGNormalDetailContentTableViewCell
-                cell.configCell(content: "房中到分开恨着我的范我爱我出去很is当发is当发我has第复合物吃嗯好IP长个我中扥hipwe很我很无耻喷雾IE很 ")
+                cell.configCell(content: model.introduction)
                 return cell
             }
         } else if indexPath.section == 1 {
@@ -83,7 +88,19 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGProductDetailFlowTableViewCell.identifier) as! LGProductDetailFlowTableViewCell
-                cell.configCell(number: indexPath.row, type: .middle, content: "沟里国家生死")
+                let flowItem = model.flowArray![indexPath.row - 1]
+                var type: LGProductDetailFlowTableViewCell.FlowCellType
+                if model.flowArray!.count <= 1 {
+                    type = .only
+                } else if indexPath.row == 1 {
+                    type = .top
+                } else if indexPath.row == model.flowArray!.count {
+                    type = .bottom
+                } else {
+                    type = .middle
+                }
+                
+                cell.configCell(number: flowItem.order, type: type, content: flowItem.name)
                 return cell
             }
         } else if indexPath.section == 2 {
@@ -94,7 +111,7 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailContentTableViewCell.identifier) as! LGNormalDetailContentTableViewCell
-                cell.configCell(content: "18-35周岁")
+                cell.configCell(content: model.condition)
                 return cell
             }
         } else {
@@ -104,7 +121,17 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
                 cell.configCell(title: "审核说明")
                 return cell
             } else {
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailInfoTableViewCell.identifier) as! LGNormalDetailInfoTableViewCell
+                if indexPath.row == 1 {
+                    cell.configCell(title: "审核周期：", content: model.cycle)
+                } else if indexPath.row == 2 {
+                    cell.configCell(title: "审核方式：", content: model.mode)
+                } else if indexPath.row == 3 {
+                    cell.configCell(title: "放款时间：", content: model.loanTimeinfo)
+                } else {
+                    cell.configCell(title: "还款方式：", content: model.repayment == 1 ? "随借随还" : "分期还款")
+                }
+                return cell
             }
         }
     }

@@ -8,16 +8,24 @@
 
 import UIKit
 import SnapKit
+import MBProgressHUD
 
 class LGRecommendDetailViewController: LGViewController {
     /// 传入
     var model: LGLoanProductModel!
+    
+    private var detailTableView: UITableView!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
+    //MARK:- Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupNavigationBar()
         setup()
+        getDetail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,16 +34,11 @@ class LGRecommendDetailViewController: LGViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-//    private func setupNavigationBar() {
-//        let bar = navigationController!.navigationBar
-//        bar.backgroundColor = UIColor.clear
-//    }
-    
     private func setup() {
         title = "马上金融"
         
         // 表单
-        let detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
         detailTableView.separatorStyle = .none
         detailTableView.bounces = false
         detailTableView.backgroundColor = kColorSeperatorBackground
@@ -70,8 +73,20 @@ class LGRecommendDetailViewController: LGViewController {
         }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    private func getDetail() {
+        if !model.isDetailed {
+            MBProgressHUD.showAdded(to: view, animated: true)
+            model.getDetail { [weak self] error in
+                if self != nil {
+                    MBProgressHUD.hide(for: self!.view, animated: true)
+                    if error == nil {
+                        self!.detailTableView.reloadData()
+                    } else {
+                        LGHud.show(in: self!.view, animated: true, text: error)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -94,6 +109,7 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
             if indexPath.row == 0 {
                 // 头部
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGRecommendDetailHeadTableViewCell.identifier) as! LGRecommendDetailHeadTableViewCell
+                cell.delegate = self
                 
                 return cell
             } else {
@@ -127,6 +143,17 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            // 查看详情
+            if model.isDetailed {
+                let detailVC = LGProductDetailViewController()
+                detailVC.model = model
+                show(detailVC, sender: nil)
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
@@ -141,5 +168,27 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
+    }
+}
+
+extension LGRecommendDetailViewController: LGRecommendDetailHeadTableViewCellDelegate {
+    func headCellDidClickShare(_ headCell: LGRecommendDetailHeadTableViewCell) {
+        return
+    }
+    
+    func headCellDidClickLoanMoney(_ headCell: LGRecommendDetailHeadTableViewCell) {
+        return
+    }
+    
+    func headCellDidClickLoanTime(_ headCell: LGRecommendDetailHeadTableViewCell) {
+        return
+    }
+    
+    func headCellDidClickLoanUsage(_ headCell: LGRecommendDetailHeadTableViewCell) {
+        return
+    }
+    
+    func headCellDidClickBack(_ headCell: LGRecommendDetailHeadTableViewCell) {
+        navigationController?.popViewController(animated: true)
     }
 }

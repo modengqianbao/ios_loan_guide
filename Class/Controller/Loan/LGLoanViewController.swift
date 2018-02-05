@@ -126,7 +126,10 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
         if model.loanArray.count != 0 {
             let item = model.loanArray[indexPath.row]
             if item.isRecommended {
-                
+                let detailVC = LGRecommendDetailViewController()
+                detailVC.hidesBottomBarWhenPushed = true
+                detailVC.model = item
+                show(detailVC, sender: nil)
             } else {
                 let detailVC = LGNormalDetailViewController()
                 detailVC.hidesBottomBarWhenPushed = true

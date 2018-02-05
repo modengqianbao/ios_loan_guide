@@ -142,15 +142,27 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let loanItem = model.loanProductArray[indexPath.row]
+        if loanItem.isRecommended {
+            let detailVC = LGRecommendDetailViewController()
+            detailVC.model = loanItem
+            detailVC.hidesBottomBarWhenPushed = true
+            show(detailVC, sender: nil)
+        } else {
+            let detailVC = LGNormalDetailViewController()
+            detailVC.model = loanItem
+            detailVC.hidesBottomBarWhenPushed = true
+            show(detailVC, sender: nil)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
