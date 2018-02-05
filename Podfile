@@ -14,5 +14,8 @@ target 'LoanGuide' do
 	pod 'CocoaSecurity'
 	pod 'FSTextView'
 	pod 'HMSegmentedControl'
+	pod 'RxWebViewController'
+	pod 'WebViewJavascriptBridge', '~> 6.0'
+	pod 'WebViewBridge.Swift'
 	
 end

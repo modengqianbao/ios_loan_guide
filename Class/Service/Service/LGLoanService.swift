@@ -42,4 +42,34 @@ class LGLoanService {
             }
         }
     }
+    
+    /// 获取贷款产品详情
+    func getLoanDetail(loanItem: LGLoanProductModel, complete: @escaping (_ error: String?) -> Void) {
+        let urlString = domain.appending("loan_detail")
+        let parameters = ["id": loanItem.id]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let jsonItem = json!["data"]["loanDetail"]
+                loanItem.condition = jsonItem["loanCondition"].stringValue
+                loanItem.cycle = jsonItem["loanCycle"].stringValue
+                loanItem.loanTime = jsonItem["loanTime"].intValue
+                loanItem.loanTimeinfo = jsonItem["loanTimeInfo"].stringValue
+                loanItem.repayment = jsonItem["loanRepayment"].intValue
+                loanItem.termMin = jsonItem["loanTermMin"].intValue
+                loanItem.termMax = jsonItem["loanTermMax"].intValue
+                loanItem.mode = jsonItem["loanMode"].stringValue
+                let jsonArray = jsonItem["loanFlows"].arrayValue
+                var array = [LGLoanFlowModel]()
+                for jsonItem in jsonArray {
+                    let flowItem = LGLoanFlowModel(json: jsonItem)
+                    array.append(flowItem)
+                }
+                loanItem.flowArray = array
+                loanItem.isDetailed = true
+                complete(nil)
+            } else {
+                complete(error)
+            }
+        }
+    }
 }

@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class LGRecommendDetailViewController: LGViewController {
+    /// 传入
+    var model: LGLoanProductModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()

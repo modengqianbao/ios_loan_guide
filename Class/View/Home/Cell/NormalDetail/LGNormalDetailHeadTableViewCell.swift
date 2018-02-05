@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import Kingfisher
+
+protocol LGNormalDetailHeaderTableViewCellDelegate: class {
+    func headCellDidSelectBack(_ headerCell: LGNormalDetailHeadTableViewCell)
+}
 
 class LGNormalDetailHeadTableViewCell: UITableViewCell {
     static let identifier = "LGNormalDetailHeadTableViewCell"
     
+    weak var delegate: LGNormalDetailHeaderTableViewCellDelegate?
+    
     private var iconImageView: UIImageView!
     private var titleLabel: UILabel!
+    
+    /// 贷款额度
+    private var limitLabel: UILabel!
+    /// 利率范围
+    private var rateRangeLabel: UILabel!
+    /// 还款方式
+    private var methodLabel: UILabel!
+    /// 期限范围
+    private var timeRangeLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -69,7 +85,6 @@ class LGNormalDetailHeadTableViewCell: UITableViewCell {
         // 标题
         let iconRadius = CGFloat(30)
         iconImageView = UIImageView()
-        iconImageView.backgroundColor = UIColor.red
         iconImageView.layer.cornerRadius = iconRadius
         iconImageView.layer.masksToBounds = true
         addSubview(iconImageView)
@@ -93,7 +108,7 @@ class LGNormalDetailHeadTableViewCell: UITableViewCell {
         // 详情
         let font = UIFont.systemFont(ofSize: 13, weight: .regular)
         let color = UIColor.white
-        let limitLabel = UILabel()
+        limitLabel = UILabel()
         limitLabel.textColor = color
         limitLabel.font = font
         limitLabel.text = "贷款额度"
@@ -103,7 +118,7 @@ class LGNormalDetailHeadTableViewCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
         }
         
-        let rateRangeLabel = UILabel()
+        rateRangeLabel = UILabel()
         rateRangeLabel.font = font
         rateRangeLabel.textColor = color
         rateRangeLabel.text = "利率范围"
@@ -113,7 +128,7 @@ class LGNormalDetailHeadTableViewCell: UITableViewCell {
             make.left.equalTo(self!.snp.centerX).offset(20)
         }
         
-        let methodLabel = UILabel()
+        methodLabel = UILabel()
         methodLabel.font = font
         methodLabel.textColor = color
         methodLabel.text = "还款方式"
@@ -123,7 +138,7 @@ class LGNormalDetailHeadTableViewCell: UITableViewCell {
             make.top.equalTo(limitLabel.snp.bottom).offset(12)
         }
         
-        let timeRangeLabel = UILabel()
+        timeRangeLabel = UILabel()
         timeRangeLabel.font = font
         timeRangeLabel.textColor = color
         timeRangeLabel.text = "期限范围"
@@ -135,10 +150,21 @@ class LGNormalDetailHeadTableViewCell: UITableViewCell {
     }
     
     @objc private func backButtonOnClick() {
-        
+        delegate?.headCellDidSelectBack(self)
     }
     
     @objc private func shareButtonOnClick() {
         
+    }
+    
+    /// 名称，图片URL，贷款额度，利率范围，还款方式，期限范围
+    func configCell(name: String, logoURLString: String, loanCount: String, rateRange:String, returnType: String, returnRange: String) {
+        let url = URL(string: logoURLString)
+        iconImageView.kf.setImage(with: url)
+        titleLabel.text = name
+        limitLabel.text = "贷款额度:".appending(loanCount)
+        rateRangeLabel.text = "利率范围:".appending(rateRange)
+        methodLabel.text = "还款方式:".appending(returnType)
+        timeRangeLabel.text = "期限范围".appending(returnRange)
     }
 }

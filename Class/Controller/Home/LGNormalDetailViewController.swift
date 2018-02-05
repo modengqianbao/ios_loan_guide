@@ -8,39 +8,45 @@
 
 import UIKit
 import SnapKit
+import MBProgressHUD
 
 class LGNormalDetailViewController: LGViewController {
+    /// 传入
+    var model: LGLoanProductModel!
+    
+    private var detailTableView: UITableView!
     
     private var isFirstLaunch = true
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    //MARK:- Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        getLoanDetail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if isFirstLaunch {
             isFirstLaunch = false
             navigationController?.navigationBar.isHidden = true
         }
-//        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//    
-//        navigationController?.navigationBar.isHidden = false
-//    }
-    
     private func setup() {
-        title = "马上金融"
+        title = model.name
         
         // 导航栏按键
         let backButton = UIButton(type: .custom)
         backButton.setImage(UIImage(named: "nav_back"), for: .normal)
+        backButton.setTitle("       ", for: .normal)
         backButton.sizeToFit()
         backButton.addTarget(self, action: #selector(backButtonOnClick), for: .touchUpInside)
         let backItem = UIBarButtonItem(customView: backButton)
@@ -54,8 +60,9 @@ class LGNormalDetailViewController: LGViewController {
         navigationItem.rightBarButtonItem = shareItem
         
         // 表单
-        let detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
         detailTableView.separatorStyle = .none
+        detailTableView.showsVerticalScrollIndicator = false
         detailTableView.backgroundColor = kColorSeperatorBackground
         detailTableView.bounces = false
         detailTableView.register(LGNormalDetailHeadTableViewCell.self,
@@ -66,6 +73,10 @@ class LGNormalDetailViewController: LGViewController {
                                  forCellReuseIdentifier: LGNormalDetailContentTableViewCell.identifier)
         detailTableView.register(LGNormalDetailApplyTableViewCell.self,
                                  forCellReuseIdentifier: LGNormalDetailApplyTableViewCell.identifier)
+        detailTableView.register(LGNormalDetailFlowTableViewCell.self,
+                                 forCellReuseIdentifier: LGNormalDetailFlowTableViewCell.identifier)
+        detailTableView.register(LGNormalDetailInfoTableViewCell.self,
+                                 forCellReuseIdentifier: LGNormalDetailInfoTableViewCell.identifier)
         detailTableView.delegate = self
         detailTableView.dataSource = self
         view.addSubview(detailTableView)
@@ -75,12 +86,25 @@ class LGNormalDetailViewController: LGViewController {
         }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    private func getLoanDetail() {
+        if !model.isDetailed {
+            MBProgressHUD.showAdded(to: view, animated: true)
+            model.getDetail { [weak self] error in
+                if self != nil {
+                    MBProgressHUD.hide(for: self!.view, animated: true)
+                    if error == nil {
+                        self!.detailTableView.reloadData()
+                    } else {
+                        LGHud.show(in: self!.view, animated: true, text: error)
+                    }
+                }
+            }
+        }
     }
     
     @objc private func backButtonOnClick() {
-        
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func shareButtonOnClick() {
@@ -88,7 +112,6 @@ class LGNormalDetailViewController: LGViewController {
     }
 }
 
-//MARK:- UITableView delegate, datasource
 extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
@@ -120,6 +143,37 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
         if indexPath.section == 0 {
             // 头部
             let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailHeadTableViewCell.identifier) as! LGNormalDetailHeadTableViewCell
+            let loanCountString = "\(model.loanMin)-\(model.loanMax)元"
+            /// 单位
+            var unitString: String
+            var rateRangeString: String
+            var repaymentString: String?
+            var repayRangeString: String?
+            if model.loanSign == 1 {
+                unitString = "日"
+            } else {
+                unitString = "月"
+            }
+            if model.rateMin == model.rateMax {
+                rateRangeString = "\(model.rateMin)%/\(unitString)"
+            } else {
+                rateRangeString = "\(model.rateMin)%-\(model.rateMax)%/\(unitString)"
+            }
+            if model.isDetailed {
+                repayRangeString = "\(model.termMin!)-\(model.termMax!)\(unitString)"
+                if model.repayment! == 1 {
+                    repaymentString = "随借随还"
+                } else {
+                    repaymentString = "分期还款"
+                }
+            }
+            cell.configCell(name: model.name,
+                            logoURLString: imageDomaion.appending(model.logoString),
+                            loanCount: loanCountString,
+                            rateRange: rateRangeString,
+                            returnType: repaymentString ?? "",
+                            returnRange: repayRangeString ?? "")
+            cell.delegate = self
             
             return cell
         } else if indexPath.section == 1 {
@@ -129,7 +183,10 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
                 cell.configCell(title: "申请流程")
                 return cell
             } else {
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailFlowTableViewCell.identifier) as! LGNormalDetailFlowTableViewCell
+                cell.configCell(flowArray: model.flowArray)
+                
+                return cell
             }
         } else if indexPath.section == 2 {
             // 申请条件
@@ -139,7 +196,7 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailContentTableViewCell.identifier) as! LGNormalDetailContentTableViewCell
-                cell.configCell(content: "18-35周岁")
+                cell.configCell(content: model.condition)
                 return cell
             }
         } else if indexPath.section == 3 {
@@ -149,7 +206,17 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
                 cell.configCell(title: "审核说明")
                 return cell
             } else {
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailInfoTableViewCell.identifier) as! LGNormalDetailInfoTableViewCell
+                if indexPath.row == 1 {
+                    cell.configCell(title: "审核周期：", content: model.cycle)
+                } else if indexPath.row == 2 {
+                    cell.configCell(title: "审核方式：", content: model.mode)
+                } else if indexPath.row == 3 {
+                    cell.configCell(title: "放款时间：", content: model.loanTimeinfo)
+                } else {                    
+                    cell.configCell(title: "还款方式：", content: model.repayment == 1 ? "随借随还" : "分期还款")
+                }
+                return cell
             }
         } else if indexPath.section == 4 {
             // 产品介绍
@@ -159,7 +226,7 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailContentTableViewCell.identifier) as! LGNormalDetailContentTableViewCell
-                cell.configCell(content: "发大Shi范围长发一昂我吃放松地符合我文hi我陈红当发一昂我ifhi我 方尺文化i和ID森我真会玩吃货第五晨hiif网发我wehi红地方种地方we胡if无if很i无")
+                cell.configCell(content: model.introduction)
                 return cell
             }
         } else {
@@ -195,5 +262,11 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
         } else {
             navigationController?.navigationBar.isHidden = true
         }
+    }
+}
+
+extension LGNormalDetailViewController: LGNormalDetailHeaderTableViewCellDelegate {
+    func headCellDidSelectBack(_ headerCell: LGNormalDetailHeadTableViewCell) {
+        backButtonOnClick()
     }
 }

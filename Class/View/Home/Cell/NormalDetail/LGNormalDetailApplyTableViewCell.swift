@@ -9,8 +9,14 @@
 import UIKit
 import SnapKit
 
+protocol LGNormalDetailApplyTableVIewCellDelegate: class {
+    func applyCellDidSubmit(_ applyCell: LGNormalDetailApplyTableViewCell)
+}
+
 class LGNormalDetailApplyTableViewCell: UITableViewCell {
     static let identifier = "LGNormalDetailApplyTableViewCell"
+    
+    weak var delegate: LGNormalDetailApplyTableVIewCellDelegate?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,6 +49,6 @@ class LGNormalDetailApplyTableViewCell: UITableViewCell {
     }
     
     @objc private func applyButtonOnClick() {
-        
+        delegate?.applyCellDidSubmit(self)
     }
 }

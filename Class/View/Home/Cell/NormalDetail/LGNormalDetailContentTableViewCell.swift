@@ -38,7 +38,9 @@ class LGNormalDetailContentTableViewCell: UITableViewCell {
         }
     }
     
-    func configCell(content: String) {
-        contentLabel.text = content
+    func configCell(content: String?) {
+        if content != nil {
+            contentLabel.text = content!.replacingOccurrences(of: "<br>", with: "\n")
+        }
     }
 }

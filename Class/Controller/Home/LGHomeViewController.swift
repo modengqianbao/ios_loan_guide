@@ -12,7 +12,7 @@ import MJRefresh
 
 class LGHomeViewController: LGViewController {
     
-    private var homeTableView: UITableView!
+    private var homeTableView: UITableView!   
     
     private let model = LGHomeModel()
 
@@ -22,6 +22,16 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
+//        test()
+    }
+    
+    func test() {
+        let tett = 1
+        let webVC = LGWebViewViewController()
+        webVC.webTitle = "哈哈"
+        webVC.hidesBottomBarWhenPushed = true
+        webVC.urlString = userAgreementURLString
+        show(webVC, sender: nil)
     }
     
     private func loadData() {

@@ -22,8 +22,24 @@ class LGLoanViewController: LGViewController {
         getLoanList()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     private func setup() {
         navigationItem.title = "贷款"
+        view.backgroundColor = kColorBackground
+        
+        let whiteView = UIView()
+        whiteView.backgroundColor = kColorBackground
+        view.addSubview(whiteView)
+        whiteView.snp.makeConstraints { [weak self] make in
+            make.left.right.equalTo(self!.view)
+            make.bottom.equalTo(self!.view.snp.top)
+            make.height.equalTo(64)
+        }
         
         // 顶部排序按钮
         let dropDownMenu = LGDropDownMenu(frame: CGRect(x: 0,
@@ -104,6 +120,21 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
                             describeString: loanItem.loanSpec)
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if model.loanArray.count != 0 {
+            let item = model.loanArray[indexPath.row]
+            if item.isRecommended {
+                
+            } else {
+                let detailVC = LGNormalDetailViewController()
+                detailVC.hidesBottomBarWhenPushed = true
+                detailVC.model = item
+                show(detailVC, sender: nil)
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

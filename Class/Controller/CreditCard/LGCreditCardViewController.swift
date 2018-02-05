@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import RxWebViewController
 
 class LGCreditCardViewController: LGViewController {
     
@@ -102,6 +103,19 @@ extension LGCreditCardViewController: UITableViewDelegate, UITableViewDataSource
             
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if model.creditCardArray.count != 0 {
+            let item = model.creditCardArray[indexPath.row]
+            let url = URL(string: item.urlString)
+            let webVC = RxWebViewController(url: url)!
+            webVC.navigationController?.navigationBar.tintColor = kColorTitleText
+            webVC.hidesBottomBarWhenPushed = true
+
+            navigationController?.pushViewController(webVC, animated: true)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
