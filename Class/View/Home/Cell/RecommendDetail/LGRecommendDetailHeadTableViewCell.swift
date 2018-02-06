@@ -116,8 +116,8 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         // 额度
         limitButton = UIButton(type: .custom)
         limitButton.setTitleColor(kColorMainTone, for: .normal)
-//        limitButton.setTitle("3000元", for: .normal)
         limitButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
+        limitButton.addTarget(self, action: #selector(limitButtonOnClick), for: .touchUpInside)
         whiteView.addSubview(limitButton)
         limitButton.snp.makeConstraints { make in
             make.centerX.equalTo(whiteView).multipliedBy(0.5).offset(-4)
@@ -134,7 +134,6 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         limitLabel = UILabel()
         limitLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         limitLabel.textColor = kColorAssistText
-//        limitLabel.text = "额度1000~8000"
         whiteView.addSubview(limitLabel)
         limitLabel.snp.makeConstraints { make in
             make.top.equalTo(limitButton.snp.bottom)
@@ -155,7 +154,7 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         stageButton = UIButton(type: .custom)
         stageButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .regular)
         stageButton.setTitleColor(kColorMainTone, for: .normal)
-//        stageButton.setTitle("180日", for: .normal)
+        stageButton.addTarget(self, action: #selector(termButtonOnClick), for: .touchUpInside)
         whiteView.addSubview(stageButton)
         stageButton.snp.makeConstraints { make in
             make.centerX.equalTo(whiteView).multipliedBy(1.5).offset(-4)
@@ -172,7 +171,6 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         stageLabel = UILabel()
         stageLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         stageLabel.textColor = kColorAssistText
-//        stageLabel.text = "分期90-360期"
         whiteView.addSubview(stageLabel)
         stageLabel.snp.makeConstraints { make in
             make.centerX.equalTo(whiteView).multipliedBy(1.5)
@@ -185,6 +183,9 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         usageView.layer.cornerRadius = 3
         usageView.layer.borderColor = kColorBorder.cgColor
         usageView.layer.borderWidth = 1
+        usageView.isUserInteractionEnabled = true
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(usageOnClick))
+        usageView.addGestureRecognizer(tapGR)
         whiteView.addSubview(usageView)
         usageView.snp.makeConstraints { make in
             make.left.equalTo(whiteView).offset(22)
@@ -297,14 +298,26 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
         
     }
     
+    @objc private func limitButtonOnClick() {
+        delegate?.headCellDidClickLoanMoney(self)
+    }
+    
+    @objc private func termButtonOnClick() {
+        delegate?.headCellDidClickLoanTime(self)
+    }
+    
+    @objc private func usageOnClick() {
+        delegate?.headCellDidClickLoanUsage(self)
+    }
+    
     /// 贷款名，当前选择贷款，贷款额度，贷款时间，分期范围，贷款用途，放款时间，日利率
-    func configCell(title: String, currentMoney: Int, limitString: String?, currentStage: String, stageRange: String?, usage: String?, timeString: String, rateString: String) {
+    func configCell(title: String, currentMoney: String, limitString: String?, currentStage: String, stageRange: String?, usage: String?, timeString: String, rateString: String) {
         titleLabel.text = title
         limitButton.setTitle("\(currentMoney)元", for: .normal)
         limitLabel.text = limitString
         stageButton.setTitle(currentStage, for: .normal)
         stageLabel.text = stageRange
         usageLabel.text = usage
-        descLabel.attributedText = describeText(timeString, rateString: rateString)
+        descLabel.attributedText = describeText(" \(timeString)  ", rateString: " \(rateString)")
     }
 }

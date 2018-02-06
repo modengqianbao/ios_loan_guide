@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.6.0)
-  - BRPickerView (1.1.0):
+  - BRPickerView (2.1.0):
     - MJExtension (~> 3.0.13)
   - CocoaSecurity (1.2.4)
   - FSTextView (1.8)
@@ -19,7 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
-  - BRPickerView
+  - BRPickerView (~> 2.1.0)
   - CocoaSecurity
   - FSTextView
   - HMSegmentedControl
@@ -36,7 +36,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  BRPickerView: 9c93d5d9390eaed650c55b44e3eea7b0d619218c
+  BRPickerView: bcf71c838a27490a34a61c0ed5074ef5651b1717
   CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
   FSTextView: 9e2ca07bb6bb0fb7e77b49b2717adf81f3c620b5
   HMSegmentedControl: b25bc4ec44766e073d62c473188fb354ee244b76
@@ -52,6 +52,6 @@ SPEC CHECKSUMS:
   WebViewBridge.Swift: 4aa074c8d626d1f336fe24325f44cd4d530940ea
   WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
 
-PODFILE CHECKSUM: e4934829a4741f9881eb3366f88c4e6ab8a37095
+PODFILE CHECKSUM: 209f1c034a49c73f1ef5d06286915505eb282daa
 
 COCOAPODS: 1.3.1

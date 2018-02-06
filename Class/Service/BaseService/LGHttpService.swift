@@ -61,16 +61,17 @@ class LGHttpService {
     }
     
     private func saveCookies(response: DataResponse<Any>) {
-        let headerFields = response.response?.allHeaderFields as! [String: String]
-        let url = response.response?.url
-        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
-        var cookieArray = [[HTTPCookiePropertyKey: Any]]()
-        for cookie in cookies {
-            cookieArray.append(cookie.properties!)
-        }
-        if cookieArray.count > 0 {
-            UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
-            UserDefaults.standard.synchronize()
+        if let headerFields = response.response?.allHeaderFields as? [String: String] {
+            let url = response.response?.url
+            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
+            var cookieArray = [[HTTPCookiePropertyKey: Any]]()
+            for cookie in cookies {
+                cookieArray.append(cookie.properties!)
+            }
+            if cookieArray.count > 0 {
+                UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
+                UserDefaults.standard.synchronize()
+            }
         }
     }
     

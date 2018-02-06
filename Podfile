@@ -17,6 +17,6 @@ target 'LoanGuide' do
 	pod 'RxWebViewController'
 	pod 'WebViewJavascriptBridge', '~> 6.0'
 	pod 'WebViewBridge.Swift'
-	pod 'BRPickerView'
+	pod 'BRPickerView', '~> 2.1.0'
 	
 end

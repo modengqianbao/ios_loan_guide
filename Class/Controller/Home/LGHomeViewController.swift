@@ -25,6 +25,12 @@ class LGHomeViewController: LGViewController {
 //        test()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     func test() {
         let tett = 1
         let webVC = LGWebViewViewController()

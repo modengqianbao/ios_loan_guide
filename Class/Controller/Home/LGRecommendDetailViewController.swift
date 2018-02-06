@@ -9,12 +9,20 @@
 import UIKit
 import SnapKit
 import MBProgressHUD
+import BRPickerView
 
 class LGRecommendDetailViewController: LGViewController {
     /// 传入
     var model: LGLoanProductModel!
     
     private var detailTableView: UITableView!
+    private var pickView: BRStringPickerView!
+    
+    private var moneyArray: [String]!
+    private var selectedMoneyIndex: Int = 0
+    private var termArray: [String]!
+    private var selectedTermIndex: Int = 0
+    private var selectedUsageIndex: Int = 0
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -73,6 +81,24 @@ class LGRecommendDetailViewController: LGViewController {
         }
     }
     
+    private func setupPickArray() {
+        // 计算额度数
+        let limitCount = (model.loanMax - model.loanMin) / 1000
+        moneyArray = [String]()
+        for i in 0...limitCount {
+            moneyArray.append("\(model.loanMin + i * 1000)")
+        }
+        
+        // 计算分期数
+        /// 按天算或按月算
+        let unit = model.loanSign == 1 ? 30 : 1
+        let count = (model.termMax! - model.termMin!) / unit
+        termArray = [String]()
+        for i in 0...count {
+            termArray.append("\(model.termMin! + i * unit)")
+        }
+    }
+    
     private func getDetail() {
         if !model.isDetailed {
             MBProgressHUD.showAdded(to: view, animated: true)
@@ -80,14 +106,27 @@ class LGRecommendDetailViewController: LGViewController {
                 if self != nil {
                     MBProgressHUD.hide(for: self!.view, animated: true)
                     if error == nil {
+                        self!.setupPickArray()
                         self!.detailTableView.reloadData()
                     } else {
                         LGHud.show(in: self!.view, animated: true, text: error)
                     }
                 }
             }
+        } else {
+            setupPickArray()
         }
     }
+    
+//    private func showUsagePickView() {
+//        BRStringPickerView.showStringPicker(withTitle: "222", dataSource: loanUsageArray, defaultSelValue: loanUsageArray[0], isAutoSelect: false, themeColor: kColorMainTone) { value in
+//            print(value)
+//        }
+//    }
+//
+//    private func showMoneyPickview() {
+//
+//    }
 }
 
 //MARK:- UITableView delegate, datasource
@@ -110,7 +149,25 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
                 // 头部
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGRecommendDetailHeadTableViewCell.identifier) as! LGRecommendDetailHeadTableViewCell
                 cell.delegate = self
-                
+                if model.isDetailed {
+                    let limitString = "额度\(model.loanMin)~\(model.loanMax)"
+                    let stageString = "分期\(model.termMin!)~\(model.termMax!)期"
+                    var rate: String
+                    if model.rateMin == model.rateMax {
+                        rate = "\(model.rateMin)%"
+                    } else {
+                        rate = "\(model.rateMin)%~\(model.rateMax)"
+                    }
+                    let rateString = "\(model.loanSign == 1 ? "日" : "月")利率\(rate)"
+                    cell.configCell(title: model.name,
+                                    currentMoney: moneyArray[selectedMoneyIndex],
+                                    limitString: limitString,
+                                    currentStage: "\(termArray[selectedTermIndex])\(model.loanSign == 1 ? "日" : "月")",
+                                    stageRange: stageString,
+                                    usage: loanUsageArray[selectedUsageIndex],
+                                    timeString: model.loanTimeinfo!,
+                                    rateString: rateString)
+                }
                 return cell
             } else {
                 // 查看详情
@@ -177,15 +234,27 @@ extension LGRecommendDetailViewController: LGRecommendDetailHeadTableViewCellDel
     }
     
     func headCellDidClickLoanMoney(_ headCell: LGRecommendDetailHeadTableViewCell) {
-        return
+        BRStringPickerView.showStringPicker(withTitle: "额度", dataSource: moneyArray, defaultSelValue: moneyArray[selectedMoneyIndex], isAutoSelect: false, themeColor: kColorMainTone) { [weak self] value in
+            let index = self!.moneyArray.index(of: value as! String)
+            self!.selectedMoneyIndex = index!
+            self!.detailTableView.reloadData()
+        }
     }
     
     func headCellDidClickLoanTime(_ headCell: LGRecommendDetailHeadTableViewCell) {
-        return
+        BRStringPickerView.showStringPicker(withTitle: "分期", dataSource: termArray, defaultSelValue: termArray[selectedTermIndex], isAutoSelect: false, themeColor: kColorMainTone) { [weak self] value in
+            let index = self!.termArray.index(of: value as! String)
+            self!.selectedTermIndex = index!
+            self!.detailTableView.reloadData()
+        }
     }
     
     func headCellDidClickLoanUsage(_ headCell: LGRecommendDetailHeadTableViewCell) {
-        return
+        BRStringPickerView.showStringPicker(withTitle: "贷款用途", dataSource: loanUsageArray, defaultSelValue: loanUsageArray[selectedUsageIndex], isAutoSelect: false, themeColor: kColorMainTone) { [weak self] value in
+            let index = loanUsageArray.index(of: value as! String)
+            self!.selectedUsageIndex = index!
+            self!.detailTableView.reloadData()
+        }
     }
     
     func headCellDidClickBack(_ headCell: LGRecommendDetailHeadTableViewCell) {
