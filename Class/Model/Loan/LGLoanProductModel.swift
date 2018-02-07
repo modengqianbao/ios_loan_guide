@@ -12,28 +12,28 @@ import SwiftyJSON
 class LGLoanProductModel {
     let id: Int
     /// 简介
-    let introduction: String
-    let isRecommended: Bool
+    var introduction: String
+    var isRecommended: Bool
     /// 标签
-    let labelString: String
+    var labelString: String
     /// logo图片地址
-    let logoString: String
+    var logoString: String
     /// 最大额度
-    let loanMax: Int
+    var loanMax: Int
     /// 最小额度
-    let loanMin: Int
+    var loanMin: Int
     /// 名称
-    let name: String
+    var name: String
     /// 利率单位，1-天，2-月
-    let loanSign: Int
+    var loanSign: Int
     /// 产品特点
-    let loanSpec: String
+    var loanSpec: String
     /// 最大利率
-    let rateMax: Float
+    var rateMax: Float
     /// 最小利率
-    let rateMin: Float
+    var rateMin: Float
     /// 产品状态 1，马上抢 2，可申请 3.已抢光
-    let status: Int
+    var status: Int
     
     /*-------------------------------------------------------*/
     // 详情
@@ -71,6 +71,22 @@ class LGLoanProductModel {
         rateMax = json["rateMax"].floatValue
         rateMin = json["rateMin"].floatValue
         status = json["status"].intValue        
+    }
+    
+    init(bannerModel: LGHomeBannerModel) {
+        id = bannerModel.id
+        name = bannerModel.name
+        isRecommended = bannerModel.type == 1
+        introduction = ""
+        labelString = ""
+        logoString = ""
+        loanMax = 0
+        loanMin = 0
+        loanSign = 0
+        loanSpec = ""
+        rateMax = 0
+        rateMin = 0
+        status = 0
     }
     
     func getDetail(complete: @escaping (_ error: String?) -> Void) {

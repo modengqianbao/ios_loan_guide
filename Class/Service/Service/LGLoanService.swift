@@ -58,6 +58,16 @@ class LGLoanService {
                 loanItem.termMin = jsonItem["loanTermMin"].intValue
                 loanItem.termMax = jsonItem["loanTermMax"].intValue
                 loanItem.mode = jsonItem["loanMode"].stringValue
+                loanItem.introduction = ""
+//                labelString = ""
+                loanItem.logoString = jsonItem["loanLogo"].stringValue
+                loanItem.loanMax = jsonItem["loanMax"].intValue
+                loanItem.loanMin = jsonItem["loanMax"].intValue
+                loanItem.loanSign = jsonItem["loanSign"].intValue
+//                loanItem.loanSpec = ""
+                loanItem.rateMax = jsonItem["rateMax"].floatValue
+                loanItem.rateMin = jsonItem["rateMin"].floatValue
+//                loanItem.status = jsonItem[""]
                 let jsonArray = jsonItem["loanFlows"].arrayValue
                 var array = [LGLoanFlowModel]()
                 for jsonItem in jsonArray {

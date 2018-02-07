@@ -59,6 +59,7 @@
 		E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */; };
 		E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */; };
 		E08E8D32201C6F18008A4FCC /* LGHotProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */; };
+		E0906C6C20295250007DE25E /* LGHomeBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0906C6B20295250007DE25E /* LGHomeBannerModel.swift */; };
 		E0B0419B202495DB002F6CDC /* LGChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B0419A202495DB002F6CDC /* LGChangePasswordViewController.swift */; };
 		E0B213992023F7DF000DEA4F /* LGHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B213982023F7DF000DEA4F /* LGHomeModel.swift */; };
 		E0B2139D2023F866000DEA4F /* LGHomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2139C2023F866000DEA4F /* LGHomeService.swift */; };
@@ -139,6 +140,7 @@
 		E08E8D2D201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGMineButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckTableViewCell.swift; sourceTree = "<group>"; };
 		E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHotProductTableViewCell.swift; sourceTree = "<group>"; };
+		E0906C6B20295250007DE25E /* LGHomeBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeBannerModel.swift; sourceTree = "<group>"; };
 		E0B0419A202495DB002F6CDC /* LGChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGChangePasswordViewController.swift; sourceTree = "<group>"; };
 		E0B213982023F7DF000DEA4F /* LGHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeModel.swift; sourceTree = "<group>"; };
 		E0B2139C2023F866000DEA4F /* LGHomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeService.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				E0B213982023F7DF000DEA4F /* LGHomeModel.swift */,
+				E0906C6B20295250007DE25E /* LGHomeBannerModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 				E0532D322025DA8900020ED1 /* LGMessageViewController.swift in Sources */,
 				E0600C2C2021E3980007B732 /* LGDropMenuTableViewCell.swift in Sources */,
 				E02AB1B8201F0D9E00F90E69 /* LGNormalDetailViewController.swift in Sources */,
+				E0906C6C20295250007DE25E /* LGHomeBannerModel.swift in Sources */,
 				E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */,
 				E04C75BA2022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift in Sources */,
 				E053F3B5201B2B010066FD1E /* LGCreditCardViewController.swift in Sources */,

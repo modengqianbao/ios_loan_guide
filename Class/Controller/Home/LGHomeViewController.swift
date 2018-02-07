@@ -51,6 +51,15 @@ class LGHomeViewController: LGViewController {
     }
     
     private func setupSubviews() {
+        let whiteView = UIView()
+        whiteView.backgroundColor = kColorBackground
+        view.addSubview(whiteView)
+        whiteView.snp.makeConstraints { [weak self] make in
+            make.left.right.equalTo(self!.view)
+            make.bottom.equalTo(self!.view.snp.top)
+            make.height.equalTo(64)
+        }
+        
         homeTableView = UITableView(frame: CGRect.zero,
                                     style: .grouped)
         homeTableView.separatorStyle = .none
@@ -58,38 +67,46 @@ class LGHomeViewController: LGViewController {
         homeTableView.register(LGRecommendTableViewCell.self, forCellReuseIdentifier: LGRecommendTableViewCell.identifier)
         homeTableView.register(LGCreditCheckTableViewCell.self, forCellReuseIdentifier: LGCreditCheckTableViewCell.identifier)
         homeTableView.register(LGHotProductTableViewCell.self, forCellReuseIdentifier: LGHotProductTableViewCell.identifier)
+        homeTableView.register(LGCreditCardTableViewCell.self, forCellReuseIdentifier: LGCreditCardTableViewCell.identifier)
+        homeTableView.showsVerticalScrollIndicator = false
         homeTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-            self!.model.reloadLoanProduct { hasMore, error in
-                self!.homeTableView.mj_footer.isHidden = false
+            self!.model.getHomeData { error in
+//                self!.homeTableView.mj_footer.isHidden = false
                 self!.homeTableView.mj_header.endRefreshing()
                 self!.homeTableView.reloadData()
                 if error == nil {
-                    if hasMore {
-                        self!.homeTableView.mj_footer.endRefreshing()
-                    } else {
-                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
-                    }
+//                    if hasMore {
+//                        self!.homeTableView.mj_footer.endRefreshing()
+//                    } else {
+//                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
+//                    }
                 } else {
                     LGHud.show(in: self!.view, animated: true, text: error)
                 }
             }
+            
+//            self!.model.getBanner(complete: { [weak self] error in
+//                if error == nil {
+//                    self!.homeTableView.reloadData()
+//                }
+//            })
         })
-        homeTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
-            self!.model.loadMoreLoanProduct(complete: { hasMore, error in
-                if error == nil {
-                    self!.homeTableView.reloadData()
-                    if hasMore {
-                        self!.homeTableView.mj_footer.endRefreshing()
-                    } else {
-                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
-                    }
-                } else {
-                    self!.homeTableView.mj_footer.endRefreshing()
-                    LGHud.show(in: self!.view, animated: true, text: error)
-                }
-            })
-        })
-        homeTableView.mj_footer.isHidden = true
+//        homeTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
+//            self!.model.loadMoreLoanProduct(complete: { hasMore, error in
+//                if error == nil {
+//                    self!.homeTableView.reloadData()
+//                    if hasMore {
+//                        self!.homeTableView.mj_footer.endRefreshing()
+//                    } else {
+//                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
+//                    }
+//                } else {
+//                    self!.homeTableView.mj_footer.endRefreshing()
+//                    LGHud.show(in: self!.view, animated: true, text: error)
+//                }
+//            })
+//        })
+//        homeTableView.mj_footer.isHidden = true
         homeTableView.delegate = self
         homeTableView.dataSource = self
         view.addSubview(homeTableView)
@@ -102,24 +119,29 @@ class LGHomeViewController: LGViewController {
 //MAKR:- UITableView delegate, datasource
 extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             // 急速好贷
             return 2
-        } else {
+        } else if section == 1{
             // 热门产品
             return model.loanProductArray.count
+        } else {
+            // 信用卡产品
+            return model.creditProductArray.count
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "极速好贷")
-        } else {
+        } else if section == 1 {
             return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "热门产品")
+        } else {
+            return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "信用卡产品")
         }
     }
     
@@ -127,15 +149,26 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             // 急速好贷
             if indexPath.row == 0 {
-                // 马上金融+拍拍贷
+                // banner
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGRecommendTableViewCell.identifier) as! LGRecommendTableViewCell
+                if model.bannerArray.count == 1 {
+                    cell.configCell(leftImageURLString: imageDomaion.appending(model.bannerArray[0].imageURLString),
+                                    rightImageURLString: nil)
+                } else if model.bannerArray.count >= 2 {
+                    cell.configCell(leftImageURLString: imageDomaion.appending(model.bannerArray[0].imageURLString),
+                                    rightImageURLString: imageDomaion.appending(model.bannerArray[1].imageURLString))
+                } else {
+                    cell.configCell(leftImageURLString: nil, rightImageURLString: nil)
+                }
+                cell.delegate = self
+                
                 return cell
             } else {
                 // 信用知多少
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCheckTableViewCell.identifier)!
                 return cell
             }
-        } else {
+        } else if indexPath.section == 1 {
             // 热门产品
             let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
             let item = model.loanProductArray[indexPath.row]
@@ -145,11 +178,53 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                             moneyString: "\(item.loanMax)",
                             describeString: item.introduction)
             return cell
+        } else {
+            // 信用卡产品
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCardTableViewCell.identifier) as! LGCreditCardTableViewCell
+            let item = model.creditProductArray[indexPath.row]
+            cell.configCell(iconURLString: imageDomaion.appending(item.logoURL),
+                            title: item.name,
+                            content: item.introduce,
+                            extra: item.label)
+            return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let loanItem = model.loanProductArray[indexPath.row]
+        if indexPath.section == 0 {
+            
+        } else if indexPath.section == 1 {
+            let loanItem = model.loanProductArray[indexPath.row]
+            if loanItem.isRecommended {
+                let detailVC = LGRecommendDetailViewController()
+                detailVC.model = loanItem
+                detailVC.hidesBottomBarWhenPushed = true
+                show(detailVC, sender: nil)
+            } else {
+                let detailVC = LGNormalDetailViewController()
+                detailVC.model = loanItem
+                detailVC.hidesBottomBarWhenPushed = true
+                show(detailVC, sender: nil)
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+}
+
+extension LGHomeViewController: LGRecommendTableViewCellDelegate {
+    func recommendTableViewCellDidSelectLeftBanner(cell: LGRecommendTableViewCell) {
+        let bannerModel = model.bannerArray[0]
+        let loanItem = LGLoanProductModel(bannerModel: bannerModel)
         if loanItem.isRecommended {
             let detailVC = LGRecommendDetailViewController()
             detailVC.model = loanItem
@@ -161,14 +236,21 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             detailVC.hidesBottomBarWhenPushed = true
             show(detailVC, sender: nil)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+    func recommendTableViewCellDidSelectRightBanner(cell: LGRecommendTableViewCell) {
+        let bannerModel = model.bannerArray[1]
+        let loanItem = LGLoanProductModel(bannerModel: bannerModel)
+        if loanItem.isRecommended {
+            let detailVC = LGRecommendDetailViewController()
+            detailVC.model = loanItem
+            detailVC.hidesBottomBarWhenPushed = true
+            show(detailVC, sender: nil)
+        } else {
+            let detailVC = LGNormalDetailViewController()
+            detailVC.model = loanItem
+            detailVC.hidesBottomBarWhenPushed = true
+            show(detailVC, sender: nil)
+        }
     }
 }
