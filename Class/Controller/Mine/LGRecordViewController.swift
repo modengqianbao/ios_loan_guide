@@ -8,8 +8,10 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
+import RxWebViewController
 
-class LGRecordViewController: UIViewController {
+class LGRecordViewController: LGViewController {
     /// 传入
     var model: LGMineModel!
     
@@ -35,6 +37,15 @@ class LGRecordViewController: UIViewController {
     private func setup() {
         title = "申请记录"
         view.backgroundColor = kColorBackground
+        
+        let whiteView = UIView()
+        whiteView.backgroundColor = kColorBackground
+        view.addSubview(whiteView)
+        whiteView.snp.makeConstraints { [weak self] make in
+            make.left.right.equalTo(self!.view)
+            make.bottom.equalTo(self!.view.snp.top)
+            make.height.equalTo(64)
+        }
         
         // 选择框
         let segmentViewHeight = CGFloat(50)
@@ -91,11 +102,80 @@ class LGRecordViewController: UIViewController {
                 // 贷款
                 tableView.register(LGHotProductTableViewCell.self,
                                    forCellReuseIdentifier: LGHotProductTableViewCell.identifier)
+                tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+                    self!.model.reloadLoanProduct { hasMore, error in
+                        if self != nil {
+                            tableView.mj_footer.isHidden = false
+                            tableView.mj_header.endRefreshing()
+                            if error == nil {
+                                tableView.reloadData()
+                                if hasMore {
+                                    tableView.mj_footer.endRefreshing()
+                                } else {
+                                    tableView.mj_footer.endRefreshingWithNoMoreData()
+                                }
+                            } else {
+                                LGHud.show(in: self!.view, animated: true, text: error)
+                            }
+                        }
+                    }
+                })
+                tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] in
+                    self!.model.loadLoanProduct { hasMore, error in
+                        if self != nil {
+                            if error == nil {
+                                tableView.reloadData()
+                                if hasMore {
+                                    tableView.mj_footer.endRefreshing()
+                                } else {
+                                    tableView.mj_footer.endRefreshingWithNoMoreData()
+                                }
+                            } else {
+                                LGHud.show(in: self!.view, animated: true, text: error)
+                            }
+                        }
+                    }
+                })
             } else {
                 // 信用卡
                 tableView.register(LGCreditCardTableViewCell.self,
                                    forCellReuseIdentifier: LGCreditCardTableViewCell.identifier)
+                tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+                    self!.model.reloadCreditProduct { hasMore, error in
+                        if self != nil {
+                            tableView.mj_footer.isHidden = false
+                            tableView.mj_header.endRefreshing()
+                            if error == nil {
+                                tableView.reloadData()
+                                if hasMore {
+                                    tableView.mj_footer.endRefreshing()
+                                } else {
+                                    tableView.mj_footer.endRefreshingWithNoMoreData()
+                                }
+                            } else {
+                                LGHud.show(in: self!.view, animated: true, text: error)
+                            }
+                        }
+                    }
+                })
+                tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {[weak self] in
+                    self!.model.loadCreditProduct { hasMore, error in
+                        if self != nil {
+                            if error == nil {
+                                tableView.reloadData()
+                                if hasMore {
+                                    tableView.mj_footer.endRefreshing()
+                                } else {
+                                    tableView.mj_footer.endRefreshingWithNoMoreData()
+                                }
+                            } else {
+                                LGHud.show(in: self!.view, animated: true, text: error)
+                            }
+                        }
+                    }
+                })
             }
+            tableView.mj_footer.isHidden = true
             tableView.delegate = self
             tableView.dataSource = self
             tableViewArray.append(tableView)
@@ -126,22 +206,80 @@ class LGRecordViewController: UIViewController {
 //2MARK:- UITableView delegate, datasource
 extension LGRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        if tableView == tableViewArray[0] {
+            if model.loanArray != nil {
+                return model.loanArray!.count
+            } else {
+                return 0
+            }
+        } else {
+            if model.creditArray != nil {
+                return model.creditArray!.count
+            } else {
+                return 0
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if tableView == tableViewArray[0] {
+            let array = model.loanArray![section]
+            return array.count
+        } else {
+            let array = model.creditArray![section]
+            return array.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tableViewArray[0] {
             // 贷款列表
             let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
-            
+            let loanItem = model.loanArray![indexPath.section][indexPath.row]
+            let moneyString = "日利率: \(loanItem.rateMax)%, 额度: \(loanItem.loanMax)元"
+            cell.configCell(iconURLString: imageDomaion.appending(loanItem.logoString),
+                            title: loanItem.name,
+                            adString: loanItem.labelString,
+                            moneyString: moneyString,
+                            describeString: loanItem.loanSpec)
             return cell
         } else {
-            return UITableViewCell()
+            // 信用卡列表
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCardTableViewCell.identifier) as! LGCreditCardTableViewCell
+            let creditItem = model.creditArray![indexPath.section][indexPath.row]
+            cell.configCell(iconURLString: imageDomaion.appending(creditItem.logoURL),
+                            title: creditItem.name,
+                            content: creditItem.introduce,
+                            extra: creditItem.label)
+            
+            return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == tableViewArray[0] {
+            let item = model.loanArray![indexPath.section][indexPath.row]
+            if item.isRecommended {
+                let detailVC = LGRecommendDetailViewController()
+                detailVC.hidesBottomBarWhenPushed = true
+                detailVC.model = item
+                show(detailVC, sender: nil)
+            } else {
+                let detailVC = LGNormalDetailViewController()
+                detailVC.hidesBottomBarWhenPushed = true
+                detailVC.model = item
+                show(detailVC, sender: nil)
+            }
+        } else {
+            let item = model.creditArray![indexPath.section][indexPath.row]
+            let url = URL(string: item.urlString)
+            let webVC = RxWebViewController(url: url)!
+            webVC.navigationController?.navigationBar.tintColor = kColorTitleText
+            webVC.hidesBottomBarWhenPushed = true
+            
+            navigationController?.pushViewController(webVC, animated: true)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -154,7 +292,21 @@ extension LGRecordViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return dateView(date: "2018年02月04日")
+        if tableView == tableViewArray[0] {
+            if model.loanDateStringArray != nil {
+                let dateString = model.loanDateStringArray![section]
+                return dateView(date: dateString)
+            } else {
+                return nil
+            }
+        } else {
+            if model.creditDateStringArray != nil {
+                let dateString = model.creditDateStringArray![section]
+                return dateView(date: dateString)
+            } else {
+                return nil
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -181,6 +333,7 @@ extension LGRecordViewController: UICollectionViewDataSource, UICollectionViewDe
             tableView.snp.makeConstraints({ make in
                 make.left.right.top.bottom.equalTo(cell.contentView)
             })
+            tableView.mj_header.beginRefreshing()
         }
         
         return cell

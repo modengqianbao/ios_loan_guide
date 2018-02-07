@@ -176,7 +176,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                             title: item.name,
                             adString: item.labelString,
                             moneyString: "\(item.loanMax)",
-                            describeString: item.introduction)
+                            describeString: item.loanSpec)
             return cell
         } else {
             // 信用卡产品

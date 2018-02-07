@@ -58,11 +58,11 @@ class LGLoanService {
                 loanItem.termMin = jsonItem["loanTermMin"].intValue
                 loanItem.termMax = jsonItem["loanTermMax"].intValue
                 loanItem.mode = jsonItem["loanMode"].stringValue
-                loanItem.introduction = ""
+                loanItem.introduction = jsonItem["introduce"].stringValue
 //                labelString = ""
                 loanItem.logoString = jsonItem["loanLogo"].stringValue
                 loanItem.loanMax = jsonItem["loanMax"].intValue
-                loanItem.loanMin = jsonItem["loanMax"].intValue
+                loanItem.loanMin = jsonItem["loanMin"].intValue
                 loanItem.loanSign = jsonItem["loanSign"].intValue
 //                loanItem.loanSpec = ""
                 loanItem.rateMax = jsonItem["rateMax"].floatValue

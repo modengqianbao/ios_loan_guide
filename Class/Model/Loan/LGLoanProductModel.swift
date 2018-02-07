@@ -34,6 +34,8 @@ class LGLoanProductModel {
     var rateMin: Float
     /// 产品状态 1，马上抢 2，可申请 3.已抢光
     var status: Int
+    /// 记录时间
+    var timeInt: Int?
     
     /*-------------------------------------------------------*/
     // 详情
@@ -70,7 +72,8 @@ class LGLoanProductModel {
         loanSpec = json["loanSpec"].stringValue
         rateMax = json["rateMax"].floatValue
         rateMin = json["rateMin"].floatValue
-        status = json["status"].intValue        
+        status = json["status"].intValue
+        timeInt = json["time"].int
     }
     
     init(bannerModel: LGHomeBannerModel) {

@@ -32,7 +32,7 @@ class LGCreditCardTableViewCell: UITableViewCell {
     
     private func setup() {
         backgroundColor = kColorBackground
-        selectionStyle = .none
+//        selectionStyle = .none
         
         // 图片
         iconImageView = UIImageView()
@@ -58,6 +58,7 @@ class LGCreditCardTableViewCell: UITableViewCell {
         contentLabel = UILabel()
         contentLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         contentLabel.textColor = kColorAssistText
+        contentLabel.numberOfLines = 0
         addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
             make.left.equalTo(titleLabel)

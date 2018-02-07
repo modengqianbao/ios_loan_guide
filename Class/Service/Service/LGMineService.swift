@@ -62,4 +62,44 @@ class LGMineService {
             }
         }
     }
+    
+    /// 获取贷款记录
+    func getLoanRecord(page: Int, pageSize: Int, complete: @escaping (_ array: [LGLoanProductModel]?, _ error: String?) -> Void) {
+        let urlString = domain.appending("loan_browse")
+        let parameters = ["currentPage": page,
+                          "pageSize": pageSize]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let jsonArray = json!["data"]["loans"].arrayValue
+                var array = [LGLoanProductModel]()
+                for jsonItem in jsonArray {
+                    let item = LGLoanProductModel(json: jsonItem)
+                    array.append(item)
+                }
+                complete(array, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
+    
+    /// 获取信用卡记录
+    func getCreditRecord(page: Int, pageSize: Int, complete: @escaping (_ array: [LGCreditProductModel]?, _ error: String?) -> Void){
+        let urlString = domain.appending("credit_browse")
+        let parameters = ["currentPage": page,
+                          "pageSize": pageSize]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let jsonArray = json!["data"]["credits"].arrayValue
+                var array = [LGCreditProductModel]()
+                for jsonItem in jsonArray {
+                    let item = LGCreditProductModel(json: jsonItem)
+                    array.append(item)
+                }
+                complete(array, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
 }
