@@ -22,7 +22,7 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
-        test()
+//        test()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,11 +33,12 @@ class LGHomeViewController: LGViewController {
     
     func test() {
         let tett = 1
-        let webVC = LGCreditCheckVericationViewController()
+        let vc = LGQRCodeViewController(type: .service)
+        present(vc, animated: true, completion: nil)
 //        webVC.webTitle = "哈哈"
-        webVC.hidesBottomBarWhenPushed = true
+//        webVC.hidesBottomBarWhenPushed = true
 //        webVC.urlString = userAgreementURLString
-        show(webVC, sender: nil)
+        
     }
     
     private func loadData() {

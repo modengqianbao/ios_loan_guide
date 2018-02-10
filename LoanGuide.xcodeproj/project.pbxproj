@@ -19,6 +19,7 @@
 		E02AB1B8201F0D9E00F90E69 /* LGNormalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */; };
 		E02AB1BB201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1BA201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift */; };
 		E0380F9F2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0380F9E2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift */; };
+		E03F6448202ECAAE00F20DB6 /* LGQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F6447202ECAAE00F20DB6 /* LGQRCodeViewController.swift */; };
 		E03F88B8201B665400862C53 /* LGHomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F88B7201B665400862C53 /* LGHomeTableHeaderView.swift */; };
 		E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F88BA201B6D6500862C53 /* LGRecommendTableViewCell.swift */; };
 		E042251A202BDE7000196A1F /* LGCreditCheckFlowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0422519202BDE7000196A1F /* LGCreditCheckFlowTableViewCell.swift */; };
@@ -105,6 +106,7 @@
 		E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailViewController.swift; sourceTree = "<group>"; };
 		E02AB1BA201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailHeadTableViewCell.swift; sourceTree = "<group>"; };
 		E0380F9E2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailHeadTableViewCell.swift; sourceTree = "<group>"; };
+		E03F6447202ECAAE00F20DB6 /* LGQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGQRCodeViewController.swift; sourceTree = "<group>"; };
 		E03F88B7201B665400862C53 /* LGHomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeTableHeaderView.swift; sourceTree = "<group>"; };
 		E03F88BA201B6D6500862C53 /* LGRecommendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendTableViewCell.swift; sourceTree = "<group>"; };
 		E0422519202BDE7000196A1F /* LGCreditCheckFlowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckFlowTableViewCell.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				E0532D2420259EAD00020ED1 /* LGQuestionViewController.swift */,
 				E0532D312025DA8900020ED1 /* LGMessageViewController.swift */,
 				E00774D920269ACF00350BE1 /* LGRecordViewController.swift */,
+				E03F6447202ECAAE00F20DB6 /* LGQRCodeViewController.swift */,
 				E0762371202B2DC80073968F /* Credit */,
 				E00774DB20269AFB00350BE1 /* Login */,
 				E0FBCC1E2025934D00BC7DCC /* Setting */,
@@ -784,6 +787,7 @@
 				E011E5F22023092F00FC3BF0 /* LGProductDetailViewController.swift in Sources */,
 				E0532D322025DA8900020ED1 /* LGMessageViewController.swift in Sources */,
 				E0600C2C2021E3980007B732 /* LGDropMenuTableViewCell.swift in Sources */,
+				E03F6448202ECAAE00F20DB6 /* LGQRCodeViewController.swift in Sources */,
 				E02AB1B8201F0D9E00F90E69 /* LGNormalDetailViewController.swift in Sources */,
 				E0906C6C20295250007DE25E /* LGHomeBannerModel.swift in Sources */,
 				E00EFB9F201D76610022F77D /* LGSignupViewController.swift in Sources */,

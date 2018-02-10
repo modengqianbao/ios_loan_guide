@@ -174,9 +174,13 @@ extension LGMineViewController: UITableViewDelegate, UITableViewDataSource {
                 questionVC.hidesBottomBarWhenPushed = true
                 show(questionVC, sender: nil)
             } else if indexPath.row == 1 {
-                
+                // 客服
+                let qrcodeVC = LGQRCodeViewController(type: .service)
+                present(qrcodeVC, animated: true, completion: nil)
             } else {
-                
+                // 公众号
+                let qrcodeVC = LGQRCodeViewController(type: .official)
+                present(qrcodeVC, animated: true, completion: nil)
             }
         } else {
             let settingVC = LGSettingViewController()
