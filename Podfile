@@ -18,5 +18,6 @@ target 'LoanGuide' do
 	pod 'WebViewJavascriptBridge', '~> 6.0'
 	pod 'WebViewBridge.Swift'
 	pod 'BRPickerView', '~> 2.1.0'
+	pod 'BEMCheckBox'
 	
 end

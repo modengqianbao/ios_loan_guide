@@ -22,7 +22,7 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
-//        test()
+        test()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,10 +33,10 @@ class LGHomeViewController: LGViewController {
     
     func test() {
         let tett = 1
-        let webVC = LGWebViewViewController()
-        webVC.webTitle = "哈哈"
+        let webVC = LGCreditCheckVericationViewController()
+//        webVC.webTitle = "哈哈"
         webVC.hidesBottomBarWhenPushed = true
-        webVC.urlString = userAgreementURLString
+//        webVC.urlString = userAgreementURLString
         show(webVC, sender: nil)
     }
     
@@ -192,7 +192,12 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            
+            if indexPath.row == 1 {
+                // 信用知多少
+                let creditVC = LGCreditCheckFlowViewController()
+                creditVC.hidesBottomBarWhenPushed = true
+                show(creditVC, sender: nil)
+            }
         } else if indexPath.section == 1 {
             let loanItem = model.loanProductArray[indexPath.row]
             if loanItem.isRecommended {

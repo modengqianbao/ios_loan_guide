@@ -51,6 +51,14 @@ class LGVericationTableViewCell: UITableViewCell {
             make.right.equalTo(self!).offset(-12)
             make.centerY.equalTo(self!)
         }
+        
+        let line = UIView()
+        line.backgroundColor = kColorSeperatorBackground
+        addSubview(line)
+        line.snp.makeConstraints { [weak self] make in
+            make.left.right.bottom.equalTo(self!)
+            make.height.equalTo(1)
+        }
     }
     
     func configCell(title: String, content: String?, placeHolder: String) {

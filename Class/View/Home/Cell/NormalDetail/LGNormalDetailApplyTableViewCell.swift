@@ -9,14 +9,16 @@
 import UIKit
 import SnapKit
 
-protocol LGNormalDetailApplyTableVIewCellDelegate: class {
+protocol LGNormalDetailApplyTableViewCellDelegate: class {
     func applyCellDidSubmit(_ applyCell: LGNormalDetailApplyTableViewCell)
 }
 
 class LGNormalDetailApplyTableViewCell: UITableViewCell {
     static let identifier = "LGNormalDetailApplyTableViewCell"
     
-    weak var delegate: LGNormalDetailApplyTableVIewCellDelegate?
+    weak var delegate: LGNormalDetailApplyTableViewCellDelegate?
+    
+    private var applyButton: UIButton!
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,7 +35,7 @@ class LGNormalDetailApplyTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         // 按钮
-        let applyButton = UIButton(type: .custom)
+        applyButton = UIButton(type: .custom)
         applyButton.backgroundColor = kColorMainTone
         applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         applyButton.setTitleColor(UIColor.white, for: .normal)
@@ -50,5 +52,9 @@ class LGNormalDetailApplyTableViewCell: UITableViewCell {
     
     @objc private func applyButtonOnClick() {
         delegate?.applyCellDidSubmit(self)
+    }
+    
+    func configCell(title: String) {
+        applyButton.setTitle(title, for: .normal)
     }
 }

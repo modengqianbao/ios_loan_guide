@@ -15,6 +15,6 @@ class LGHud {
         hud.label.text = text
         hud.label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         hud.label.numberOfLines = 0
-        hud.hide(animated: true, afterDelay: 3)
+        hud.hide(animated: true, afterDelay: 2)
     }
 }
