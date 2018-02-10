@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+/// 退出登录通知
+let kNotificationLogout = Notification(name: Notification.Name("logout"))
+
+/// 登录通知
+let kNotificationLogin = Notification(name: Notification.Name("login"))

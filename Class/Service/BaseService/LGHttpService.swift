@@ -44,6 +44,9 @@ class LGHttpService {
         }
         
         Alamofire.request(url, method: .post, parameters: parameters).responseJSON { response in
+            // 持久化cookie
+            self.saveCookies(response: response)
+            
             if let data = response.result.value {
                 let json = JSON(data)
                 if json["msg"].stringValue.isEmpty {
@@ -54,9 +57,6 @@ class LGHttpService {
             } else {
                 complete(nil, "request error")
             }
-            
-            // 持久化cookie
-            self.saveCookies(response: response)
         }
     }
     
@@ -80,6 +80,17 @@ class LGHttpService {
         for cookieProperties in cookieArray {
             if let cookie = HTTPCookie(properties: cookieProperties) {
                 HTTPCookieStorage.shared.setCookie(cookie)
+            }
+        }
+    }
+    
+    func clearCookies() {
+        UserDefaults.standard.set(nil, forKey: "savedCookies")
+        UserDefaults.standard.synchronize()
+        
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for each in cookies {
+                HTTPCookieStorage.shared.deleteCookie(each)
             }
         }
     }

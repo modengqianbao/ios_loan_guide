@@ -184,18 +184,36 @@ class LGLoginViewController: LGViewController {
     @objc private func loginButtonOnClick() {
         view.endEditing(true)
         MBProgressHUD.showAdded(to: view, animated: false)
+        let phoneNumber = phoneTextField.text!
         let password = CocoaSecurity.md5(passwordTextField.text!)
         print(password!.hex)
-        LGUserService.sharedService.login(withPhone: phoneTextField.text!, password: password!.hex) { [weak self] error in
-            if self != nil {
+        LGUserService.sharedService.login(withPhone: phoneNumber, password: password!.hex) { [weak self] error in
+            if error == nil {
+                // 登录成功，去获取认证信息
+                LGUserModel.currentUser.login(phoneNumber: phoneNumber)
+                LGUserService.sharedService.getVerificationInfo(complete: { status, idNumber, name, mark, error in
+                    if self != nil {
+                        MBProgressHUD.hide(for: self!.view, animated: true)
+                        if error == nil {
+                            // 获取认证信息成功
+                            if status {
+                                // 已认证
+                                LGUserModel.currentUser.verificated(idNumber: idNumber!, mark: mark!, name: name!)
+                            }
+                            // 发送登录通知
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(kNotificationLogin)
+                            }
+                            // 关闭登录页
+                            self!.navigationController?.dismiss(animated: true, completion: nil)
+                        } else {
+                            LGHud.show(in: self!.view, animated: true, text: error)
+                        }
+                    }
+                })
+            } else {
                 MBProgressHUD.hide(for: self!.view, animated: true)
-                if error == nil {
-                    // 登录成功
-                    let te = 2
-                    print("登录成功")
-                } else {
-                    LGHud.show(in: self!.view, animated: true, text: error)
-                }
+                LGHud.show(in: self!.view, animated: true, text: error)
             }
         }
     }

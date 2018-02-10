@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class LGMineViewController: LGViewController {
+    private var phoneLabel: UILabel!
+    private var vericationLabel: UILabel!
     
     private let model = LGMineModel()
 
@@ -17,12 +19,18 @@ class LGMineViewController: LGViewController {
         super.viewDidLoad()
 
         setupSubviews()
+        setupNotification()
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupSubviews() {
@@ -53,16 +61,30 @@ class LGMineViewController: LGViewController {
             make.left.equalTo(topView).offset(12)
         }
         
-        // “请点击登录”
-        let loginLabel = UILabel()
-        loginLabel.textColor = UIColor.white
-        loginLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        loginLabel.text = "请点击登录"
-        loginLabel.sizeToFit()
-        topView.addSubview(loginLabel)
-        loginLabel.snp.makeConstraints { make in
+        // 手机号 / “请点击登录”
+        phoneLabel = UILabel()
+        phoneLabel.textColor = UIColor.white
+        phoneLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+//        phoneLabel.text = "请点击登录"
+        phoneLabel.sizeToFit()
+        topView.addSubview(phoneLabel)
+        phoneLabel.snp.makeConstraints { make in
             make.left.equalTo(avatarImageView.snp.right).offset(12)
             make.top.equalTo(avatarImageView).offset(8)
+        }
+        
+        // 认证标签
+        vericationLabel = UILabel()
+        vericationLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        vericationLabel.textAlignment = .center
+        vericationLabel.textColor = UIColor.white
+//        vericationLabel.backgroundColor = UIColor.red
+//        vericationLabel.text = "未认证"
+        topView.addSubview(vericationLabel)
+        vericationLabel.snp.makeConstraints { make in
+            make.size.equalTo(CGSize(width: 54, height: 20))
+            make.left.equalTo(phoneLabel)
+            make.top.equalTo(phoneLabel.snp.bottom).offset(4)
         }
         
         // 右箭头
@@ -108,11 +130,54 @@ class LGMineViewController: LGViewController {
         }
     }
     
+    private func setupNotification() {
+        // 接收登陆通知
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveLoginNotification), name: kNotificationLogin.name, object: nil)
+        // 接收登出通知
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveLogoutNotification), name: kNotificationLogout.name, object: nil)
+        
+    }
+    
+    private func reloadData() {
+        if LGUserModel.currentUser.isLogin {
+            phoneLabel.text = LGUserModel.currentUser.phone
+            
+            vericationLabel.isHidden = false
+            if LGUserModel.currentUser.isVerified {
+                vericationLabel.backgroundColor = UIColor(red:0.15, green:0.80, blue:0.34, alpha:1.00)
+                vericationLabel.text = "已认证"
+            } else {
+                vericationLabel.backgroundColor = UIColor(red:0.88, green:0.17, blue:0.26, alpha:1.00)
+                vericationLabel.text = "未认证"
+            }
+        } else {
+            phoneLabel.text = "请点击登录"
+            
+            vericationLabel.isHidden = true
+        }
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
+    @objc private func receiveLoginNotification() {
+        reloadData()
+    }
+    
+    @objc private func receiveLogoutNotification() {
+        reloadData()
+    }
+    
     @objc private func topViewOnTouch() {
+        if LGUserModel.currentUser.isLogin {
+            
+        } else {
+            showLoginVC()
+        }
+    }
+    
+    private func showLoginVC() {
         let loginVC = LGLoginViewController()
         let nc = LGNavigationController(rootViewController: loginVC)
         present(nc, animated: true, completion: nil)
@@ -166,26 +231,30 @@ extension LGMineViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                // 常见问题
-                let questionVC = LGQuestionViewController()
-                questionVC.model = model
-                questionVC.hidesBottomBarWhenPushed = true
-                show(questionVC, sender: nil)
-            } else if indexPath.row == 1 {
-                // 客服
-                let qrcodeVC = LGQRCodeViewController(type: .service)
-                present(qrcodeVC, animated: true, completion: nil)
+        if LGUserModel.currentUser.isLogin {
+            if indexPath.section == 0 {
+                if indexPath.row == 0 {
+                    // 常见问题
+                    let questionVC = LGQuestionViewController()
+                    questionVC.model = model
+                    questionVC.hidesBottomBarWhenPushed = true
+                    show(questionVC, sender: nil)
+                } else if indexPath.row == 1 {
+                    // 客服
+                    let qrcodeVC = LGQRCodeViewController(type: .service)
+                    present(qrcodeVC, animated: true, completion: nil)
+                } else {
+                    // 公众号
+                    let qrcodeVC = LGQRCodeViewController(type: .official)
+                    present(qrcodeVC, animated: true, completion: nil)
+                }
             } else {
-                // 公众号
-                let qrcodeVC = LGQRCodeViewController(type: .official)
-                present(qrcodeVC, animated: true, completion: nil)
+                let settingVC = LGSettingViewController()
+                settingVC.hidesBottomBarWhenPushed = true
+                show(settingVC, sender: nil)
             }
         } else {
-            let settingVC = LGSettingViewController()
-            settingVC.hidesBottomBarWhenPushed = true
-            show(settingVC, sender: nil)
+            showLoginVC()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -210,20 +279,24 @@ extension LGMineViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            // 信用知多少
-        } else if indexPath.row == 1 {
-            // 申请记录
-            let recordVC = LGRecordViewController()
-            recordVC.hidesBottomBarWhenPushed = true
-            recordVC.model = model
-            show(recordVC, sender: nil)
+        if LGUserModel.currentUser.isLogin {
+            if indexPath.row == 0 {
+                // 信用知多少
+            } else if indexPath.row == 1 {
+                // 申请记录
+                let recordVC = LGRecordViewController()
+                recordVC.hidesBottomBarWhenPushed = true
+                recordVC.model = model
+                show(recordVC, sender: nil)
+            } else {
+                // 消息中心
+                let messageVC = LGMessageViewController()
+                messageVC.hidesBottomBarWhenPushed = true
+                messageVC.model = model
+                show(messageVC, sender: nil)
+            }
         } else {
-            // 消息中心
-            let messageVC = LGMessageViewController()
-            messageVC.hidesBottomBarWhenPushed = true
-            messageVC.model = model            
-            show(messageVC, sender: nil)
+            showLoginVC()
         }
     }
 }

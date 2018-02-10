@@ -63,4 +63,21 @@ class LGUserService {
             complete(error)
         }
     }
+    
+    /// 获取用户认证信息
+    func getVerificationInfo(complete: @escaping (_ status: Bool, _ idNumber: String?, _ name: String?, _ mark: String?, _ error: String?) -> Void) {
+        let urlString = domain.appending("is_attestation")
+        service.post(urlString: urlString, parameters: nil) { json, error in
+            if error == nil {
+                let idNumber = json!["data"]["idCard"].stringValue
+                let name = json!["data"]["name"].stringValue
+                let mark = json!["data"]["mark"].stringValue
+                let status = json!["data"]["status"].intValue
+                complete(status == 2, idNumber, name, mark, nil)
+            } else {
+                complete(false, nil, nil, nil, error)
+            }
+        }
+    }
+    
 }

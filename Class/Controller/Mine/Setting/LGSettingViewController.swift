@@ -83,7 +83,18 @@ extension LGSettingViewController: UITableViewDelegate, UITableViewDataSource {
                 show(aboutVC, sender: nil)
             }
         } else {
-            
+            // 退出登录
+            let alert = UIAlertController(title: "是否确认退出登录？", message: nil, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let doneAction = UIAlertAction(title: "确认", style: .default, handler: { [weak self] _ in
+                LGUserModel.currentUser.logout()
+                LGHttpService.sharedService.clearCookies()
+                NotificationCenter.default.post(kNotificationLogout)
+                self!.navigationController?.popViewController(animated: true)
+            })
+            alert.addAction(cancelAction)
+            alert.addAction(doneAction)
+            present(alert, animated: true, completion: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
