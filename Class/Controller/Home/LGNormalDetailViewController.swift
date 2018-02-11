@@ -29,6 +29,7 @@ class LGNormalDetailViewController: LGViewController {
 
         setup()
         getLoanDetail()
+        record()    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,6 +100,12 @@ class LGNormalDetailViewController: LGViewController {
                     }
                 }
             }
+        }
+    }
+    
+    private func record() {
+        if LGUserModel.currentUser.isLogin {
+            LGUserService.sharedService.recordBrowse(productType: 1, productID: model.id, complete: nil)
         }
     }
     

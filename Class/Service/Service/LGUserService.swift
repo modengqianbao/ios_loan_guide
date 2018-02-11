@@ -80,4 +80,23 @@ class LGUserService {
         }
     }
     
+    /// 记录用户浏览
+    /// 1：贷款，2：信用卡
+    func recordBrowse(productType: Int, productID: Int, complete: ((_ error: String?) -> Void)?) {
+        let urlString = domain.appending("record_history")
+        let parameters = ["id": productID,
+                          "type": productType]
+        service.get(urlString: urlString, parameters: parameters) { _, error in
+            complete?(error)
+        }
+    }
+    
+    /// 记录用户行为
+    func recordBehavior(behavior: LGUserBehaviorType, complete: ((_ error: String?) -> Void)?) {
+        let urlString = domain.appending("user_behavior")
+        let parameters = ["behavior": behavior.rawValue]
+        service.get(urlString: urlString, parameters: parameters) { _, error in
+            complete?(error)
+        }
+    }
 }

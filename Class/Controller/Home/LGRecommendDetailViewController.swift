@@ -34,6 +34,7 @@ class LGRecommendDetailViewController: LGViewController {
         
         setup()
         getDetail()
+        record()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,6 +117,10 @@ class LGRecommendDetailViewController: LGViewController {
         } else {
             setupPickArray()
         }
+    }
+    
+    private func record() {
+        LGUserService.sharedService.recordBrowse(productType: 1, productID: model.id, complete: nil)
     }
     
 //    private func showUsagePickView() {
@@ -238,6 +243,7 @@ extension LGRecommendDetailViewController: LGRecommendDetailHeadTableViewCellDel
             let index = self!.moneyArray.index(of: value as! String)
             self!.selectedMoneyIndex = index!
             self!.detailTableView.reloadData()
+            LGUserService.sharedService.recordBehavior(behavior: .selectLoanLimit, complete: nil)
         }
     }
     
@@ -246,6 +252,7 @@ extension LGRecommendDetailViewController: LGRecommendDetailHeadTableViewCellDel
             let index = self!.termArray.index(of: value as! String)
             self!.selectedTermIndex = index!
             self!.detailTableView.reloadData()
+            LGUserService.sharedService.recordBehavior(behavior: .selectLoanTerm, complete: nil)
         }
     }
     

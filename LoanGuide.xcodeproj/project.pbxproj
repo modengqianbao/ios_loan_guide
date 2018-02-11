@@ -80,6 +80,7 @@
 		E0E93A2D20242EE800992FB3 /* LGUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2C20242EE800992FB3 /* LGUserService.swift */; };
 		E0E93A2F20242F1300992FB3 /* LGUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2E20242F1300992FB3 /* LGUserModel.swift */; };
 		E0E93A312024316900992FB3 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A302024316900992FB3 /* Notification.swift */; };
+		E0F83BBB202FD3BB00F8C2BB /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F83BBA202FD3BB00F8C2BB /* Enum.swift */; };
 		E0FBCC182025689E00BC7DCC /* LGSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC172025689E00BC7DCC /* LGSettingViewController.swift */; };
 		E0FBCC1B202569D400BC7DCC /* LGSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC1A202569D400BC7DCC /* LGSettingTableViewCell.swift */; };
 		E0FBCC1D202569DF00BC7DCC /* LGLogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC1C202569DF00BC7DCC /* LGLogoutTableViewCell.swift */; };
@@ -169,6 +170,7 @@
 		E0E93A2C20242EE800992FB3 /* LGUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserService.swift; sourceTree = "<group>"; };
 		E0E93A2E20242F1300992FB3 /* LGUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserModel.swift; sourceTree = "<group>"; };
 		E0E93A302024316900992FB3 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E0F83BBA202FD3BB00F8C2BB /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		E0FBCC172025689E00BC7DCC /* LGSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSettingViewController.swift; sourceTree = "<group>"; };
 		E0FBCC1A202569D400BC7DCC /* LGSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSettingTableViewCell.swift; sourceTree = "<group>"; };
 		E0FBCC1C202569DF00BC7DCC /* LGLogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLogoutTableViewCell.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 				E053F3B0201B27910066FD1E /* Define.swift */,
 				E0E93A302024316900992FB3 /* Notification.swift */,
 				E0879194202938D300E2D4DA /* Options.swift */,
+				E0F83BBA202FD3BB00F8C2BB /* Enum.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				E04C75BC2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift in Sources */,
 				E0B213992023F7DF000DEA4F /* LGHomeModel.swift in Sources */,
 				E0380F9F2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift in Sources */,
+				E0F83BBB202FD3BB00F8C2BB /* Enum.swift in Sources */,
 				E0FBCC202025936500BC7DCC /* LGAboutUsTableViewController.swift in Sources */,
 				E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */,
 				E07537352027583E00C68424 /* LGLoanFlowModel.swift in Sources */,

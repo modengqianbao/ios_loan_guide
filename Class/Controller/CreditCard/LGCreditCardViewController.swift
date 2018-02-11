@@ -72,6 +72,10 @@ class LGCreditCardViewController: LGViewController {
     private func getCreditCard() {
         creditTableView.mj_header.beginRefreshing()
     }
+    
+    private func record(producID: Int) {
+        LGUserService.sharedService.recordBrowse(productType: 2, productID: producID, complete: nil)
+    }
 }
 
 //MARK:- UITableView delegate, datasource
@@ -107,13 +111,22 @@ extension LGCreditCardViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if model.creditCardArray.count != 0 {
-            let item = model.creditCardArray[indexPath.row]
-            let url = URL(string: item.urlString)
-            let webVC = RxWebViewController(url: url)!
-            webVC.navigationController?.navigationBar.tintColor = kColorTitleText
-            webVC.hidesBottomBarWhenPushed = true
+            if LGUserModel.currentUser.isLogin {
+                // 已登录
+                let item = model.creditCardArray[indexPath.row]
+                record(producID: item.id)
+                let url = URL(string: item.urlString)
+                let webVC = RxWebViewController(url: url)!
+                webVC.navigationController?.navigationBar.tintColor = kColorTitleText
+                webVC.hidesBottomBarWhenPushed = true
 
-            navigationController?.pushViewController(webVC, animated: true)
+                navigationController?.pushViewController(webVC, animated: true)
+            } else {
+                // 未登录
+                let loginVC = LGLoginViewController()
+                let nc = LGNavigationController(rootViewController: loginVC)
+                present(nc, animated: true, completion: nil)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

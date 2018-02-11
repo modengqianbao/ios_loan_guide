@@ -202,20 +202,34 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 1 {
             let loanItem = model.loanProductArray[indexPath.row]
             if loanItem.isRecommended {
-                let detailVC = LGRecommendDetailViewController()
-                detailVC.model = loanItem
-                detailVC.hidesBottomBarWhenPushed = true
-                show(detailVC, sender: nil)
+                if LGUserModel.currentUser.isLogin {
+                    let detailVC = LGRecommendDetailViewController()
+                    detailVC.model = loanItem
+                    detailVC.hidesBottomBarWhenPushed = true
+                    show(detailVC, sender: nil)
+                    LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
+                } else {
+                    let loginVC = LGLoginViewController()
+                    let nc = LGNavigationController(rootViewController: loginVC)
+                    present(nc, animated: true, completion: nil)
+                }
             } else {
                 let detailVC = LGNormalDetailViewController()
                 detailVC.model = loanItem
                 detailVC.hidesBottomBarWhenPushed = true
                 show(detailVC, sender: nil)
+                LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
             }
-            tableView.deselectRow(at: indexPath, animated: true)
         } else {
-            
+            if LGUserModel.currentUser.isLogin {
+                let todo = 1
+            } else {
+                let loginVC = LGLoginViewController()
+                let nc = LGNavigationController(rootViewController: loginVC)
+                present(nc, animated: true, completion: nil)
+            }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -232,10 +246,16 @@ extension LGHomeViewController: LGRecommendTableViewCellDelegate {
         let bannerModel = model.bannerArray[0]
         let loanItem = LGLoanProductModel(bannerModel: bannerModel)
         if loanItem.isRecommended {
-            let detailVC = LGRecommendDetailViewController()
-            detailVC.model = loanItem
-            detailVC.hidesBottomBarWhenPushed = true
-            show(detailVC, sender: nil)
+            if LGUserModel.currentUser.isLogin {
+                let detailVC = LGRecommendDetailViewController()
+                detailVC.model = loanItem
+                detailVC.hidesBottomBarWhenPushed = true
+                show(detailVC, sender: nil)
+            } else {
+                let loginVC = LGLoginViewController()
+                let nc = LGNavigationController(rootViewController: loginVC)
+                present(nc, animated: true, completion: nil)
+            }
         } else {
             let detailVC = LGNormalDetailViewController()
             detailVC.model = loanItem
@@ -248,10 +268,16 @@ extension LGHomeViewController: LGRecommendTableViewCellDelegate {
         let bannerModel = model.bannerArray[1]
         let loanItem = LGLoanProductModel(bannerModel: bannerModel)
         if loanItem.isRecommended {
-            let detailVC = LGRecommendDetailViewController()
-            detailVC.model = loanItem
-            detailVC.hidesBottomBarWhenPushed = true
-            show(detailVC, sender: nil)
+            if LGUserModel.currentUser.isLogin {
+                let detailVC = LGRecommendDetailViewController()
+                detailVC.model = loanItem
+                detailVC.hidesBottomBarWhenPushed = true
+                show(detailVC, sender: nil)
+            } else {
+                let loginVC = LGLoginViewController()
+                let nc = LGNavigationController(rootViewController: loginVC)
+                present(nc, animated: true, completion: nil)
+            }
         } else {
             let detailVC = LGNormalDetailViewController()
             detailVC.model = loanItem

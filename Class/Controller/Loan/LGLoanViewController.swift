@@ -126,15 +126,24 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
         if model.loanArray.count != 0 {
             let item = model.loanArray[indexPath.row]
             if item.isRecommended {
-                let detailVC = LGRecommendDetailViewController()
-                detailVC.hidesBottomBarWhenPushed = true
-                detailVC.model = item
-                show(detailVC, sender: nil)
+                // 特殊推荐需要登录
+                if LGUserModel.currentUser.isLogin {
+                    let detailVC = LGRecommendDetailViewController()
+                    detailVC.hidesBottomBarWhenPushed = true
+                    detailVC.model = item
+                    show(detailVC, sender: nil)
+                    LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
+                } else {
+                    let loginVC = LGLoginViewController()
+                    let nc = LGNavigationController(rootViewController: loginVC)
+                    present(nc, animated: true, completion: nil)
+                }
             } else {
                 let detailVC = LGNormalDetailViewController()
                 detailVC.hidesBottomBarWhenPushed = true
                 detailVC.model = item
                 show(detailVC, sender: nil)
+                LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
