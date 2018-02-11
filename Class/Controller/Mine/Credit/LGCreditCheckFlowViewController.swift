@@ -61,6 +61,11 @@ class LGCreditCheckFlowViewController: LGViewController {
         
         return head
     }
+    
+    private func showVerificationVC() {
+        let verificationVC = LGCreditCheckVericationViewController()
+        show(verificationVC, sender: nil)
+    }
 }
 
 extension LGCreditCheckFlowViewController: UITableViewDataSource, UITableViewDelegate {
@@ -116,6 +121,6 @@ extension LGCreditCheckFlowViewController: UITableViewDataSource, UITableViewDel
 
 extension LGCreditCheckFlowViewController: LGNormalDetailApplyTableViewCellDelegate {
     func applyCellDidSubmit(_ applyCell: LGNormalDetailApplyTableViewCell) {
-        
+        showVerificationVC()
     }
 }

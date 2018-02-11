@@ -22,7 +22,7 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
-//        test()
+        test()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,8 +33,8 @@ class LGHomeViewController: LGViewController {
     
     func test() {
         let tett = 1
-        let vc = LGQRCodeViewController(type: .service)
-        present(vc, animated: true, completion: nil)
+//        let vc = LGQRCodeViewController(type: .service)
+//        present(vc, animated: true, completion: nil)
 //        webVC.webTitle = "哈哈"
 //        webVC.hidesBottomBarWhenPushed = true
 //        webVC.urlString = userAgreementURLString
@@ -72,42 +72,14 @@ class LGHomeViewController: LGViewController {
         homeTableView.showsVerticalScrollIndicator = false
         homeTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             self!.model.getHomeData { error in
-//                self!.homeTableView.mj_footer.isHidden = false
                 self!.homeTableView.mj_header.endRefreshing()
-                self!.homeTableView.reloadData()
                 if error == nil {
-//                    if hasMore {
-//                        self!.homeTableView.mj_footer.endRefreshing()
-//                    } else {
-//                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
-//                    }
+                    self!.homeTableView.reloadData()
                 } else {
                     LGHud.show(in: self!.view, animated: true, text: error)
                 }
             }
-            
-//            self!.model.getBanner(complete: { [weak self] error in
-//                if error == nil {
-//                    self!.homeTableView.reloadData()
-//                }
-//            })
         })
-//        homeTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
-//            self!.model.loadMoreLoanProduct(complete: { hasMore, error in
-//                if error == nil {
-//                    self!.homeTableView.reloadData()
-//                    if hasMore {
-//                        self!.homeTableView.mj_footer.endRefreshing()
-//                    } else {
-//                        self!.homeTableView.mj_footer.endRefreshingWithNoMoreData()
-//                    }
-//                } else {
-//                    self!.homeTableView.mj_footer.endRefreshing()
-//                    LGHud.show(in: self!.view, animated: true, text: error)
-//                }
-//            })
-//        })
-//        homeTableView.mj_footer.isHidden = true
         homeTableView.delegate = self
         homeTableView.dataSource = self
         view.addSubview(homeTableView)

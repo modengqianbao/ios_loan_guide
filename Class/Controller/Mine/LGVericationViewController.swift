@@ -170,10 +170,7 @@ extension LGVericationViewController: UITableViewDelegate, UITableViewDataSource
             var idNumber: String?
             if LGUserModel.currentUser.isVerified {
                 idNumber = LGUserModel.currentUser.idNumber!
-                let startString = idNumber![0..<6]
-                let endString = idNumber![(idNumber!.count - 2)..<idNumber!.count]
-                let starString = String(repeating: "*", count: idNumber!.count - 8)
-                idNumber! = startString.appending(starString).appending(endString)
+                idNumber = idNumber!.hide(fromIndex: 6, toIndex: idNumber!.count - 2)
             } else {
                 idNumber = nil
             }

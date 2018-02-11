@@ -32,7 +32,7 @@ class LGHttpService {
                     complete(nil, json["msg"].stringValue)
                 }
             } else {
-                complete(nil, "request error")
+                complete(nil, "请检查网络连接")
             }
         }
     }
@@ -55,7 +55,7 @@ class LGHttpService {
                     complete(nil, json["msg"].stringValue)
                 }
             } else {
-                complete(nil, "request error")
+                complete(nil, "请检查网络连接")
             }
         }
     }

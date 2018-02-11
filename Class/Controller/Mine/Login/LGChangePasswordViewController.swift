@@ -114,11 +114,13 @@ class LGChangePasswordViewController: LGViewController {
         vericationButton = UIButton(type: .custom)
         if phoneNumber != nil && phoneNumber!.count == 11 {
             vericationButton.isEnabled = true
+            vericationButton.backgroundColor = kColorMainTone
         } else {
             vericationButton.isEnabled = false
+            vericationButton.backgroundColor = kColorGrey
         }
         vericationButton.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        vericationButton.backgroundColor = kColorGrey
+//        vericationButton.backgroundColor = kColorGrey
         vericationButton.layer.cornerRadius = 14
         vericationButton.layer.masksToBounds = true
         vericationButton.setTitle("获取验证码", for: .normal)
