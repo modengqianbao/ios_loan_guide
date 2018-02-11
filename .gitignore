@@ -22,4 +22,8 @@ DerivedData
 #CocoaPods
 Pods
 !Podfile
+<<<<<<< HEAD
 !Podfile.lock
+=======
+!Podfile.lock
+>>>>>>> 3384a674c94080a7f42ba5f652856df6b34671a1
