@@ -64,6 +64,17 @@ class LGUserService {
         }
     }
     
+    /// 实名认证
+    func verification(idNumber: String, name: String, phone: String, complete: @escaping (_ error: String?) -> Void) {
+        let urlString = domain.appending("idcard_auth")
+        let parameters = ["idCard": idNumber,
+                          "name": name,
+                          "phone": phone]
+        service.post(urlString: urlString, parameters: parameters) { _, error in
+            complete(error)
+        }
+    }
+    
     /// 获取用户认证信息
     func getVerificationInfo(complete: @escaping (_ status: Bool, _ idNumber: String?, _ name: String?, _ mark: String?, _ error: String?) -> Void) {
         let urlString = domain.appending("is_attestation")

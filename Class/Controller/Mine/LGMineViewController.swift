@@ -136,18 +136,20 @@ class LGMineViewController: LGViewController {
         // 接收登出通知
         NotificationCenter.default.addObserver(self, selector: #selector(receiveLogoutNotification), name: kNotificationLogout.name, object: nil)
         
+        // 接收认证成功通知
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveVerificationNotification), name: kNotificationVerification.name, object: nil)
     }
     
     private func reloadData() {
         if LGUserModel.currentUser.isLogin {
-            phoneLabel.text = LGUserModel.currentUser.phone
-            
             vericationLabel.isHidden = false
             if LGUserModel.currentUser.isVerified {
                 vericationLabel.backgroundColor = UIColor(red:0.15, green:0.80, blue:0.34, alpha:1.00)
+                phoneLabel.text = LGUserModel.currentUser.name
                 vericationLabel.text = "已认证"
             } else {
                 vericationLabel.backgroundColor = UIColor(red:0.88, green:0.17, blue:0.26, alpha:1.00)
+                phoneLabel.text = LGUserModel.currentUser.phone
                 vericationLabel.text = "未认证"
             }
         } else {
@@ -169,9 +171,16 @@ class LGMineViewController: LGViewController {
         reloadData()
     }
     
+    @objc private func receiveVerificationNotification() {
+        reloadData()
+    }
+    
     @objc private func topViewOnTouch() {
         if LGUserModel.currentUser.isLogin {
-            
+            // 身份认证页面
+            let vericationVC = LGVericationViewController()
+            vericationVC.hidesBottomBarWhenPushed = true
+            show(vericationVC, sender: nil)
         } else {
             showLoginVC()
         }

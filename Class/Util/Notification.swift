@@ -13,3 +13,6 @@ let kNotificationLogout = Notification(name: Notification.Name("logout"))
 
 /// 登录通知
 let kNotificationLogin = Notification(name: Notification.Name("login"))
+
+/// 身份认证成功
+let kNotificationVerification = Notification(name: Notification.Name("verification"))

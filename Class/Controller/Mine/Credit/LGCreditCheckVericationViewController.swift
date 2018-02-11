@@ -59,11 +59,11 @@ extension LGCreditCheckVericationViewController: UITableViewDelegate, UITableVie
             let cell = tableView.dequeueReusableCell(withIdentifier: LGVericationTableViewCell.identifier) as! LGVericationTableViewCell
             
             if indexPath.row == 0 {
-                cell.configCell(title: "姓名", content: nil, placeHolder: "姓名")
+                cell.configCell(title: "姓名", content: nil, placeHolder: "姓名", editable: true)
             } else if indexPath.row == 1 {
-                cell.configCell(title: "身份证", content: nil, placeHolder: "身份证")
+                cell.configCell(title: "身份证", content: nil, placeHolder: "身份证", editable: true)
             } else {
-                cell.configCell(title: "手机号", content: nil, placeHolder: "手机号")
+                cell.configCell(title: "手机号", content: nil, placeHolder: "手机号", editable: true)
             }
             return cell
         } else if indexPath.row == 3 {
