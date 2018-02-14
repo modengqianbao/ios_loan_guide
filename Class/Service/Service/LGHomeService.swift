@@ -18,7 +18,7 @@ class LGHomeService {
     
     /// 贷款产品推荐
     func getLoanGroom(count: Int, page: Int, complete:@escaping (_ data: [LGLoanProductModel]?, _ error: String?) -> Void) {
-        let urlString = domain.appending("loan_groom")
+        let urlString = kDomain.appending("loan_groom")
         let parameters = ["count": count,
                           "page": page]
         service.post(urlString: urlString, parameters: parameters) { (json, error) in
@@ -38,7 +38,7 @@ class LGHomeService {
     
     /// 信用卡产品推荐
     func getCreditGroom(count: Int, page: Int, complete:@escaping (_ data: [LGCreditProductModel]?, _ error: String?) -> Void) {
-        let urlString = domain.appending("credit_groom1")
+        let urlString = kDomain.appending("credit_groom1")
         let parameters = ["count": count,
                           "page": page]
         service.post(urlString: urlString, parameters: parameters) { (json, error) in
@@ -58,7 +58,7 @@ class LGHomeService {
     
     /// 获取首页banner
     func getHomeBanner(complete: @escaping (_ array: [LGHomeBannerModel]?,_ error: String?) -> Void) {
-        let urlString = domain.appending("home_page")
+        let urlString = kDomain.appending("home_page")
         service.post(urlString: urlString, parameters: nil) { json, error in
             if error == nil {
                 let jsonArray = json!["data"]["productList"].arrayValue

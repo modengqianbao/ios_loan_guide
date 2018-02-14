@@ -175,7 +175,7 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
                 }
             }
             cell.configCell(name: model.name,
-                            logoURLString: imageDomaion.appending(model.logoString),
+                            logoURLString: kImageDomain.appending(model.logoString),
                             loanCount: loanCountString,
                             rateRange: rateRangeString,
                             returnType: repaymentString ?? "",

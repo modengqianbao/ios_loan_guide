@@ -18,7 +18,7 @@ class LGMineService {
     
     /// 意见反馈
     func sendFeedBack(content: String, complete: @escaping (_ error: String?) -> Void) {
-        let urlString = domain.appending("send_suggestion")
+        let urlString = kDomain.appending("send_suggestion")
         let parameters = ["info": content]
         service.post(urlString: urlString, parameters: parameters) { _, error in
             complete(error)
@@ -27,7 +27,7 @@ class LGMineService {
     
     /// 获取问题
     func getQuestions(complete: @escaping (_ array: [LGQuestionModel]?, _ error: String?) -> Void) {
-        let urlString = domain.appending("questions")
+        let urlString = kDomain.appending("questions")
         service.post(urlString: urlString, parameters: nil) { json, error in
             if error == nil {
                 let jsonArray = json!["data"]["askList"].arrayValue
@@ -45,7 +45,7 @@ class LGMineService {
     
     /// 获取消息
     func getMessage(page: Int, count: Int, complete: @escaping (_ array: [LGMessageModel]?, _ error: String?) -> Void) {
-        let urlString = domain.appending("new_center")
+        let urlString = kDomain.appending("new_center")
         let parameters = ["count": count,
                           "page": page]
         service.post(urlString: urlString, parameters: parameters) { json, error in
@@ -65,7 +65,7 @@ class LGMineService {
     
     /// 获取贷款记录
     func getLoanRecord(page: Int, pageSize: Int, complete: @escaping (_ array: [LGLoanProductModel]?, _ error: String?) -> Void) {
-        let urlString = domain.appending("loan_browse")
+        let urlString = kDomain.appending("loan_browse")
         let parameters = ["currentPage": page,
                           "pageSize": pageSize]
         service.post(urlString: urlString, parameters: parameters) { json, error in
@@ -85,7 +85,7 @@ class LGMineService {
     
     /// 获取信用卡记录
     func getCreditRecord(page: Int, pageSize: Int, complete: @escaping (_ array: [LGCreditProductModel]?, _ error: String?) -> Void){
-        let urlString = domain.appending("credit_browse")
+        let urlString = kDomain.appending("credit_browse")
         let parameters = ["currentPage": page,
                           "pageSize": pageSize]
         service.post(urlString: urlString, parameters: parameters) { json, error in

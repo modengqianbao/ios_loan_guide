@@ -20,7 +20,7 @@ class LGCreditCarService {
     /// parameter - grade: 卡片等级(1：普卡    2：金卡3：白金卡)
     /// parameter - purpose: 卡片用途(1:标准卡2：特色主题卡3：网络联名卡4：酒店/商旅/航空卡5：取现卡    )
     func getCreditCarList(bank: Int, grade: Int, purpose: Int, complete: @escaping (_ array: [LGCreditProductModel]?, _ error: String?) -> Void) {
-        let urlString = domain.appending("credit_search")
+        let urlString = kDomain.appending("credit_search")
         let parameters = ["creditnaBank": bank,
                           "creditnaGrade": grade,
                           "creditnaPurpose": purpose]

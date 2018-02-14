@@ -100,7 +100,7 @@ extension LGCreditCardViewController: UITableViewDelegate, UITableViewDataSource
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCardTableViewCell.identifier) as! LGCreditCardTableViewCell
             let creditItem = model.creditCardArray[indexPath.row]
-            cell.configCell(iconURLString: imageDomaion.appending(creditItem.logoURL),
+            cell.configCell(iconURLString: kImageDomain.appending(creditItem.logoURL),
                             title: creditItem.name,
                             content: creditItem.introduce,
                             extra: creditItem.label)
@@ -115,6 +115,7 @@ extension LGCreditCardViewController: UITableViewDelegate, UITableViewDataSource
                 // 已登录
                 let item = model.creditCardArray[indexPath.row]
                 record(producID: item.id)
+//                let todo = 1
                 let url = URL(string: item.urlString)
                 let webVC = RxWebViewController(url: url)!
                 webVC.navigationController?.navigationBar.tintColor = kColorTitleText

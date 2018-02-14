@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import MJRefresh
-import RxWebViewController
+//import RxWebViewController
 
 class LGRecordViewController: LGViewController {
     /// 传入
@@ -237,7 +237,7 @@ extension LGRecordViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
             let loanItem = model.loanArray![indexPath.section][indexPath.row]
             let moneyString = "日利率: \(loanItem.rateMax)%, 额度: \(loanItem.loanMax)元"
-            cell.configCell(iconURLString: imageDomaion.appending(loanItem.logoString),
+            cell.configCell(iconURLString: kImageDomain.appending(loanItem.logoString),
                             title: loanItem.name,
                             adString: loanItem.labelString,
                             moneyString: moneyString,
@@ -247,7 +247,7 @@ extension LGRecordViewController: UITableViewDelegate, UITableViewDataSource {
             // 信用卡列表
             let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCardTableViewCell.identifier) as! LGCreditCardTableViewCell
             let creditItem = model.creditArray![indexPath.section][indexPath.row]
-            cell.configCell(iconURLString: imageDomaion.appending(creditItem.logoURL),
+            cell.configCell(iconURLString: kImageDomain.appending(creditItem.logoURL),
                             title: creditItem.name,
                             content: creditItem.introduce,
                             extra: creditItem.label)
@@ -272,12 +272,13 @@ extension LGRecordViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             let item = model.creditArray![indexPath.section][indexPath.row]
-            let url = URL(string: item.urlString)
-            let webVC = RxWebViewController(url: url)!
-            webVC.navigationController?.navigationBar.tintColor = kColorTitleText
-            webVC.hidesBottomBarWhenPushed = true
+            let todo = 1
+//            let url = URL(string: item.urlString)
+//            let webVC = RxWebViewController(url: url)!
+//            webVC.navigationController?.navigationBar.tintColor = kColorTitleText
+//            webVC.hidesBottomBarWhenPushed = true
             
-            navigationController?.pushViewController(webVC, animated: true)
+//            navigationController?.pushViewController(webVC, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

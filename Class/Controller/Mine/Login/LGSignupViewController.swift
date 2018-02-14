@@ -11,7 +11,6 @@ import SnapKit
 import MBProgressHUD
 import CocoaSecurity
 import TPKeyboardAvoiding
-import RxWebViewController
 
 class LGSignupViewController: LGViewController {
     private var phoneTextField: UITextField!
@@ -260,10 +259,9 @@ class LGSignupViewController: LGViewController {
     }
     
     @objc private func agreementButtonOnClick() {
-        let url = URL(string: userAgreementURLString)
-        let webVC = RxWebViewController(url: url)!
-        webVC.title = "用户协议"
-        show(webVC, sender: nil)
+        let todo = 1
+        let agreeVC = LGUserAgreementViewController(nibName: nil, bundle: nil)
+        show(agreeVC, sender: nil)
     }
     
     @objc private func textFieldDidChange() {

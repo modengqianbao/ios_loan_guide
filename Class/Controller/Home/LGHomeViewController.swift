@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import RxWebViewController
 
 class LGHomeViewController: LGViewController {
     
@@ -22,7 +23,7 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
-        test()
+//        test()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +34,12 @@ class LGHomeViewController: LGViewController {
     
     func test() {
         let tett = 1
+        let webVC = LGUserAgreementViewController(nibName: nil, bundle: nil)
+//        webVC.url = URL(string: kUserAgreementURLString)
+        webVC.hidesBottomBarWhenPushed = true
+        show(webVC, sender: nil)
+//        let url = URL(string: <#T##String#>)
+//        let webVC = RxWebViewController(url: <#T##URL!#>)
 //        let vc = LGQRCodeViewController(type: .service)
 //        present(vc, animated: true, completion: nil)
 //        webVC.webTitle = "哈哈"
@@ -125,11 +132,11 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                 // banner
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGRecommendTableViewCell.identifier) as! LGRecommendTableViewCell
                 if model.bannerArray.count == 1 {
-                    cell.configCell(leftImageURLString: imageDomaion.appending(model.bannerArray[0].imageURLString),
+                    cell.configCell(leftImageURLString: kImageDomain.appending(model.bannerArray[0].imageURLString),
                                     rightImageURLString: nil)
                 } else if model.bannerArray.count >= 2 {
-                    cell.configCell(leftImageURLString: imageDomaion.appending(model.bannerArray[0].imageURLString),
-                                    rightImageURLString: imageDomaion.appending(model.bannerArray[1].imageURLString))
+                    cell.configCell(leftImageURLString: kImageDomain.appending(model.bannerArray[0].imageURLString),
+                                    rightImageURLString: kImageDomain.appending(model.bannerArray[1].imageURLString))
                 } else {
                     cell.configCell(leftImageURLString: nil, rightImageURLString: nil)
                 }
@@ -145,7 +152,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             // 热门产品
             let cell = tableView.dequeueReusableCell(withIdentifier: LGHotProductTableViewCell.identifier) as! LGHotProductTableViewCell
             let item = model.loanProductArray[indexPath.row]
-            cell.configCell(iconURLString: imageDomaion.appending(item.logoString),
+            cell.configCell(iconURLString: kImageDomain.appending(item.logoString),
                             title: item.name,
                             adString: item.labelString,
                             moneyString: "\(item.loanMax)",
@@ -155,7 +162,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             // 信用卡产品
             let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCardTableViewCell.identifier) as! LGCreditCardTableViewCell
             let item = model.creditProductArray[indexPath.row]
-            cell.configCell(iconURLString: imageDomaion.appending(item.logoURL),
+            cell.configCell(iconURLString: kImageDomain.appending(item.logoURL),
                             title: item.name,
                             content: item.introduce,
                             extra: item.label)
@@ -194,7 +201,12 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if LGUserModel.currentUser.isLogin {
-                let todo = 1
+                let creditItem = model.creditProductArray[indexPath.row]
+                let url = URL(string: creditItem.urlString)
+                let webVC = RxWebViewController(url: url)!
+                webVC.navigationController?.navigationBar.tintColor = kColorTitleText
+                webVC.hidesBottomBarWhenPushed = true
+                show(webVC, sender: nil)
             } else {
                 let loginVC = LGLoginViewController()
                 let nc = LGNavigationController(rootViewController: loginVC)

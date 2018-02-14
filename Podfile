@@ -13,11 +13,8 @@ target 'LoanGuide' do
 	pod 'MBProgressHUD', '~> 1.1.0'
 	pod 'CocoaSecurity'
 	pod 'FSTextView'
-	pod 'HMSegmentedControl'
-	pod 'RxWebViewController'
-	pod 'WebViewJavascriptBridge', '~> 6.0'
-	pod 'WebViewBridge.Swift'
 	pod 'BRPickerView', '~> 2.1.0'
 	pod 'BEMCheckBox'
+	pod 'RxWebViewController'
 	
 end

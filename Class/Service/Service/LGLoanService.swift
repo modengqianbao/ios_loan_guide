@@ -22,7 +22,7 @@ class LGLoanService {
     /// - parameter time:    放款速度: true：选中，按照最快放款速度排序
     /// - parameter rate:    利率: rate：选中，按照最低利率排序
     func getLoanList(quota: Int, repayment: Int, term: Int, time: Bool, rate: Bool, complete: @escaping (_ array:[LGLoanProductModel]?, _ error: String?) -> Void) {
-        let urlString = domain.appending("loan_search")
+        let urlString = kDomain.appending("loan_search")
         let parameters = ["loanQuota": quota,
                           "loanRepayment": repayment,
                           "loanTerm": term,
@@ -45,7 +45,7 @@ class LGLoanService {
     
     /// 获取贷款产品详情
     func getLoanDetail(loanItem: LGLoanProductModel, complete: @escaping (_ error: String?) -> Void) {
-        let urlString = domain.appending("loan_detail")
+        let urlString = kDomain.appending("loan_detail")
         let parameters = ["id": loanItem.id]
         service.post(urlString: urlString, parameters: parameters) { json, error in
             if error == nil {

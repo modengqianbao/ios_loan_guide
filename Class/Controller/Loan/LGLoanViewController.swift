@@ -113,7 +113,7 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
             let loanItem = model.loanArray[indexPath.row]
             let moneyString = "日利率: \(loanItem.rateMax)%, 额度: \(loanItem.loanMax)元"
             
-            cell.configCell(iconURLString: imageDomaion.appending(loanItem.logoString),
+            cell.configCell(iconURLString: kImageDomain.appending(loanItem.logoString),
                             title: loanItem.name,
                             adString: loanItem.labelString,
                             moneyString: moneyString,

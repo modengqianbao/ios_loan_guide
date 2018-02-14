@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import MBProgressHUD
+import RxWebViewController
 
 class LGCreditCheckVericationViewController: LGViewController {
     private var vericationTableView: UITableView!
@@ -124,7 +125,22 @@ class LGCreditCheckVericationViewController: LGViewController {
     }
     
     private func showZhimaCredit() {
-        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        let name = LGUserModel.currentUser.name!
+        let phone = LGUserModel.currentUser.phone!
+        let idNumber = LGUserModel.currentUser.idNumber!
+        LGCreditService.sharedService.getAuthorizationURL(idNumber: idNumber, name: name, phone: phone) { [weak self] urlString, error in
+            if self != nil {
+                MBProgressHUD.hide(for: self!.view, animated: true)
+                if error == nil {
+                    let url = URL(string: urlString!)!
+                    let webVC = RxWebViewController(url: url)
+                    self!.show(webVC!, sender: nil)
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        }
     }
 }
 
@@ -198,7 +214,8 @@ extension LGCreditCheckVericationViewController: UITableViewDelegate, UITableVie
 
 extension LGCreditCheckVericationViewController: LGCreditCheckAgreementTableViewCellDelegate {
     func agreementCellDidClickAgreement(_ agreementCell: LGCreditCheckAgreementTableViewCell) {
-        let todo = 1
+        let agreeVC = LGUserAgreementViewController(nibName: nil, bundle: nil)
+        show(agreeVC, sender: nil)
     }
     
     func agreementCell(_ agreementCell: LGCreditCheckAgreementTableViewCell, didChangeCheckBoxValue selected: Bool) {
