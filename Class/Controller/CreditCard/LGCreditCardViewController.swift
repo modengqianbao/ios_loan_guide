@@ -42,6 +42,9 @@ class LGCreditCardViewController: LGViewController {
         dropDownMenu.setup()
         dropDownMenu.delegate = self
         dropDownMenu.dataSource = self
+        model.getCreditBankArray { error in
+            dropDownMenu.reloadData()
+        }
         
         // 列表
         creditTableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -191,7 +194,8 @@ extension LGCreditCardViewController: LGDropDownMenuDelegate, LGDropDownMenuData
     
     func dropMenu(_ dropMenu: LGDropDownMenu, titleForRow row: Int, inSection section: Int) -> String {
         if section == 0 {
-            return model.bankTypeArray[row]
+            let bankItem = model.bankTypeArray[row]
+            return bankItem.name
         } else if section == 1 {
             return model.levelTypeArray[row]
         } else {

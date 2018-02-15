@@ -38,4 +38,24 @@ class LGCreditCarService {
             }
         }
     }
+    
+    /// 获取银行列表
+    func getBankList(complete: @escaping (_ array: [LGCreditBankModel]?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("credit_screen")
+        service.get(urlString: urlString, parameters: nil) { json, error in
+            if error == nil {
+                let jsonArray = json!["data"]["banks"].arrayValue
+                var array = [LGCreditBankModel]()
+                for jsonItem in jsonArray {
+                    let name = jsonItem["bankName"].stringValue
+                    let id = jsonItem["creditBankId"].intValue
+                    let item = LGCreditBankModel(bankName: name, bankID: id)
+                    array.append(item)
+                }
+                complete(array, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
 }

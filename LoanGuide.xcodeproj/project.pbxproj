@@ -79,6 +79,7 @@
 		E0C8BBF3201B14BD000D56F1 /* LGHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C8BBF2201B14BD000D56F1 /* LGHomeViewController.swift */; };
 		E0D8E297203513100027D34A /* LGRecommendCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D8E296203513100027D34A /* LGRecommendCodeViewController.swift */; };
 		E0D8E299203564630027D34A /* LGCreditCheckPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D8E298203564630027D34A /* LGCreditCheckPayViewController.swift */; };
+		E0D8E29B20356D0E0027D34A /* LGCreditBankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D8E29A20356D0E0027D34A /* LGCreditBankModel.swift */; };
 		E0DEDD032033CB9C0025F4AF /* LGCreditZhimaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DEDD022033CB9C0025F4AF /* LGCreditZhimaViewController.swift */; };
 		E0DEDD052033D01C0025F4AF /* LGCreditCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DEDD042033D01C0025F4AF /* LGCreditCheckModel.swift */; };
 		E0E173B72026BC040081B7C3 /* LGLoanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E173B62026BC040081B7C3 /* LGLoanService.swift */; };
@@ -176,6 +177,7 @@
 		E0C8BBF2201B14BD000D56F1 /* LGHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeViewController.swift; sourceTree = "<group>"; };
 		E0D8E296203513100027D34A /* LGRecommendCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendCodeViewController.swift; sourceTree = "<group>"; };
 		E0D8E298203564630027D34A /* LGCreditCheckPayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckPayViewController.swift; sourceTree = "<group>"; };
+		E0D8E29A20356D0E0027D34A /* LGCreditBankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditBankModel.swift; sourceTree = "<group>"; };
 		E0DEDD022033CB9C0025F4AF /* LGCreditZhimaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditZhimaViewController.swift; sourceTree = "<group>"; };
 		E0DEDD042033D01C0025F4AF /* LGCreditCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditCheckModel.swift; sourceTree = "<group>"; };
 		E0E173B62026BC040081B7C3 /* LGLoanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoanService.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				E0FCD0302026E07E00412CA4 /* LGCreditModel.swift */,
 				E0FCD02E2026DF2100412CA4 /* LGCreditProductModel.swift */,
+				E0D8E29A20356D0E0027D34A /* LGCreditBankModel.swift */,
 			);
 			path = Credit;
 			sourceTree = "<group>";
@@ -836,6 +839,7 @@
 				E02AB1B6201F0D5000F90E69 /* LGRecommendDetailViewController.swift in Sources */,
 				E0173BC6203140510036D814 /* LGCreditService.swift in Sources */,
 				E0FCD02D2026DCFC00412CA4 /* LGCreditCarService.swift in Sources */,
+				E0D8E29B20356D0E0027D34A /* LGCreditBankModel.swift in Sources */,
 				E0E93A2F20242F1300992FB3 /* LGUserModel.swift in Sources */,
 				E028664220302EEE00D0AC54 /* String+Index.swift in Sources */,
 				E0E173BB2026C1670081B7C3 /* LGLoanModel.swift in Sources */,

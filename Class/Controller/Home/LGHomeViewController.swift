@@ -23,7 +23,7 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
-        test()
+//        test()
     }
     
     override func viewWillAppear(_ animated: Bool) {
