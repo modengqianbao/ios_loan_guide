@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // 集成友盟
+        let umConfig = UMAnalyticsConfig()
+        umConfig.appKey = "5a8902a3f29d980406000816"
+        umConfig.channelId = "App Store"
+        MobClick.start(withConfigure: umConfig)
+        
+        // 加载页面
         let tabbarVC = LGTabBarController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabbarVC
@@ -24,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+//    UMConfigInstance.appKey = @"xxxxxxxxxxxxxx...";
+//    UMConfigInstance.ChannelId = @"App Store";
+//    UMConfigInstance.eSType = E_UM_GAME; //仅适用于游戏场景，应用统计不用设置
+//    …
+//    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+//}
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

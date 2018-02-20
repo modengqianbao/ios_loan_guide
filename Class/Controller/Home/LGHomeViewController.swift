@@ -23,7 +23,7 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
-        test()
+//        test()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,10 +165,16 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                // 信用知多少
-                let creditVC = LGCreditCheckFlowViewController()
-                creditVC.hidesBottomBarWhenPushed = true
-                show(creditVC, sender: nil)
+                if LGUserModel.currentUser.isLogin {
+                    // 信用知多少
+                    let creditVC = LGCreditCheckFlowViewController()
+                    creditVC.hidesBottomBarWhenPushed = true
+                    show(creditVC, sender: nil)
+                } else {
+                    let loginVC = LGLoginViewController()
+                    let nc = LGNavigationController(rootViewController: loginVC)
+                    present(nc, animated: true, completion: nil)
+                }
             }
         } else if indexPath.section == 1 {
             let loanItem = model.loanProductArray[indexPath.row]

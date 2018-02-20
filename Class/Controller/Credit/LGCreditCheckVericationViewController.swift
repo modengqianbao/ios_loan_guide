@@ -134,7 +134,8 @@ class LGCreditCheckVericationViewController: LGViewController {
                 MBProgressHUD.hide(for: self!.view, animated: true)
                 if error == nil {
                     let url = URL(string: urlString!)!
-                    let webVC = RxWebViewController(url: url)
+                    let webVC = LGCreditZhimaViewController(url: url)
+//                    let webVC = RxWebViewController(url: url)
                     self!.show(webVC!, sender: nil)
                 } else {
                     LGHud.show(in: self!.view, animated: true, text: error)

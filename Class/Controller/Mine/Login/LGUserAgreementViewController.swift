@@ -17,8 +17,6 @@ import RxWebViewController
 
 @objc class UserAgreementJSModel: NSObject, UserAgreementJSDelegate {
     func inform() -> String {
-        print("123")
-        
         return "123"
     }
 }
@@ -39,6 +37,7 @@ class LGUserAgreementViewController: RxWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        webView.delegate = self
         loadPage()
     }
     
@@ -48,3 +47,12 @@ class LGUserAgreementViewController: RxWebViewController {
         jsContext.setObject(model, forKeyedSubscript: NSString(string: "callAndroid"))
     }
 }
+
+//extension LGUserAgreementViewController: UIWebViewDelegate {
+//    func webViewDidStartLoad(_ webView: UIWebView) {
+//        jsContext = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as! JSContext
+//        let model = UserAgreementJSModel()
+//        jsContext.setObject(model, forKeyedSubscript: NSString(string: "callAndroid"))
+//    }
+//}
+

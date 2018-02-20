@@ -16,5 +16,6 @@ target 'LoanGuide' do
 	pod 'BRPickerView', '~> 2.1.0'
 	pod 'BEMCheckBox'
 	pod 'RxWebViewController'
+	pod 'UMengAnalytics'
 	
 end
