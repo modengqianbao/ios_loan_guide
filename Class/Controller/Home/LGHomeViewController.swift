@@ -23,7 +23,7 @@ class LGHomeViewController: LGViewController {
         setup()
         setupSubviews()
         loadData()
-//        test()
+        test()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,10 +34,10 @@ class LGHomeViewController: LGViewController {
     
     func test() {
         let tett = 1
-
-        let recVC = LGCreditCheckPayViewController()
-        recVC.hidesBottomBarWhenPushed = true
-        show(recVC, sender: nil)
+        
+        let reportVC = LGReportViewController()
+        reportVC.hidesBottomBarWhenPushed = true
+        show(reportVC, sender: nil)
     }
     
     private func loadData() {

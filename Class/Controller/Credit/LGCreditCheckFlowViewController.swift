@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class LGCreditCheckFlowViewController: LGViewController {
-    private var flowTableView: UITableView!
+    private var flowTableView: UITableView!    
     
     override func viewDidLoad() {
         super.viewDidLoad()
