@@ -19,10 +19,21 @@ class LGCreditCheckVericationViewController: LGViewController {
     private var idNumber: String?
     private var isAgree = true
     
+    private var shouldShowRecommendCodeVC = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if shouldShowRecommendCodeVC {
+            showRecommendCode()
+            shouldShowRecommendCodeVC = false
+        }
     }
     
     private func setup() {
@@ -134,13 +145,26 @@ class LGCreditCheckVericationViewController: LGViewController {
                 MBProgressHUD.hide(for: self!.view, animated: true)
                 if error == nil {
                     let url = URL(string: urlString!)!
-                    let webVC = LGCreditZhimaViewController(url: url)
+                    let webVC = LGCreditZhimaViewController(url: url)!
+                    webVC.delegate = self
 //                    let webVC = RxWebViewController(url: url)
-                    self!.show(webVC!, sender: nil)
+                    self!.show(webVC, sender: nil)
                 } else {
                     LGHud.show(in: self!.view, animated: true, text: error)
                 }
             }
+        }
+    }
+    
+    private func showRecommendCode() {
+        if LGUserModel.currentUser.isNeedInviteCode {
+            // 需要邀请码
+            let codeVC = LGRecommendCodeViewController()
+            show(codeVC, sender: nil)
+        } else {
+            // 直接付钱页
+            let payVC = LGCreditCheckPayViewController()
+            show(payVC, sender: nil)
         }
     }
 }
@@ -247,5 +271,11 @@ extension LGCreditCheckVericationViewController: LGVericationTableViewCellDelega
             idNumber = text
         }
         checkButtonEnable()
+    }
+}
+
+extension LGCreditCheckVericationViewController: LGCreditZhimaViewControllerDelegate {
+    func zhimaVCDidGetAuth(_ zhimaVC: LGCreditZhimaViewController) {
+        shouldShowRecommendCodeVC = true
     }
 }

@@ -8,11 +8,17 @@
 
 import UIKit
 import SnapKit
+import MBProgressHUD
 
 class LGReportViewController: LGViewController {
-    private var reportTableView: UITableView!
+    /// 传入查询id
+    var queryID: String!
     
-    weak var headCell: LGReportHeadTableViewCell!
+    private var reportTableView: UITableView!
+    private weak var headCell: LGReportHeadTableViewCell!
+    
+    private var model: LGCreditReportModel?
+    private var shouldAnimateCell = true
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -22,12 +28,16 @@ class LGReportViewController: LGViewController {
         super.viewDidLoad()
 
         setup()
+        getData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        headCell.animate()
+        if shouldAnimateCell {
+            headCell.animate()
+            shouldAnimateCell = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +77,21 @@ class LGReportViewController: LGViewController {
         reportTableView.snp.makeConstraints { [weak self] make in
             make.top.equalTo(self!.view).offset(-20)
             make.left.right.bottom.equalTo(self!.view)
+        }
+    }
+    
+    private func getData() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        LGCreditService.sharedService.getCreditReport(queryID: queryID) { [weak self] model, error in
+            if self != nil {
+                MBProgressHUD.hide(for: self!.view, animated: true)
+                if error == nil {
+                    self!.model = model
+                    self!.reportTableView.reloadData()
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
         }
     }
 }

@@ -115,11 +115,16 @@ class LGRecommendCodeViewController: LGViewController {
     }
     
     @objc private func skipButtonOnClick() {
-        
+        showPayVC()
     }
     
     @objc private func applyButtonOnClikc() {
         
+    }
+    
+    private func showPayVC() {
+        let payVC = LGCreditCheckPayViewController()
+        show(payVC, sender: nil)
     }
     
     @objc private func textFieldValueChange(textField: UITextField) {

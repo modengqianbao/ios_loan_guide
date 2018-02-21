@@ -91,6 +91,28 @@ class LGUserService {
         }
     }
     
+    /// 获取用户邀请码信息
+    func getIsNeedInviteCode(complete: @escaping (_ isNeed: Bool?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("invite_check")
+        service.post(urlString: urlString, parameters: nil) { json, error in
+            if error == nil {
+                let isNeed = json!["data"]["isNeed"].boolValue
+                complete(isNeed, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
+    
+    /// 提交邀请码
+    func verifyInviteCode(_ code: String, complete: @escaping (_ error: String?) -> Void) {
+        let urlString = kDomain.appending("commit_invite")
+        let parameters = ["inviteCode": code]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+             complete(error)
+        }
+    }
+    
     /// 记录用户浏览
     /// 1：贷款，2：信用卡
     func recordBrowse(productType: Int, productID: Int, complete: ((_ error: String?) -> Void)?) {

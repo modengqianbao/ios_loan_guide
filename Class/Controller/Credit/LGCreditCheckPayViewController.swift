@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import MBProgressHUD
 
 class LGCreditCheckPayViewController: LGViewController {
     
@@ -21,7 +22,7 @@ class LGCreditCheckPayViewController: LGViewController {
     private func setup() {
         title = "支付页面"
         
-        let todo = 1
+        let todo = "这个图片切图要换"
         let moneyIconImageView = UIImageView(image: UIImage(named: "avatar"))
         view.addSubview(moneyIconImageView)
         moneyIconImageView.snp.makeConstraints { [weak self] make in
@@ -76,6 +77,26 @@ class LGCreditCheckPayViewController: LGViewController {
     }
     
     @objc private func payButtonOnClick() {
+        let test = "假装支付成功，跳转报告页"
         
+        MBProgressHUD.showAdded(to: view, animated: true)
+        
+        // 获取查询id
+        LGCreditService.sharedService.queryPersonalData(idNumber: LGUserModel.currentUser.idNumber!, name: LGUserModel.currentUser.name!, phone: LGUserModel.currentUser.phone!, params: LGCreditCheckModel.sharedModel.params!, sign: LGCreditCheckModel.sharedModel.sign!) { [weak self] queryID, error in
+            if self != nil {
+                MBProgressHUD.hide(for: self!.view, animated: true)
+                if error == nil {
+                    // 跳转信用报告页
+                    let reportVC = LGReportViewController()
+                    reportVC.queryID = queryID!
+                    self!.show(reportVC, sender: nil)
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        }
     }
 }
+
+
+

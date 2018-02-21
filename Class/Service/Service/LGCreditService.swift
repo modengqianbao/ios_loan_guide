@@ -30,4 +30,37 @@ class LGCreditService {
             }
         }
     }
+    
+    /// 提交查询个人风险信息
+    func queryPersonalData(idNumber: String, name: String, phone: String, params: String, sign: String, complete: @escaping (_ queryID: String?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("query_personal_data")
+        let parameters = ["idCard": idNumber,
+                          "name": name,
+                          "phone": phone,
+                          "params": params,
+                          "sign": sign]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let queryID = json!["data"]["id"].stringValue
+                complete(queryID, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
+    
+    /// 查询个人信用报告
+    func getCreditReport(queryID: String, complete: @escaping (_ reportModel: LGCreditReportModel?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("query_result")
+        let parameters = ["id": queryID]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let jsonItem = json!["data"]
+                let model = LGCreditReportModel(json: jsonItem)
+                complete(model, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
 }

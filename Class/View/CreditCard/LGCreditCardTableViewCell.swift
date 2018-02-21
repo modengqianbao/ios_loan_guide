@@ -106,6 +106,7 @@ class LGCreditCardTableViewCell: UITableViewCell {
             make.size.equalTo(CGSize(width: 50, height: 30))
             make.left.equalTo(contentLabel.snp.right).offset(8)
         }
+        applyButton.isHidden = true
         
         // 分割线
         let lineView = UIView()

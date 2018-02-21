@@ -104,6 +104,7 @@ class LGHotProductTableViewCell: UITableViewCell {
             make.right.equalTo(self!).offset(-12)
             make.size.equalTo(CGSize(width: 50, height: 30))
         }
+        applyButton.isHidden = true
         
         // 介绍
         describeLabel = UILabel()

@@ -189,8 +189,18 @@ class LGLoginViewController: LGViewController {
         print(password!.hex)
         LGUserService.sharedService.login(withPhone: phoneNumber, password: password!.hex) { [weak self] error in
             if error == nil {
-                // 登录成功，去获取认证信息
+                // 登录成功
                 LGUserModel.currentUser.login(phoneNumber: phoneNumber)
+                
+                // 去获取邀请码状态
+                LGUserService.sharedService.getIsNeedInviteCode(complete: { isNeed, error in
+                    if error == nil {
+                        // 获取邀请码状态成功
+                        LGUserModel.currentUser.setInviteCodeStatus(isNeed: isNeed!)
+                    }
+                })
+                
+                // 去获取认证信息
                 LGUserService.sharedService.getVerificationInfo(complete: { status, idNumber, name, mark, error in
                     if self != nil {
                         MBProgressHUD.hide(for: self!.view, animated: true)

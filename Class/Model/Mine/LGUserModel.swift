@@ -16,6 +16,7 @@ class LGUserModel {
     private let keyIDNumber = "idNumber"
     private let keyName = "name"
     private let keyMark = "mark"
+    private let keyIsNeedInviteCode = "isNeedInviteCode"
     
     private init() {
         isVerified = false
@@ -44,6 +45,9 @@ class LGUserModel {
     
     /// 芝麻分
     var mark: String?
+    
+    /// 用户是否需要验证码
+    var isNeedInviteCode: Bool = true
     
     /// 用户登录成功
     func login(phoneNumber: String) {
@@ -79,6 +83,16 @@ class LGUserModel {
         deleteValueFor(key: keyIDNumber)
         deleteValueFor(key: keyMark)
         deleteValueFor(key: keyName)
+        deleteValueFor(key: keyIsNeedInviteCode)
+    }
+    
+    /// 获取用户邀请码状态
+    func setInviteCodeStatus(isNeed: Bool) {
+        isNeedInviteCode = isNeed
+        
+        if !isNeed {
+            saveValue(isNeedInviteCode, forKey: keyIsNeedInviteCode)
+        }
     }
     
     private func loadUserData() {
@@ -89,6 +103,12 @@ class LGUserModel {
             isVerified = false
         } else {
             isVerified = true
+        }
+        
+        if loadValueFor(key: keyIsNeedInviteCode) == nil {
+            isNeedInviteCode = true
+        } else {
+            isNeedInviteCode = false
         }
     
         idNumber = loadValueFor(key: keyIDNumber) as? String
