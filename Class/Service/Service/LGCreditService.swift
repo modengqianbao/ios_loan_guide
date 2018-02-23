@@ -63,4 +63,21 @@ class LGCreditService {
             }
         }
     }
+    
+    /// 获取历史报告id
+    func getHistoryReportID(complete: @escaping (_ id: String?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("history_report")
+        service.post(urlString: urlString, parameters: nil) { json, error in
+            if error == nil {
+                let jsonArray = json!["data"]["reportList"].arrayValue
+                if let jsonItem = jsonArray.first {
+                    complete(jsonItem["id"].stringValue, nil)
+                } else {
+                    complete(nil, nil)
+                }
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
 }

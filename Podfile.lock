@@ -15,6 +15,14 @@ PODS:
   - TPKeyboardAvoiding (1.3.2)
   - UIColor_Hex_Swift (4.0.1)
   - UMengAnalytics (4.2.4)
+  - UMengUShare/Core (6.4.8.2):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.8.2)
+  - UMengUShare/Social/ReducedWeChat (6.4.8.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/WeChat (6.4.8.2):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedWeChat
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -31,6 +39,7 @@ DEPENDENCIES:
   - TPKeyboardAvoiding (~> 1.3.2)
   - UIColor_Hex_Swift (~> 4.0.1)
   - UMengAnalytics
+  - UMengUShare/Social/WeChat
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
@@ -48,7 +57,8 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   UIColor_Hex_Swift: c5ff88470499383b8fd85302d59344bb24ba9436
   UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
+  UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
 
-PODFILE CHECKSUM: 639e4ce5568ff4c748fef91f0a380033ffb2ce48
+PODFILE CHECKSUM: ce9f46d72cd7558030f08ea04c72e80013afbb15
 
 COCOAPODS: 1.3.1

@@ -67,7 +67,7 @@ class LGRecommendDetailInfoTableViewCell: UITableViewCell {
         addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
             make.centerY.equalTo(iconImageView)
-            make.right.equalTo(arrowImageView.snp.left).offset(-6)
+            make.right.equalTo(arrowImageView.snp.left).offset(-12)
         }
         
         checkImageView = UIImageView(image: UIImage(named: "report_verified"))
@@ -75,6 +75,16 @@ class LGRecommendDetailInfoTableViewCell: UITableViewCell {
         checkImageView.snp.makeConstraints { make in
             make.centerY.equalTo(iconImageView)
             make.right.equalTo(contentLabel.snp.left).offset(-6)
+        }
+    }
+    
+    func configCell(isVerified: Bool) {
+        if !isVerified {
+            checkImageView.image = UIImage(named: "report_alert")
+            contentLabel.text = "未认证"
+        } else {
+            checkImageView.image = UIImage(named: "report_verified")
+            contentLabel.text = "已认证"
         }
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import MBProgressHUD
 import RxWebViewController
 
 class LGHomeViewController: LGViewController {
@@ -88,6 +89,29 @@ class LGHomeViewController: LGViewController {
             make.top.left.right.bottom.equalTo(self!.view)
         }
     }
+    
+    private func showCreditCheckOrReportView() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        LGCreditService.sharedService.getHistoryReportID { [weak self] id, error in
+            MBProgressHUD.hide(for: self!.view, animated: true)
+            if error == nil {
+                if id != nil {
+                    // 有查询历史记录
+                    let reportVC = LGReportViewController()
+                    reportVC.queryID = id!
+                    reportVC.hidesBottomBarWhenPushed = true
+                    self!.show(reportVC, sender: nil)
+                } else {
+                    // 无查询历史记录
+                    let creditVC = LGCreditCheckFlowViewController()
+                    creditVC.hidesBottomBarWhenPushed = true
+                    self!.show(creditVC, sender: nil)
+                }
+            } else {
+                LGHud.show(in: self!.view, animated: true, text: error)
+            }
+        }
+    }
 }
 
 //MAKR:- UITableView delegate, datasource
@@ -100,7 +124,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             // 急速好贷
             return 2
-        } else if section == 1{
+        } else if section == 1 {
             // 热门产品
             return model.loanProductArray.count
         } else {
@@ -169,9 +193,10 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 1 {
                 if LGUserModel.currentUser.isLogin {
                     // 信用知多少
-                    let creditVC = LGCreditCheckFlowViewController()
-                    creditVC.hidesBottomBarWhenPushed = true
-                    show(creditVC, sender: nil)
+                    showCreditCheckOrReportView()
+//                    let creditVC = LGCreditCheckFlowViewController()
+//                    creditVC.hidesBottomBarWhenPushed = true
+//                    show(creditVC, sender: nil)
                 } else {
                     let loginVC = LGLoginViewController()
                     let nc = LGNavigationController(rootViewController: loginVC)

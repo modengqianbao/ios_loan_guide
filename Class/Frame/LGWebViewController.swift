@@ -10,5 +10,11 @@ import Foundation
 import RxWebViewController
 
 class LGWebViewController: RxWebViewController {
-    var todo = 1
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
 }

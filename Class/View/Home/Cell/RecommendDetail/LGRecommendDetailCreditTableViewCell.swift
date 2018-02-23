@@ -25,6 +25,32 @@ class LGRecommendDetailCreditTableViewCell: UITableViewCell {
     private func setup() {
         backgroundColor = kColorBackground
         
-
+        let titleLabel = UILabel()
+        titleLabel.textColor = kColorTitleText
+        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        titleLabel.text = "信用知多少"
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { [weak self] make in
+            make.left.equalTo(self!).offset(24)
+            make.top.equalTo(self!).offset(20)
+            make.bottom.equalTo(self!).offset(-20)
+        }
+        
+        let arrowImageView = UIImageView(image: UIImage(named: "detail_arrow_r"))
+        addSubview(arrowImageView)
+        arrowImageView.snp.makeConstraints { [weak self] make in
+            make.right.equalTo(self!).offset(-8)
+            make.centerY.equalTo(self!)
+        }
+        
+        let checkLabel = UILabel()
+        checkLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        checkLabel.textColor = kColorAssistText
+        checkLabel.text = "查看报告"
+        addSubview(checkLabel)
+        checkLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(arrowImageView)
+            make.right.equalTo(arrowImageView.snp.left).offset(-12)
+        }
     }
 }

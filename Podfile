@@ -17,5 +17,6 @@ target 'LoanGuide' do
 	pod 'BEMCheckBox'
 	pod 'RxWebViewController'
 	pod 'UMengAnalytics'
+	pod ‘UMengUShare/Social/WeChat'
 	
 end

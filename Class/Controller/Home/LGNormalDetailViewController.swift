@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import MBProgressHUD
+import RxWebViewController
 
 class LGNormalDetailViewController: LGViewController {
     /// 传入
@@ -34,12 +35,24 @@ class LGNormalDetailViewController: LGViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        if isFirstLaunch {
-            isFirstLaunch = false
-            navigationController?.navigationBar.isHidden = true
-        }
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        if isFirstLaunch {
+//            isFirstLaunch = false
+//            navigationController?.navigationBar.isHidden = true
+//        }
+//    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//        navigationController?.navigationBar.isHidden = false
+//    }
     
     private func setup() {
         title = model.name
@@ -237,7 +250,8 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
                 return cell
             }
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailApplyTableViewCell.identifier) as! LGNormalDetailApplyTableViewCell            
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailApplyTableViewCell.identifier) as! LGNormalDetailApplyTableViewCell
+            cell.delegate = self
             return cell
         }
     }
@@ -275,5 +289,13 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
 extension LGNormalDetailViewController: LGNormalDetailHeaderTableViewCellDelegate {
     func headCellDidSelectBack(_ headerCell: LGNormalDetailHeadTableViewCell) {
         backButtonOnClick()
+    }
+}
+
+extension LGNormalDetailViewController: LGNormalDetailApplyTableViewCellDelegate {
+    func applyCellDidSubmit(_ applyCell: LGNormalDetailApplyTableViewCell) {
+        let url = URL(string: model.url!)
+        let webVC = LGWebViewController(url: url!)
+        show(webVC!, sender: nil)
     }
 }

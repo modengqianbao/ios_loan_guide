@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import MBProgressHUD
 import BRPickerView
+import RxWebViewController
 
 class LGRecommendDetailViewController: LGViewController {
     /// 传入
@@ -17,6 +18,7 @@ class LGRecommendDetailViewController: LGViewController {
     
     private var detailTableView: UITableView!
     private var pickView: BRStringPickerView!
+    private var applyButton: UIButton!
     
     private var moneyArray: [String]!
     private var selectedMoneyIndex: Int = 0
@@ -70,11 +72,13 @@ class LGRecommendDetailViewController: LGViewController {
         }
         
         // 立即申请
-        let applyButton = UIButton(type: .custom)
+        applyButton = UIButton(type: .custom)
         applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         applyButton.backgroundColor = kColorMainTone
         applyButton.setTitleColor(UIColor.white, for: .normal)
         applyButton.setTitle("立即申请", for: .normal)
+        applyButton.addTarget(self, action: #selector(applyButtonOnClick), for: .touchUpInside)
+        applyButton.isEnabled = false
         view.addSubview(applyButton)
         applyButton.snp.makeConstraints { [weak self] make in
             make.left.right.bottom.equalTo(self!.view)
@@ -108,6 +112,7 @@ class LGRecommendDetailViewController: LGViewController {
                     MBProgressHUD.hide(for: self!.view, animated: true)
                     if error == nil {
                         self!.setupPickArray()
+                        self!.applyButton.isEnabled = true
                         self!.detailTableView.reloadData()
                     } else {
                         LGHud.show(in: self!.view, animated: true, text: error)
@@ -121,6 +126,35 @@ class LGRecommendDetailViewController: LGViewController {
     
     private func record() {
         LGUserService.sharedService.recordBrowse(productType: 1, productID: model.id, complete: nil)
+    }
+    
+    @objc private func applyButtonOnClick() {
+        let url = URL(string: model.url!)
+        let webVC = LGWebViewController(url: url!)
+        show(webVC!, sender: nil)
+    }
+    
+    private func showCreditCheckOrReportView() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        LGCreditService.sharedService.getHistoryReportID { [weak self] id, error in
+            MBProgressHUD.hide(for: self!.view, animated: true)
+            if error == nil {
+                if id != nil {
+                    // 有查询历史记录
+                    let reportVC = LGReportViewController()
+                    reportVC.queryID = id!
+                    reportVC.hidesBottomBarWhenPushed = true
+                    self!.show(reportVC, sender: nil)
+                } else {
+                    // 无查询历史记录
+                    let creditVC = LGCreditCheckFlowViewController()
+                    creditVC.hidesBottomBarWhenPushed = true
+                    self!.show(creditVC, sender: nil)
+                }
+            } else {
+                LGHud.show(in: self!.view, animated: true, text: error)
+            }
+        }
     }
     
 //    private func showUsagePickView() {
@@ -188,6 +222,7 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGRecommendDetailInfoTableViewCell.identifier) as! LGRecommendDetailInfoTableViewCell
+                cell.configCell(isVerified: LGUserModel.currentUser.isVerified)
                 
                 return cell
             }
@@ -213,7 +248,15 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
                 detailVC.model = model
                 show(detailVC, sender: nil)
             }
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            // 认证页面
+            let veriVC = LGVericationViewController()
+            show(veriVC, sender: nil)
+        } else if indexPath.section == 2 && indexPath.row == 1 {
+            // 信用查询
+            showCreditCheckOrReportView()
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

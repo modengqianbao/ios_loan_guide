@@ -18,6 +18,12 @@ class LGCreditCheckFlowViewController: LGViewController {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     private func setup() {
         title = "信用知多少"
         view.backgroundColor = kColorBackground

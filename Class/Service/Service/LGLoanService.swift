@@ -67,6 +67,7 @@ class LGLoanService {
 //                loanItem.loanSpec = ""
                 loanItem.rateMax = jsonItem["rateMax"].floatValue
                 loanItem.rateMin = jsonItem["rateMin"].floatValue
+                loanItem.url = jsonItem["loanConnect"].stringValue
 //                loanItem.status = jsonItem[""]
                 let jsonArray = jsonItem["loanFlows"].arrayValue
                 var array = [LGLoanFlowModel]()

@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import MBProgressHUD
 
 class LGMineViewController: LGViewController {
     private var phoneLabel: UILabel!
@@ -191,6 +192,29 @@ class LGMineViewController: LGViewController {
         let nc = LGNavigationController(rootViewController: loginVC)
         present(nc, animated: true, completion: nil)
     }
+    
+    private func showCreditCheckOrReportView() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        LGCreditService.sharedService.getHistoryReportID { [weak self] id, error in
+            MBProgressHUD.hide(for: self!.view, animated: true)
+            if error == nil {
+                if id != nil {
+                    // 有查询历史记录
+                    let reportVC = LGReportViewController()
+                    reportVC.queryID = id!
+                    reportVC.hidesBottomBarWhenPushed = true
+                    self!.show(reportVC, sender: nil)
+                } else {
+                    // 无查询历史记录
+                    let creditVC = LGCreditCheckFlowViewController()
+                    creditVC.hidesBottomBarWhenPushed = true
+                    self!.show(creditVC, sender: nil)
+                }
+            } else {
+                LGHud.show(in: self!.view, animated: true, text: error)
+            }
+        }
+    }
 }
 
 //MARK:- UITableView delegate, datasource
@@ -291,6 +315,7 @@ extension LGMineViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if LGUserModel.currentUser.isLogin {
             if indexPath.row == 0 {
                 // 信用知多少
+                showCreditCheckOrReportView()
             } else if indexPath.row == 1 {
                 // 申请记录
                 let recordVC = LGRecordViewController()

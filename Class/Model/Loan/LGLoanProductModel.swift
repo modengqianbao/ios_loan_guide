@@ -58,6 +58,8 @@ class LGLoanProductModel {
     var termMin: Int?
     /// 最大期限
     var termMax: Int?
+    /// 贷款链接
+    var url: String?
     
     init(json: JSON) {
         id = json["id"].intValue
