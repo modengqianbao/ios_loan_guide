@@ -92,19 +92,19 @@ class LGHotProductTableViewCell: UITableViewCell {
         }
         
         // 申请按钮
-        applyButton = UIButton(type: .custom)
-        applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        applyButton.layer.cornerRadius = 3
-        applyButton.backgroundColor = kColorMainTone
-        applyButton.layer.masksToBounds = true
-        applyButton.setTitle("申请", for: .normal)
-        addSubview(applyButton)
-        applyButton.snp.makeConstraints { [weak self] make in
-            make.centerY.equalTo(self!)
-            make.right.equalTo(self!).offset(-12)
-            make.size.equalTo(CGSize(width: 50, height: 30))
-        }
-        applyButton.isHidden = true
+//        applyButton = UIButton(type: .custom)
+//        applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+//        applyButton.layer.cornerRadius = 3
+//        applyButton.backgroundColor = kColorMainTone
+//        applyButton.layer.masksToBounds = true
+//        applyButton.setTitle("申请", for: .normal)
+//        addSubview(applyButton)
+//        applyButton.snp.makeConstraints { [weak self] make in
+//            make.centerY.equalTo(self!)
+//            make.right.equalTo(self!).offset(-12)
+//            make.size.equalTo(CGSize(width: 50, height: 30))
+//        }
+//        applyButton.isHidden = true
         
         // 介绍
         describeLabel = UILabel()
@@ -116,7 +116,7 @@ class LGHotProductTableViewCell: UITableViewCell {
             make.left.equalTo(titleLabel)
             make.top.equalTo(moneyLabel.snp.bottom).offset(4)
             make.bottom.equalTo(self!).offset(-12)
-            make.right.lessThanOrEqualTo(applyButton.snp.left).offset(-12)
+//            make.right.lessThanOrEqualTo(applyButton.snp.left).offset(-12)
         }
         
         // 分割线

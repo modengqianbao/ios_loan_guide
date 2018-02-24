@@ -9,4 +9,4 @@
 import Foundation
 
 /// 贷款用途
-let loanUsageArray = ["购物", "旅行", "嫁娶", "教育", "医疗", "装修", "其他"]
+let kLoanUsageArray = ["购物", "旅行", "嫁娶", "教育", "医疗", "装修", "其他"]

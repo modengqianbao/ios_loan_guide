@@ -129,9 +129,23 @@ class LGRecommendDetailViewController: LGViewController {
     }
     
     @objc private func applyButtonOnClick() {
-        let url = URL(string: model.url!)
-        let webVC = LGWebViewController(url: url!)
-        show(webVC!, sender: nil)
+        MBProgressHUD.showAdded(to: view, animated: true)
+        LGLoanService.sharedService.getApplyURL(money: moneyArray[selectedMoneyIndex],
+                                                usage: kLoanUsageArray[selectedUsageIndex],
+                                                perids: termArray[selectedTermIndex],
+                                                productID: model.id)
+        { [weak self] urlString, error in
+            if self != nil {
+                MBProgressHUD.hide(for: self!.view, animated: true)
+                if error == nil {
+                    let url = URL(string: urlString!)
+                    let webVC = LGWebViewController(url: url!)
+                    self!.show(webVC!, sender: nil)
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
+        }
     }
     
     private func showCreditCheckOrReportView() {
@@ -203,7 +217,7 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
                                     limitString: limitString,
                                     currentStage: "\(termArray[selectedTermIndex])\(model.loanSign == 1 ? "日" : "月")",
                                     stageRange: stageString,
-                                    usage: loanUsageArray[selectedUsageIndex],
+                                    usage: kLoanUsageArray[selectedUsageIndex],
                                     timeString: model.loanTimeinfo!,
                                     rateString: rateString)
                 }
@@ -300,8 +314,8 @@ extension LGRecommendDetailViewController: LGRecommendDetailHeadTableViewCellDel
     }
     
     func headCellDidClickLoanUsage(_ headCell: LGRecommendDetailHeadTableViewCell) {
-        BRStringPickerView.showStringPicker(withTitle: "贷款用途", dataSource: loanUsageArray, defaultSelValue: loanUsageArray[selectedUsageIndex], isAutoSelect: false, themeColor: kColorMainTone) { [weak self] value in
-            let index = loanUsageArray.index(of: value as! String)
+        BRStringPickerView.showStringPicker(withTitle: "贷款用途", dataSource: kLoanUsageArray, defaultSelValue: kLoanUsageArray[selectedUsageIndex], isAutoSelect: false, themeColor: kColorMainTone) { [weak self] value in
+            let index = kLoanUsageArray.index(of: value as! String)
             self!.selectedUsageIndex = index!
             self!.detailTableView.reloadData()
         }

@@ -87,6 +87,12 @@ class LGReportHeadTableViewCell: UITableViewCell {
         delegate?.headCellDidClickBack(self)
     }
     
+    func configCell(mark: Int, level: String, dateString: String) {
+        creditView.mark = mark
+        creditView.level = level
+        creditView.dateString = dateString
+    }
+    
     func animate() {
         creditView.animate()
     }

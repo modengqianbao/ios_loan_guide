@@ -49,7 +49,7 @@ class LGCreditReportModel {
         get  {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy年MM月dd日"
-            let date = Date(timeIntervalSince1970: TimeInterval(queryTimeInt))
+            let date = Date(timeIntervalSince1970: TimeInterval(queryTimeInt / 1000))
             return formatter.string(from: date)
         }
     }

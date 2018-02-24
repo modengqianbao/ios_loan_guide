@@ -83,4 +83,45 @@ class LGLoanService {
             }
         }
     }
+    
+    /// 申请单点登录url
+    /// - parameter loanMoney: 贷款金额
+    /// - parameter loanUse: 用途
+    /// - parameter periods: 分期期数
+    /// - parameter productId: 产品id
+    func getApplyURL(money: String, usage: String, perids: String, productID: Int, complete: @escaping (_ urlString: String?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("apply_sso")
+        let parameters = ["loanMoney": money,
+                          "loanUse": usage,
+                          "periods": perids,
+                          "productId": productID,
+                          "type": 2] as [String : Any]
+        service.post(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let urlString = json!["data"]["url"].stringValue
+                complete(urlString, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
+    
+    /// 获取随机推荐贷款产品
+    func getRadomLoan(count: Int, complete:@escaping (_ array: [LGLoanProductModel]?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("loan_groom_random")
+        let parameters = ["count": count]
+        service.get(urlString: urlString, parameters: parameters) { json, error in
+            if error == nil {
+                let jsonArray = json!["data"]["loans"].arrayValue
+                var array = [LGLoanProductModel]()
+                for jsonItem in jsonArray {
+                    let item = LGLoanProductModel(json: jsonItem)
+                    array.append(item)
+                }
+                complete(array, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
 }

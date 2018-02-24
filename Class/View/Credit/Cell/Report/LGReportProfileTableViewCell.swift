@@ -57,7 +57,7 @@ class LGReportProfileTableViewCell: UITableViewCell {
         nameLabel = UILabel()
         nameLabel.textColor = kColorTitleText
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        nameLabel.text = "李克喂"
+//        nameLabel.text = "李克喂"
         whiteView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.left.equalTo(whiteView).offset(10)
@@ -68,7 +68,7 @@ class LGReportProfileTableViewCell: UITableViewCell {
         idLabel = UILabel()
         idLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         idLabel.textColor = kColorAssistText
-        idLabel.text = "身份证号：123456789123456789（福建 泉州）"
+//        idLabel.text = "身份证号：123456789123456789（福建 泉州）"
         whiteView.addSubview(idLabel)
         idLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel)
@@ -79,7 +79,7 @@ class LGReportProfileTableViewCell: UITableViewCell {
         phoneLabel = UILabel()
         phoneLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         phoneLabel.textColor = kColorAssistText
-        phoneLabel.text = "手机号：12345678912（四川 成都）"
+//        phoneLabel.text = "手机号：12345678912（四川 成都）"
         whiteView.addSubview(phoneLabel)
         phoneLabel.snp.makeConstraints { make in
             make.left.equalTo(idLabel)
@@ -89,27 +89,54 @@ class LGReportProfileTableViewCell: UITableViewCell {
         
         // 是否已验证
         statusLabel = UILabel()
-        statusLabel.text = "已验证"
+//        statusLabel.text = "已验证"
         whiteView.addSubview(statusLabel)
         statusLabel.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.right.equalTo(whiteView).offset(-12)
         }
-        
-        let string = " 已验证"
-        let imageAttachment = NSTextAttachment()
-        let icon = UIImage(named: "report_verified")!
-        imageAttachment.image = icon
-        imageAttachment.bounds = CGRect(x: 0,
-                                        y: -1,
-                                        width: icon.size.width,
-                                        height: icon.size.height)
-        
-        let textAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .regular),
-                              NSAttributedStringKey.foregroundColor: UIColor(red:0.31, green:0.67, blue:0.32, alpha:1.00)]
-        let attributedString = NSMutableAttributedString(string: string,
-                                                         attributes: textAttributes)
-        attributedString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
-        statusLabel.attributedText = attributedString
+    }
+    
+    private func setupVerifyStatuLabel(isVerified: Bool) {
+        if isVerified {
+            let string = " 已验证"
+            let imageAttachment = NSTextAttachment()
+            let icon = UIImage(named: "report_verified")!
+            imageAttachment.image = icon
+            imageAttachment.bounds = CGRect(x: 0,
+                                            y: -1,
+                                            width: icon.size.width,
+                                            height: icon.size.height)
+            
+            let textAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .regular),
+                                  NSAttributedStringKey.foregroundColor: UIColor(red:0.31, green:0.67, blue:0.32, alpha:1.00)]
+            let attributedString = NSMutableAttributedString(string: string,
+                                                             attributes: textAttributes)
+            attributedString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+            statusLabel.attributedText = attributedString
+        } else {
+            let string = " 未验证"
+            let imageAttachment = NSTextAttachment()
+            let icon = UIImage(named: "report_alert")!
+            imageAttachment.image = icon
+            imageAttachment.bounds = CGRect(x: 0,
+                                            y: -1,
+                                            width: icon.size.width,
+                                            height: icon.size.height)
+            
+            let textAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13, weight: .regular),
+                                  NSAttributedStringKey.foregroundColor: UIColor(red:0.88, green:0.17, blue:0.26, alpha:1.00)]
+            let attributedString = NSMutableAttributedString(string: string,
+                                                             attributes: textAttributes)
+            attributedString.insert(NSAttributedString(attachment: imageAttachment), at: 0)
+            statusLabel.attributedText = attributedString
+        }
+    }
+    
+    func configCell(name: String?, isVerified: Bool, idNumber: String, idLocation: String, phone: String, phoneLocation: String) {
+        nameLabel.text = name
+        setupVerifyStatuLabel(isVerified: isVerified)
+        idLabel.text = "身份证号：\(idNumber)（\(idLocation)）"
+        phoneLabel.text = "手机号：\(phone)（\(phoneLocation)）"
     }
 }

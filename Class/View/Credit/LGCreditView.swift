@@ -12,17 +12,28 @@ import SnapKit
 class LGCreditView: UIView {
     // 传入
     /// 测评时间
-    var dateString: String?
+    var dateString: String? {
+        didSet {
+            if dateString != nil {
+                dateLabel.text = "测评时间\(dateString!)"
+            }
+        }
+    }
     /// 信用分数
-    var mark: Int! = 80
+    var mark: Int! = 0
     /// 信用等级
-    var level: String?
+    var level: String? {
+        didSet {
+            levelLabel.text = level
+        }
+    }
     
     private var markLabel: UILabel!
     private var levelLabel: UILabel!
     private var dateLabel: UILabel!
     private var dotView: UIView!
     
+    private let emptyColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
     private var path: UIBezierPath!
     private var currentMark: Int!
     private var timer: Timer!
@@ -41,42 +52,12 @@ class LGCreditView: UIView {
         backgroundColor = UIColor.clear
         clipsToBounds = false
         layer.masksToBounds = false
-    }
-    
-    override func draw(_ rect: CGRect) {
-        let emptyColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
-        emptyColor.set()
-        
-        let rectCenter = CGPoint(x: rect.minX + rect.size.width / 2, y: rect.minY + rect.size.height / 2)
-        let startAngle = CGFloat.pi * 0.75
-        let endAngle = CGFloat.pi * 0.25
-        
-        // 画外圈
-        let outRadius = rect.size.width / 2 - 1
-        let outCircle = UIBezierPath(arcCenter: rectCenter,
-                                     radius: outRadius,
-                                     startAngle: startAngle,
-                                     endAngle: endAngle,
-                                     clockwise: true)
-        outCircle.lineWidth = 1
-        outCircle.lineCapStyle = .round
-        outCircle.stroke()
-        
-        // 画内圈
-        let inRadius = rect.size.width / 2 - 8
-        let inCircle = UIBezierPath(arcCenter: rectCenter,
-                                    radius: inRadius,
-                                    startAngle: startAngle,
-                                    endAngle: endAngle,
-                                    clockwise: true)
-        inCircle.lineWidth = 4
-        inCircle.lineCapStyle = .round
-        inCircle.stroke()
         
         // 标数
         let numbersImageView = UIImageView(image: UIImage(named: "numbers"))
         numbersImageView.contentMode = .scaleAspectFill
         addSubview(numbersImageView)
+        let inRadius = bounds.size.width / 2 - 8
         numbersImageView.snp.makeConstraints { [weak self] make in
             make.center.equalTo(self!)
             make.size.equalTo(CGSize(width: inRadius * 1.9, height: inRadius * 1.9))
@@ -142,6 +123,36 @@ class LGCreditView: UIView {
         addSubview(dotView)
     }
     
+    override func draw(_ rect: CGRect) {
+        emptyColor.set()
+        
+        let rectCenter = CGPoint(x: rect.minX + rect.size.width / 2, y: rect.minY + rect.size.height / 2)
+        let startAngle = CGFloat.pi * 0.75
+        let endAngle = CGFloat.pi * 0.25
+        
+        // 画外圈
+        let outRadius = rect.size.width / 2 - 1
+        let outCircle = UIBezierPath(arcCenter: rectCenter,
+                                     radius: outRadius,
+                                     startAngle: startAngle,
+                                     endAngle: endAngle,
+                                     clockwise: true)
+        outCircle.lineWidth = 1
+        outCircle.lineCapStyle = .round
+        outCircle.stroke()
+        
+        // 画内圈
+        let inRadius = rect.size.width / 2 - 8
+        let inCircle = UIBezierPath(arcCenter: rectCenter,
+                                    radius: inRadius,
+                                    startAngle: startAngle,
+                                    endAngle: endAngle,
+                                    clockwise: true)
+        inCircle.lineWidth = 4
+        inCircle.lineCapStyle = .round
+        inCircle.stroke()
+    }
+    
     private func makeNumberLabel() -> UILabel {
         let label = UILabel()
         label.textColor = UIColor.white
@@ -152,7 +163,8 @@ class LGCreditView: UIView {
     }
     
     func animate() {
-        let duration = 3.0
+        let duration = 2.0
+        
         // 计算角度
         let startAngle = CGFloat.pi * 0.75
         let offsetAngle = CGFloat(mark - 50) / CGFloat(50) * CGFloat.pi * CGFloat(1.4)
