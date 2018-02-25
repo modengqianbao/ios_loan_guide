@@ -273,6 +273,15 @@
 			path = Report;
 			sourceTree = "<group>";
 		};
+		E02609F020418F1A00EF498B /* Credit */ = {
+			isa = PBXGroup;
+			children = (
+				E0DEDD042033D01C0025F4AF /* LGCreditCheckModel.swift */,
+				E05DDEC2203CFE9D00D44395 /* LGCreditReportModel.swift */,
+			);
+			path = Credit;
+			sourceTree = "<group>";
+		};
 		E02AB1B9201F11F000F90E69 /* RecommendDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +290,7 @@
 				E05BA3D02020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift */,
 				E05BA3D22020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift */,
 				E077C79520215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift */,
+				E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */,
 			);
 			path = RecommendDetail;
 			sourceTree = "<group>";
@@ -304,9 +314,6 @@
 				E03F88BA201B6D6500862C53 /* LGRecommendTableViewCell.swift */,
 				E08E8D2F201C689A008A4FCC /* LGCreditCheckTableViewCell.swift */,
 				E08E8D31201C6F18008A4FCC /* LGHotProductTableViewCell.swift */,
-				E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */,
-				E02AB1B9201F11F000F90E69 /* RecommendDetail */,
-				E0380F9D2022B2010029EF12 /* NormalDetail */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -352,6 +359,9 @@
 			isa = PBXGroup;
 			children = (
 				E053F3B2201B2AD90066FD1E /* LGLoanViewController.swift */,
+				E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */,
+				E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */,
+				E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */,
 			);
 			path = Loan;
 			sourceTree = "<group>";
@@ -382,6 +392,8 @@
 		E053F3A6201B273D0066FD1E /* Loan */ = {
 			isa = PBXGroup;
 			children = (
+				E02AB1B9201F11F000F90E69 /* RecommendDetail */,
+				E0380F9D2022B2010029EF12 /* NormalDetail */,
 				E077C79B2021ADAA00DDEDC0 /* DropDownMenu */,
 			);
 			path = Loan;
@@ -431,14 +443,14 @@
 			path = Loan;
 			sourceTree = "<group>";
 		};
-		E053F3AC201B27490066FD1E /* Credit */ = {
+		E053F3AC201B27490066FD1E /* CreditCard */ = {
 			isa = PBXGroup;
 			children = (
 				E0FCD0302026E07E00412CA4 /* LGCreditModel.swift */,
 				E0FCD02E2026DF2100412CA4 /* LGCreditProductModel.swift */,
 				E0D8E29A20356D0E0027D34A /* LGCreditBankModel.swift */,
 			);
-			path = Credit;
+			path = CreditCard;
 			sourceTree = "<group>";
 		};
 		E053F3AD201B27490066FD1E /* Mine */ = {
@@ -448,8 +460,6 @@
 				E0E93A2E20242F1300992FB3 /* LGUserModel.swift */,
 				E0532D282025A08A00020ED1 /* LGQuestionModel.swift */,
 				E0532D352025E39F00020ED1 /* LGMessageModel.swift */,
-				E0DEDD042033D01C0025F4AF /* LGCreditCheckModel.swift */,
-				E05DDEC2203CFE9D00D44395 /* LGCreditReportModel.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -604,8 +614,9 @@
 			children = (
 				E053F3AA201B27490066FD1E /* Home */,
 				E053F3AB201B27490066FD1E /* Loan */,
-				E053F3AC201B27490066FD1E /* Credit */,
+				E053F3AC201B27490066FD1E /* CreditCard */,
 				E053F3AD201B27490066FD1E /* Mine */,
+				E02609F020418F1A00EF498B /* Credit */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -637,9 +648,6 @@
 			isa = PBXGroup;
 			children = (
 				E0C8BBF2201B14BD000D56F1 /* LGHomeViewController.swift */,
-				E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */,
-				E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */,
-				E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1049,11 +1057,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4R7AXFL8HB;
+				DEVELOPMENT_TEAM = 2EPHDXDU97;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.grazee.ModengWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoshudian.loanguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/App/LoanGuide-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -1067,11 +1075,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4R7AXFL8HB;
+				DEVELOPMENT_TEAM = 2EPHDXDU97;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.grazee.ModengWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoshudian.loanguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/App/LoanGuide-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
