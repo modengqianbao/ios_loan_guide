@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         umConfig.channelId = "App Store"
         MobClick.start(withConfigure: umConfig)
         
+        // 小米推送
+        MiPushSDK.registerMiPush(self)
+        
         // 加载页面
         let tabbarVC = LGTabBarController()
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -28,6 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        MiPushSDK.bindDeviceToken(deviceToken)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -55,3 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: MiPushSDKDelegate, UNUserNotificationCenterDelegate {
+    
+}

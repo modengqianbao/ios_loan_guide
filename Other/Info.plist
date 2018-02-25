@@ -53,5 +53,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>MiSDKAppID</key>
+	<string>2882303761517720186</string>
+	<key>MiSDKAppKey</key>
+	<string>5681772091186</string>
+	<key>MiSDKRun</key>
+	<string>${MiSDKRun}</string>
 </dict>
 </plist>

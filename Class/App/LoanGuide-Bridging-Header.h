@@ -10,5 +10,6 @@
 #define LoanGuide_Bridging_Header_h
 
 #include <UMMobClick/MobClick.h>
+#include "MiPushSDK.h"
 
 #endif /* LoanGuide_Bridging_Header_h */
