@@ -104,6 +104,19 @@ class LGUserService {
         }
     }
     
+    /// 检查用户登录状态
+    func checkLogin(complete: @escaping (_ isLogin: Bool?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("check_login")
+        service.get(urlString: urlString, parameters: nil) { json, error in
+            if error == nil {
+                let status = json!["data"]["islogin"].boolValue
+                complete(status, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
+    
     /// 提交邀请码
     func verifyInviteCode(_ code: String, complete: @escaping (_ error: String?) -> Void) {
         let urlString = kDomain.appending("commit_invite")

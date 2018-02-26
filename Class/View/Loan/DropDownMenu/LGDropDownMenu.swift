@@ -75,6 +75,8 @@ class LGDropDownMenu: UIView {
     
     private func setupMenuTableView() {
         menuTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        menuTableView.rowHeight = UITableViewAutomaticDimension
+        menuTableView.estimatedRowHeight = 80
         menuTableView.backgroundView = UIView()
         menuTableView.backgroundView!.backgroundColor = UIColor.clear
         menuTableView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)

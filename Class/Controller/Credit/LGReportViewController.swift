@@ -43,6 +43,8 @@ class LGReportViewController: LGViewController {
         view.backgroundColor = kColorBackground
         
         reportTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        reportTableView.rowHeight = UITableViewAutomaticDimension
+        reportTableView.estimatedRowHeight = 80
         reportTableView.backgroundColor = kColorSeperatorBackground
         reportTableView.separatorStyle = .none
         reportTableView.showsVerticalScrollIndicator = false

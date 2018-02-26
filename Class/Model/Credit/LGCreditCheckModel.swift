@@ -11,7 +11,9 @@ import Foundation
 class LGCreditCheckModel {
     static let sharedModel = LGCreditCheckModel()
     
-    private init() {}
+    private init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(clearAuth), name: kNotificationLogout.name, object: nil)
+    }
     
     /// 是否得到授权
     var isAuthed = false
@@ -28,5 +30,11 @@ class LGCreditCheckModel {
         self.sign = sign
         
         isAuthed = true
+    }
+    
+    @objc private func clearAuth() {
+        isAuthed = false
+        params = nil
+        sign = nil
     }
 }

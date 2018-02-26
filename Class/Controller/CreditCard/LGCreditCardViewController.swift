@@ -48,6 +48,8 @@ class LGCreditCardViewController: LGViewController {
         
         // 列表
         creditTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        creditTableView.rowHeight = UITableViewAutomaticDimension
+        creditTableView.estimatedRowHeight = 80
         creditTableView.register(LGCreditCardTableViewCell.self,
                                  forCellReuseIdentifier: LGCreditCardTableViewCell.identifier)
         creditTableView.register(LGEmptyTableViewCell.self,

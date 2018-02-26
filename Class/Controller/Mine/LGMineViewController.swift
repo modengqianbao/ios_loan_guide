@@ -119,6 +119,8 @@ class LGMineViewController: LGViewController {
         
         // 选项列表
         let mineTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        mineTableView.rowHeight = UITableViewAutomaticDimension
+        mineTableView.estimatedRowHeight = 80
         mineTableView.backgroundColor = kColorSeperatorBackground
         mineTableView.register(LGMineTableViewCell.self, forCellReuseIdentifier: LGMineTableViewCell.identifier)
         mineTableView.separatorStyle = .none

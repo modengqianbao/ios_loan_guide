@@ -34,6 +34,8 @@ class LGMessageViewController: UIViewController {
         view.backgroundColor = kColorBackground
         
         messageTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        messageTableView.rowHeight = UITableViewAutomaticDimension
+        messageTableView.estimatedRowHeight = 80
         messageTableView.separatorStyle = .none
         messageTableView.backgroundColor = kColorSeperatorBackground
         messageTableView.register(LGMessageTableViewCell.self,

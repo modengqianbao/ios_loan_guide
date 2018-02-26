@@ -97,6 +97,8 @@ class LGRecordViewController: LGViewController {
         tableViewArray = [UITableView]()
         for index in 0..<titleArray.count {
             let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.estimatedRowHeight = 80
             tableView.backgroundColor = kColorSeperatorBackground
             if index == 0 {
                 // 贷款

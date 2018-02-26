@@ -75,6 +75,8 @@ class LGVericationViewController: LGViewController {
         
         // 表单
         vericationTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        vericationTableView.rowHeight = UITableViewAutomaticDimension
+        vericationTableView.estimatedRowHeight = 80
         vericationTableView.isScrollEnabled = false
         vericationTableView.separatorStyle = .none
         vericationTableView.register(LGVericationTableViewCell.self,

@@ -29,6 +29,8 @@ class LGSettingViewController: LGViewController {
         
         // 列表
         let settingTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        settingTableView.rowHeight = UITableViewAutomaticDimension
+        settingTableView.estimatedRowHeight = 80
         settingTableView.backgroundColor = kColorSeperatorBackground
         settingTableView.separatorStyle = .none
         settingTableView.register(LGSettingTableViewCell.self,

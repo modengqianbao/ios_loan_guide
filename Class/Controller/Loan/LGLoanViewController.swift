@@ -59,6 +59,8 @@ class LGLoanViewController: LGViewController {
         // 列表
         loanTableView = UITableView(frame: CGRect.zero, style: .grouped)
         loanTableView.separatorStyle = .none
+        loanTableView.rowHeight = UITableViewAutomaticDimension
+        loanTableView.estimatedRowHeight = 80
         loanTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             self!.model.reloadLoanList { error in
                 self!.loanTableView.mj_header.endRefreshing()

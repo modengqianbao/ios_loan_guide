@@ -29,6 +29,8 @@ class LGCreditCheckFlowViewController: LGViewController {
         view.backgroundColor = kColorBackground
         
         flowTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        flowTableView.rowHeight = UITableViewAutomaticDimension
+        flowTableView.estimatedRowHeight = 80
         flowTableView.separatorStyle = .none
         flowTableView.backgroundColor = kColorSeperatorBackground
         flowTableView.register(LGCreditCheckFlowTableViewCell.self,

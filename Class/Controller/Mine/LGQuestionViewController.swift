@@ -36,6 +36,8 @@ class LGQuestionViewController: UIViewController {
         view.backgroundColor = kColorBackground
         
         questionTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        questionTableView.rowHeight = UITableViewAutomaticDimension
+        questionTableView.estimatedRowHeight = 80
         questionTableView.separatorStyle = .none
         questionTableView.backgroundColor = kColorSeperatorBackground
         questionTableView.register(LGQuestionHeaderTableViewCell.self,

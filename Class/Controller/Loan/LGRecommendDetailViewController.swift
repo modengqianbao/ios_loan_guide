@@ -50,6 +50,8 @@ class LGRecommendDetailViewController: LGViewController {
         
         // 表单
         detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        detailTableView.rowHeight = UITableViewAutomaticDimension
+        detailTableView.estimatedRowHeight = 80
         detailTableView.separatorStyle = .none
         detailTableView.bounces = false
         detailTableView.backgroundColor = kColorSeperatorBackground
@@ -170,16 +172,6 @@ class LGRecommendDetailViewController: LGViewController {
             }
         }
     }
-    
-//    private func showUsagePickView() {
-//        BRStringPickerView.showStringPicker(withTitle: "222", dataSource: loanUsageArray, defaultSelValue: loanUsageArray[0], isAutoSelect: false, themeColor: kColorMainTone) { value in
-//            print(value)
-//        }
-//    }
-//
-//    private func showMoneyPickview() {
-//
-//    }
 }
 
 //MARK:- UITableView delegate, datasource

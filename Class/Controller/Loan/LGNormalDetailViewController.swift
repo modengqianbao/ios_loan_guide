@@ -75,6 +75,8 @@ class LGNormalDetailViewController: LGViewController {
         
         // 表单
         detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        detailTableView.rowHeight = UITableViewAutomaticDimension
+        detailTableView.estimatedRowHeight = 80
         detailTableView.separatorStyle = .none
         detailTableView.showsVerticalScrollIndicator = false
         detailTableView.backgroundColor = kColorSeperatorBackground
@@ -119,6 +121,7 @@ class LGNormalDetailViewController: LGViewController {
     private func record() {
         if LGUserModel.currentUser.isLogin {
             LGUserService.sharedService.recordBrowse(productType: 1, productID: model.id, complete: nil)
+            LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
         }
     }
     

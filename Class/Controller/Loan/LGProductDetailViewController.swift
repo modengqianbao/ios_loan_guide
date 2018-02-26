@@ -30,6 +30,8 @@ class LGProductDetailViewController: LGViewController {
         
         let detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
         detailTableView.backgroundColor = kColorSeperatorBackground
+        detailTableView.rowHeight = UITableViewAutomaticDimension
+        detailTableView.estimatedRowHeight = 80
         detailTableView.showsVerticalScrollIndicator = false
         detailTableView.separatorStyle = .none
         detailTableView.register(LGRecommendTitleTableViewCell.self,

@@ -73,6 +73,7 @@ class LGReportProfileTableViewCell: UITableViewCell {
         idLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel)
             make.top.equalTo(nameLabel.snp.bottom).offset(12)
+            make.right.equalTo(whiteView).offset(-4)
         }
         
         // 手机号

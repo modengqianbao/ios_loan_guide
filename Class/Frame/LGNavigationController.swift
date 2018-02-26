@@ -15,6 +15,7 @@ class LGNavigationController: UINavigationController {
         super.viewDidLoad()
 
         setupNavigationBar()
+        setupNotification()
     }
     
     private func setupNavigationBar() {
@@ -30,5 +31,13 @@ class LGNavigationController: UINavigationController {
         
         navigationBar.backIndicatorImage = backImage
         navigationBar.backIndicatorTransitionMaskImage = backImage
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveLogoutNotification), name: kNotificationLogout.name, object: nil)
+    }
+    
+    @objc private func receiveLogoutNotification() {
+        popToRootViewController(animated: true)
     }
 }

@@ -66,6 +66,8 @@ class LGHomeViewController: LGViewController {
         homeTableView = UITableView(frame: CGRect.zero,
                                     style: .grouped)
         homeTableView.separatorStyle = .none
+        homeTableView.rowHeight = UITableViewAutomaticDimension
+        homeTableView.estimatedRowHeight = 80
         homeTableView.backgroundColor = kColorSeperatorBackground
         homeTableView.register(LGRecommendTableViewCell.self, forCellReuseIdentifier: LGRecommendTableViewCell.identifier)
         homeTableView.register(LGCreditCheckTableViewCell.self, forCellReuseIdentifier: LGCreditCheckTableViewCell.identifier)
@@ -248,6 +250,10 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 28
+    }
 }
 
 extension LGHomeViewController: LGRecommendTableViewCellDelegate {
@@ -271,6 +277,7 @@ extension LGHomeViewController: LGRecommendTableViewCellDelegate {
             detailVC.hidesBottomBarWhenPushed = true
             show(detailVC, sender: nil)
         }
+        LGUserService.sharedService.recordBehavior(behavior: .clickBanner, complete: nil)
     }
     
     func recommendTableViewCellDidSelectRightBanner(cell: LGRecommendTableViewCell) {
@@ -293,5 +300,6 @@ extension LGHomeViewController: LGRecommendTableViewCellDelegate {
             detailVC.hidesBottomBarWhenPushed = true
             show(detailVC, sender: nil)
         }
+        LGUserService.sharedService.recordBehavior(behavior: .clickBanner, complete: nil)
     }
 }
