@@ -106,6 +106,8 @@
 		E0E93A2D20242EE800992FB3 /* LGUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2C20242EE800992FB3 /* LGUserService.swift */; };
 		E0E93A2F20242F1300992FB3 /* LGUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A2E20242F1300992FB3 /* LGUserModel.swift */; };
 		E0E93A312024316900992FB3 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E93A302024316900992FB3 /* Notification.swift */; };
+		E0EAAB7620442F6A001D9931 /* RxWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EAAB7320442F6A001D9931 /* RxWebViewController.m */; };
+		E0EAAB7720442F6A001D9931 /* RxWebViewNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EAAB7520442F6A001D9931 /* RxWebViewNavigationViewController.m */; };
 		E0F83BBB202FD3BB00F8C2BB /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F83BBA202FD3BB00F8C2BB /* Enum.swift */; };
 		E0F94FE52033C0B800DD917F /* LGWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F94FE42033C0B800DD917F /* LGWebViewController.swift */; };
 		E0FBCC182025689E00BC7DCC /* LGSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FBCC172025689E00BC7DCC /* LGSettingViewController.swift */; };
@@ -225,6 +227,10 @@
 		E0E93A2C20242EE800992FB3 /* LGUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserService.swift; sourceTree = "<group>"; };
 		E0E93A2E20242F1300992FB3 /* LGUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGUserModel.swift; sourceTree = "<group>"; };
 		E0E93A302024316900992FB3 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E0EAAB7220442F6A001D9931 /* RxWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxWebViewController.h; sourceTree = "<group>"; };
+		E0EAAB7320442F6A001D9931 /* RxWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxWebViewController.m; sourceTree = "<group>"; };
+		E0EAAB7420442F6A001D9931 /* RxWebViewNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RxWebViewNavigationViewController.h; sourceTree = "<group>"; };
+		E0EAAB7520442F6A001D9931 /* RxWebViewNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RxWebViewNavigationViewController.m; sourceTree = "<group>"; };
 		E0F5E057203BB76500142AB1 /* LoanGuide-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoanGuide-Bridging-Header.h"; sourceTree = "<group>"; };
 		E0F83BBA202FD3BB00F8C2BB /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		E0F94FE42033C0B800DD917F /* LGWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGWebViewController.swift; sourceTree = "<group>"; };
@@ -504,6 +510,7 @@
 		E058D3B420429CEC00AFA063 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				E0EAAB7120442F6A001D9931 /* RxWebViewController */,
 				E058D3B520429CFC00AFA063 /* MiPush */,
 			);
 			path = Lib;
@@ -708,6 +715,17 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		E0EAAB7120442F6A001D9931 /* RxWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E0EAAB7220442F6A001D9931 /* RxWebViewController.h */,
+				E0EAAB7320442F6A001D9931 /* RxWebViewController.m */,
+				E0EAAB7420442F6A001D9931 /* RxWebViewNavigationViewController.h */,
+				E0EAAB7520442F6A001D9931 /* RxWebViewNavigationViewController.m */,
+			);
+			path = RxWebViewController;
+			sourceTree = "<group>";
+		};
 		E0FBCC19202569BD00BC7DCC /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,7 +837,6 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
-				"${BUILT_PRODUCTS_DIR}/RxWebViewController/RxWebViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
@@ -836,7 +853,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxWebViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
@@ -921,6 +937,7 @@
 				E0532D2E2025AA2700020ED1 /* LGQuestionContentTableViewCell.swift in Sources */,
 				E05BA3D12020A3D800E2D53D /* LGRecommendTitleTableViewCell.swift in Sources */,
 				E03F88BB201B6D6500862C53 /* LGRecommendTableViewCell.swift in Sources */,
+				E0EAAB7620442F6A001D9931 /* RxWebViewController.m in Sources */,
 				E00774DA20269ACF00350BE1 /* LGRecordViewController.swift in Sources */,
 				E041FF3B20380BE6001C7DFD /* LGReportViewController.swift in Sources */,
 				E08E8D2E201C5E42008A4FCC /* LGMineButtonCollectionViewCell.swift in Sources */,
@@ -973,6 +990,7 @@
 				E030DA0A20399F400006AB89 /* LGReportContentTableViewCell.swift in Sources */,
 				E0E173BB2026C1670081B7C3 /* LGLoanModel.swift in Sources */,
 				E0D8E297203513100027D34A /* LGRecommendCodeViewController.swift in Sources */,
+				E0EAAB7720442F6A001D9931 /* RxWebViewNavigationViewController.m in Sources */,
 				E0FBCC182025689E00BC7DCC /* LGSettingViewController.swift in Sources */,
 				E0FCD02F2026DF2100412CA4 /* LGCreditProductModel.swift in Sources */,
 				E0E93A2D20242EE800992FB3 /* LGUserService.swift in Sources */,

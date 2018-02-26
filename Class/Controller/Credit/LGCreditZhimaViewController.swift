@@ -8,7 +8,7 @@
 
 import UIKit
 import JavaScriptCore
-import RxWebViewController
+//import RxWebViewController
 
 //@objc protocol ZhimaJSDelegate: JSExport {
 //    func inform() -> String

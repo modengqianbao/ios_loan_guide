@@ -11,38 +11,26 @@ import SnapKit
 import MBProgressHUD
 
 class LGCreditCheckPayViewController: LGViewController {
-    
+    private weak var moneyLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        getPayMoney()
     }
     
     private func setup() {
         title = "支付页面"
         
-        let todo = "这个图片切图要换"
-        let moneyIconImageView = UIImageView(image: UIImage(named: "avatar"))
+        let moneyIconImageView = UIImageView(image: UIImage(named: "pay"))
         view.addSubview(moneyIconImageView)
         moneyIconImageView.snp.makeConstraints { [weak self] make in
             make.centerX.equalTo(self!.view)
             make.top.equalTo(self!.view).offset(40)
         }
         
-        let moneyLabel = UILabel()
-        let text = "查询费：3.99"
-        let attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(NSAttributedStringKey.font,
-                                    value: UIFont.systemFont(ofSize: 20, weight: .regular),
-                                    range: NSRange(location: 0, length: 8))
-        attributedText.addAttribute(NSAttributedStringKey.foregroundColor,
-                                    value: UIColor.black,
-                                    range: NSRange(location: 0, length: 4))
-        attributedText.addAttribute(NSAttributedStringKey.foregroundColor,
-                                    value: UIColor.red,
-                                    range: NSRange(location: 4, length: 4))
-        moneyLabel.attributedText = attributedText
+        moneyLabel = UILabel()
         view.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { make in
             make.centerX.equalTo(moneyIconImageView)
@@ -73,6 +61,31 @@ class LGCreditCheckPayViewController: LGViewController {
             make.right.equalTo(self!.view).offset(-24)
             make.top.equalTo(hintLabel.snp.bottom).offset(40)
             make.height.equalTo(40)
+        }
+    }
+    
+    private func getPayMoney() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        LGCreditService.sharedService.getPayMoney { [weak self] money, error in
+            if self != nil {
+                MBProgressHUD.hide(for: self!.view, animated: true)
+                if error == nil {
+                    let text = "查询费：\(money!)"
+                    let attributedText = NSMutableAttributedString(string: text)
+                    attributedText.addAttribute(NSAttributedStringKey.font,
+                                                value: UIFont.systemFont(ofSize: 20, weight: .regular),
+                                                range: NSRange(location: 0, length: text.count))
+                    attributedText.addAttribute(NSAttributedStringKey.foregroundColor,
+                                                value: UIColor.black,
+                                                range: NSRange(location: 0, length: 4))
+                    attributedText.addAttribute(NSAttributedStringKey.foregroundColor,
+                                                value: UIColor.red,
+                                                range: NSRange(location: 4, length: text.count - 4))
+                    self!.moneyLabel.attributedText = attributedText
+                } else {
+                    LGHud.show(in: self!.view, animated: true, text: error)
+                }
+            }
         }
     }
     

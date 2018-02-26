@@ -80,4 +80,17 @@ class LGCreditService {
             }
         }
     }
+    
+    /// 获取支付金额
+    func getPayMoney(complete: @escaping (_ money: String?, _ error: String?) -> Void) {
+        let urlString = kDomain.appending("pay_money")
+        service.post(urlString: urlString, parameters: nil) { json, error in
+            if error == nil {
+                let money = json!["data"]["money"].stringValue
+                complete(money, nil)
+            } else {
+                complete(nil, error)
+            }
+        }
+    }
 }

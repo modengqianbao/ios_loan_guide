@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import JavaScriptCore
-import RxWebViewController
+//import RxWebViewController
 
 @objc protocol UserAgreementJSDelegate: JSExport {
     func inform() -> String

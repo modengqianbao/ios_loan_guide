@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import MJRefresh
-import RxWebViewController
+//import RxWebViewController
 
 class LGCreditCardViewController: LGViewController {
     
@@ -122,7 +122,7 @@ extension LGCreditCardViewController: UITableViewDelegate, UITableViewDataSource
                 record(producID: item.id)
 //                let todo = 1
                 let url = URL(string: item.urlString)
-                let webVC = RxWebViewController(url: url)!
+                let webVC = LGWebViewController(url: url)!
                 webVC.navigationController?.navigationBar.tintColor = kColorTitleText
                 webVC.hidesBottomBarWhenPushed = true
 

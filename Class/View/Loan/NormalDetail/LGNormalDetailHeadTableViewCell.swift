@@ -109,23 +109,29 @@ class LGNormalDetailHeadTableViewCell: UITableViewCell {
         let font = UIFont.systemFont(ofSize: 13, weight: .regular)
         let color = UIColor.white
         limitLabel = UILabel()
+        limitLabel.adjustsFontSizeToFitWidth = true
         limitLabel.textColor = color
         limitLabel.font = font
         limitLabel.text = "贷款额度"
+//        limitLabel.minimumScaleFactor = 0.5
         addSubview(limitLabel)
         limitLabel.snp.makeConstraints { [weak self] make in
-            make.left.equalTo(self!).offset(20)
+            make.left.equalTo(self!).offset(8)
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.right.equalTo(self!.snp.centerX).offset(-4)
         }
         
         rateRangeLabel = UILabel()
         rateRangeLabel.font = font
         rateRangeLabel.textColor = color
+        rateRangeLabel.adjustsFontSizeToFitWidth = true
+//        rateRangeLabel.minimumScaleFactor = 0.5
         rateRangeLabel.text = "利率范围"
         addSubview(rateRangeLabel)
         rateRangeLabel.snp.makeConstraints { [weak self] make in
             make.centerY.equalTo(limitLabel)
-            make.left.equalTo(self!.snp.centerX).offset(20)
+            make.left.equalTo(self!.snp.centerX).offset(8)
+            make.right.equalTo(self!).offset(-4)
         }
         
         methodLabel = UILabel()

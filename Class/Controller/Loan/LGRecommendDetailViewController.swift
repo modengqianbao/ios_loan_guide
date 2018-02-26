@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import MBProgressHUD
 import BRPickerView
-import RxWebViewController
+//import RxWebViewController
 
 class LGRecommendDetailViewController: LGViewController {
     /// 传入
@@ -123,6 +123,7 @@ class LGRecommendDetailViewController: LGViewController {
             }
         } else {
             setupPickArray()
+            applyButton.isEnabled = true
         }
     }
     

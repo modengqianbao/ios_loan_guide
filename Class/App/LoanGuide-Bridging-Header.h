@@ -11,5 +11,6 @@
 
 #include <UMMobClick/MobClick.h>
 #include "MiPushSDK.h"
+#include "RxWebViewController.h"
 
 #endif /* LoanGuide_Bridging_Header_h */

@@ -9,7 +9,6 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.15.1)
-  - RxWebViewController (0.0.2)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.0.0)
   - TPKeyboardAvoiding (1.3.2)
@@ -33,7 +32,6 @@ DEPENDENCIES:
   - Kingfisher (~> 4.0)
   - MBProgressHUD (~> 1.1.0)
   - MJRefresh
-  - RxWebViewController
   - SnapKit (~> 4.0.0)
   - SwiftyJSON
   - TPKeyboardAvoiding (~> 1.3.2)
@@ -51,7 +49,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
-  RxWebViewController: 79bcbf51aff13d93db9779404348b052ab0cd440
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
@@ -59,6 +56,6 @@ SPEC CHECKSUMS:
   UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
 
-PODFILE CHECKSUM: ce9f46d72cd7558030f08ea04c72e80013afbb15
+PODFILE CHECKSUM: d35b78be41bdb7af52137a4d49c5663e90290027
 
 COCOAPODS: 1.3.1

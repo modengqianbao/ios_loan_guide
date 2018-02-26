@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import MBProgressHUD
-import RxWebViewController
+//import RxWebViewController
 
 class LGCreditCheckVericationViewController: LGViewController {
     private var vericationTableView: UITableView!

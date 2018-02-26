@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import MJRefresh
 import MBProgressHUD
-import RxWebViewController
+//import RxWebViewController
 
 class LGHomeViewController: LGViewController {
     
@@ -230,7 +230,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
             if LGUserModel.currentUser.isLogin {
                 let creditItem = model.creditProductArray[indexPath.row]
                 let url = URL(string: creditItem.urlString)
-                let webVC = RxWebViewController(url: url)!
+                let webVC = LGWebViewController(url: url)!
                 webVC.navigationController?.navigationBar.tintColor = kColorTitleText
                 webVC.hidesBottomBarWhenPushed = true
                 show(webVC, sender: nil)

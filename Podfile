@@ -15,7 +15,7 @@ target 'LoanGuide' do
 	pod 'FSTextView'
 	pod 'BRPickerView', '~> 2.1.0'
 	pod 'BEMCheckBox'
-	pod 'RxWebViewController'
+#	pod 'RxWebViewController'
 	pod 'UMengAnalytics'
 	pod ‘UMengUShare/Social/WeChat'
 	

@@ -21,5 +21,5 @@ class LGViewController: UIViewController {
         // 返回按钮
         let item = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = item  
-    }
+    }        
 }
