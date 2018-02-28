@@ -19,9 +19,11 @@ class LGCreditCheckTableViewCell: UITableViewCell {
         
         // 背景图
         let backgroundImageView = UIImageView(image: UIImage(named: "banner_m"))
+        backgroundImageView.contentMode = .scaleAspectFill
         addSubview(backgroundImageView)
         backgroundImageView.snp.makeConstraints { [weak self] make in
             make.top.left.right.bottom.equalTo(self!)
+            make.height.equalTo(kScreenWidth / 4.4)
         }
     }
     

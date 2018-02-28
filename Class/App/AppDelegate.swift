@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 小米推送
         MiPushSDK.registerMiPush(self)
         
+        // 检查用户登录状态
+        checkLoginStatus()
+        
         // 加载页面
         let tabbarVC = LGTabBarController()
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -31,6 +34,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    private func checkLoginStatus() {
+        LGUserService.sharedService.checkLogin { isLogin, error in
+            if error == nil {
+                if !isLogin! {
+                    // 登录过期
+                    LGUserModel.currentUser.logout()
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(kNotificationLoginExpired)
+                    }
+                }
+            } else {
+                LGUserModel.currentUser.logout()
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(kNotificationLogout)
+                }
+            }
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -49,6 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        // 检查用户登录状态
+        checkLoginStatus()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

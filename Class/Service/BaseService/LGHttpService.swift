@@ -26,7 +26,10 @@ class LGHttpService {
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if let data = response.result.value {
                 let json = JSON(data)
-                if json["msg"].stringValue.isEmpty {
+                let code = json["code"].intValue
+                if code == 50008 {
+                    complete(nil, "登录过期")
+                } else if json["msg"].stringValue.isEmpty {
                     complete(json, nil)
                 } else {
                     complete(nil, json["msg"].stringValue)
@@ -49,7 +52,10 @@ class LGHttpService {
             
             if let data = response.result.value {
                 let json = JSON(data)
-                if json["msg"].stringValue.isEmpty {
+                let code = json["code"].intValue
+                if code == 50008 {
+                    complete(nil, "登录过期")
+                } else if json["msg"].stringValue.isEmpty {
                     complete(json, nil)
                 } else {
                     complete(nil, json["msg"].stringValue)

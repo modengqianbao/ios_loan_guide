@@ -35,9 +35,14 @@ class LGNavigationController: UINavigationController {
     
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(receiveLogoutNotification), name: kNotificationLogout.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveLoginExpiredNotification), name: kNotificationLoginExpired.name, object: nil)
     }
     
     @objc private func receiveLogoutNotification() {
+        popToRootViewController(animated: true)
+    }
+    
+    @objc private func receiveLoginExpiredNotification() {
         popToRootViewController(animated: true)
     }
 }
