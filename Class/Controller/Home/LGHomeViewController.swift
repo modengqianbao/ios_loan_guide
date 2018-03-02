@@ -125,7 +125,11 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             // 急速好贷
-            return 2
+            if model.bannerArticleURLString == nil {
+                return 1
+            } else {
+                return 2
+            }
         } else if section == 1 {
             // 热门产品
             return model.loanProductArray.count
@@ -137,7 +141,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "极速好贷")
+            return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "莫等钱包")
         } else if section == 1 {
             return LGHomeTableHeaderView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), title: "热门产品")
         } else {
@@ -165,7 +169,11 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             } else {
                 // 信用知多少
-                let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCheckTableViewCell.identifier)!
+                let cell = tableView.dequeueReusableCell(withIdentifier: LGCreditCheckTableViewCell.identifier) as! LGCreditCheckTableViewCell
+                if let imageURLString = model.bannerArticleImageURLString {
+                    cell.configCell(imageURL: kImageDomain.appending(imageURLString))
+                }
+                
                 return cell
             }
         } else if indexPath.section == 1 {
@@ -193,16 +201,13 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                if LGUserModel.currentUser.isLogin {
                     // 信用知多少
-                    showCreditCheckOrReportView()
-//                    let creditVC = LGCreditCheckFlowViewController()
-//                    creditVC.hidesBottomBarWhenPushed = true
-//                    show(creditVC, sender: nil)
-                } else {
-                    let loginVC = LGLoginViewController()
-                    let nc = LGNavigationController(rootViewController: loginVC)
-                    present(nc, animated: true, completion: nil)
+//                    showCreditCheckOrReportView()
+                if let urlString = model.bannerArticleURLString {
+                    let url = URL(string: urlString)
+                    let webVC = LGWebViewController(url: url!)!
+                    webVC.hidesBottomBarWhenPushed = true
+                    show(webVC, sender: nil)
                 }
             }
         } else if indexPath.section == 1 {

@@ -38,6 +38,16 @@ class LGMineButtonCollectionViewCell: UICollectionViewCell {
             make.centerX.equalTo(self!)
             make.top.equalTo(iconImageView.snp.bottom).offset(8)
         }
+        
+        // 分割线
+        let lineView = UIView()
+        lineView.backgroundColor = kColorBorder
+        addSubview(lineView)
+        lineView.snp.makeConstraints { [weak self] make in
+            make.right.equalTo(self!)
+            make.size.equalTo(CGSize(width: 1, height: 30))
+            make.centerY.equalTo(self!)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

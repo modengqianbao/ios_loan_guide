@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import MBProgressHUD
 import BRPickerView
-//import RxWebViewController
+import AVFoundation
 
 class LGRecommendDetailViewController: LGViewController {
     /// 传入
@@ -132,6 +132,10 @@ class LGRecommendDetailViewController: LGViewController {
     }
     
     @objc private func applyButtonOnClick() {
+        checkCamera()
+    }
+    
+    private func showDetailWebView() {
         MBProgressHUD.showAdded(to: view, animated: true)
         LGLoanService.sharedService.getApplyURL(money: moneyArray[selectedMoneyIndex],
                                                 usage: kLoanUsageArray[selectedUsageIndex],
@@ -149,6 +153,75 @@ class LGRecommendDetailViewController: LGViewController {
                 }
             }
         }
+    }
+    
+    private func checkCamera() {
+        // 相机授权
+        let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
+        if cameraStatus == .authorized {
+            // 拥有相机权限，检查麦克风权限
+            checkMicrophone()
+        } else if cameraStatus == .notDetermined {
+            // 尚未请求
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] authed in
+                if authed {
+                    self!.checkMicrophone()
+                } else {
+                    self!.showNoCameraAuthAlert()
+                }
+            })
+        } else {
+            // 无相机权限
+            showNoCameraAuthAlert()
+        }
+    }
+    
+    private func checkMicrophone() {
+        let microphoneStatus = AVCaptureDevice.authorizationStatus(for: .audio)
+        if microphoneStatus == .authorized {
+            // 拥有麦克风权限
+            showDetailWebView()
+        } else if microphoneStatus == .notDetermined {
+            // 尚未请求
+            AVCaptureDevice.requestAccess(for: .audio, completionHandler: { [weak self] authed in
+                if authed {
+                    self!.showDetailWebView()
+                } else {
+                    self!.showNoMicrophoneAuthAlert()
+                }
+            })
+        } else {
+            // 唔麦克风权限
+            showNoMicrophoneAuthAlert()
+        }
+    }
+    
+    private func showNoCameraAuthAlert() {
+        let alert = UIAlertController(title: "请同意相机权限用于人像验证。", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let goSettingAction = UIAlertAction(title: "前往设置", style: .default) { _ in
+            let url = URL(string: UIApplicationOpenSettingsURLString)
+            if url != nil && UIApplication.shared.canOpenURL(url!) {
+                UIApplication.shared.openURL(url!)
+            }
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(goSettingAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func showNoMicrophoneAuthAlert() {
+        let alert = UIAlertController(title: "请同意麦克风权限用于身份验证。", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let goSettingAction = UIAlertAction(title: "前往设置", style: .default) { _ in
+            let url = URL(string: UIApplicationOpenSettingsURLString)
+            if url != nil && UIApplication.shared.canOpenURL(url!) {
+                UIApplication.shared.openURL(url!)
+            }
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(goSettingAction)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showCreditCheckOrReportView() {
@@ -178,7 +251,9 @@ class LGRecommendDetailViewController: LGViewController {
 //MARK:- UITableView delegate, datasource
 extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+//        return 3
+        // 去掉信用相关
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -261,7 +336,8 @@ extension LGRecommendDetailViewController: UITableViewDelegate, UITableViewDataS
             show(veriVC, sender: nil)
         } else if indexPath.section == 2 && indexPath.row == 1 {
             // 信用查询
-            showCreditCheckOrReportView()
+//            showCreditCheckOrReportView()
+            
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

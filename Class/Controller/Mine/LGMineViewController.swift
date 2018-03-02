@@ -99,13 +99,14 @@ class LGMineViewController: LGViewController {
         // 按钮视图
         let height = CGFloat(75)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: kScreenWidth / 3,
+        layout.itemSize = CGSize(width: kScreenWidth / 2,
                                  height: height)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let buttonCollectionView = UICollectionView(frame: CGRect.zero,
                                                     collectionViewLayout: layout)
-        buttonCollectionView.register(LGMineButtonCollectionViewCell.self, forCellWithReuseIdentifier: LGMineButtonCollectionViewCell.identifier)
+        buttonCollectionView.register(LGMineButtonCollectionViewCell.self,
+                                      forCellWithReuseIdentifier: LGMineButtonCollectionViewCell.identifier)
         buttonCollectionView.backgroundColor = kColorBackground
         buttonCollectionView.bounces = false
         buttonCollectionView.delegate = self
@@ -298,14 +299,22 @@ extension LGMineViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK:- UICollectionView delegate, datasource
 extension LGMineViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+//        return 3
+        // 去掉信用知多少
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LGMineButtonCollectionViewCell.identifier, for: indexPath) as! LGMineButtonCollectionViewCell
+//        if indexPath.row == 0 {
+//            cell.configCell(icon: UIImage(named: "credit"), title: "信用知多少")
+//        } else if indexPath.row == 1 {
+//            cell.configCell(icon: UIImage(named: "record"), title: "申请记录")
+//        } else {
+//            cell.configCell(icon: UIImage(named: "message"), title: "消息中心")
+//        }
+        // 去掉信用知多少
         if indexPath.row == 0 {
-            cell.configCell(icon: UIImage(named: "credit"), title: "信用知多少")
-        } else if indexPath.row == 1 {
             cell.configCell(icon: UIImage(named: "record"), title: "申请记录")
         } else {
             cell.configCell(icon: UIImage(named: "message"), title: "消息中心")
@@ -315,10 +324,24 @@ extension LGMineViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if LGUserModel.currentUser.isLogin {
+//            if indexPath.row == 0 {
+//                // 信用知多少
+//                showCreditCheckOrReportView()
+//            } else if indexPath.row == 1 {
+//                // 申请记录
+//                let recordVC = LGRecordViewController()
+//                recordVC.hidesBottomBarWhenPushed = true
+//                recordVC.model = model
+//                show(recordVC, sender: nil)
+//            } else {
+//                // 消息中心
+//                let messageVC = LGMessageViewController()
+//                messageVC.hidesBottomBarWhenPushed = true
+//                messageVC.model = model
+//                show(messageVC, sender: nil)
+//            }
+            // 去掉信用知多少
             if indexPath.row == 0 {
-                // 信用知多少
-                showCreditCheckOrReportView()
-            } else if indexPath.row == 1 {
                 // 申请记录
                 let recordVC = LGRecordViewController()
                 recordVC.hidesBottomBarWhenPushed = true

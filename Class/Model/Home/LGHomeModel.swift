@@ -15,6 +15,9 @@ class LGHomeModel {
     var creditProductCurrentPage: Int
     var bannerArray: [LGHomeBannerModel]
     
+    var bannerArticleImageURLString: String?
+    var bannerArticleURLString: String?
+    
     private var loanReady: Bool!
     private var creditReady: Bool!
     private var bannerReady: Bool!
@@ -124,7 +127,16 @@ class LGHomeModel {
     private func getBanner(complete: @escaping (_ error: String?) -> Void) {
         LGHomeService.sharedService.getHomeBanner { [weak self] array, error in
             if error == nil {
-                self!.bannerArray = array!
+                // 处理banner模型
+                if array!.count > 2 {
+                    self!.bannerArray = [array![0], array![1]]
+                    let articleItem = array![2]
+                    let urlArray = articleItem.imageURLString.components(separatedBy: ",")
+                    self!.bannerArticleImageURLString = urlArray[0]
+                    self!.bannerArticleURLString = urlArray[1]
+                } else {
+                    self!.bannerArray = array!
+                }
                 complete(nil)
             } else {
                 complete(error)
