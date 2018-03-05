@@ -57,6 +57,15 @@ class LGRecommendDetailHeadTableViewCell: UITableViewCell {
             make.left.right.top.equalTo(self!)
         }
         
+        // 适配X
+        let upImageView = UIImageView(image: UIImage(named: "bg_detail"))
+        addSubview(upImageView)
+        upImageView.snp.makeConstraints { [weak self] make in
+            make.left.right.equalTo(self!)
+            make.bottom.equalTo(self!.snp.top)
+            make.height.equalTo(40)
+        }
+        
         // 导航块
         let naviView = UIView()
         naviView.backgroundColor = UIColor.clear

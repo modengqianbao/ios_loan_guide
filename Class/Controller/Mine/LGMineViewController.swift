@@ -46,6 +46,11 @@ class LGMineViewController: LGViewController {
         view.addSubview(topView)
         topView.snp.makeConstraints { [weak self] make in
             make.left.top.right.equalTo(self!.view)
+            
+            // 适配X
+            if kScreenHeight > 800 {
+                make.height.equalTo(136)
+            }
         }
         
         // 头像

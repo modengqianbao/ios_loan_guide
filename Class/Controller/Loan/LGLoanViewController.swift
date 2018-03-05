@@ -38,7 +38,7 @@ class LGLoanViewController: LGViewController {
         whiteView.snp.makeConstraints { [weak self] make in
             make.left.right.equalTo(self!.view)
             make.bottom.equalTo(self!.view.snp.top)
-            make.height.equalTo(64)
+            make.height.equalTo(100)
         }
         
         // 顶部排序按钮
