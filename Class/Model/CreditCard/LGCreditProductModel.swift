@@ -44,4 +44,15 @@ class LGCreditProductModel {
         status = json["status"].intValue
         timeInt = json["time"].intValue
     }
+    
+    init(databaseModel model: LGCreditProductDatabaseModel) {
+        logoURL = model.logoURL
+        name = model.creditName
+        urlString = model.urlString
+        id = model.id
+        introduce = model.introduce
+        label = model.label
+        status = model.status
+        timeInt = model.timeInt
+    }
 }

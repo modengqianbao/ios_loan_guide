@@ -78,6 +78,22 @@ class LGLoanProductModel {
         timeInt = json["time"].int
     }
     
+    init(databaseModel model: LGLoanProductDatabaseModel) {
+        id = model.id
+        name = model.loanName
+        isRecommended = model.isRecommended
+        introduction = model.introduction
+        labelString = model.labelString
+        logoString = model.logoString
+        loanMax = model.loanMax
+        loanMin = model.loanMin
+        loanSign = model.loanSign
+        loanSpec = model.loanSpec
+        rateMax = model.rateMax
+        rateMin = model.rateMin
+        status = model.status
+    }
+    
     init(bannerModel: LGHomeBannerModel) {
         id = bannerModel.id
         name = bannerModel.name

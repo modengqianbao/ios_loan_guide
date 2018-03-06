@@ -56,3 +56,6 @@ let kDomain = isTesting ? "http://creditproduct.test.cdecube.com/api/android/" :
 let kImageDomain = "http://wallet.cdxiaoshudian.com/"
 let kUserAgreementURLString = "http://wallet.cdxiaoshudian.com/agreement"
 
+
+//MARK:- Realm
+

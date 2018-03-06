@@ -54,7 +54,14 @@ class LGNormalDetailApplyTableViewCell: UITableViewCell {
         delegate?.applyCellDidSubmit(self)
     }
     
-    func configCell(title: String) {
+    func configCell(title: String, enable: Bool) {
         applyButton.setTitle(title, for: .normal)
+        if enable {
+            applyButton.backgroundColor = kColorMainTone
+            applyButton.isEnabled = true
+        } else {
+            applyButton.backgroundColor = kColorGrey
+            applyButton.isEnabled = false
+        }
     }
 }

@@ -21,6 +21,7 @@
 		E02AB1B6201F0D5000F90E69 /* LGRecommendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */; };
 		E02AB1B8201F0D9E00F90E69 /* LGNormalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */; };
 		E02AB1BB201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02AB1BA201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift */; };
+		E02D0B52204E19EB00388AE3 /* LGLoanProductDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D0B51204E19EB00388AE3 /* LGLoanProductDatabaseModel.swift */; };
 		E030DA0A20399F400006AB89 /* LGReportContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030DA0920399F400006AB89 /* LGReportContentTableViewCell.swift */; };
 		E030DA0C2039A3F60006AB89 /* LGReportRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030DA0B2039A3F60006AB89 /* LGReportRecordTableViewCell.swift */; };
 		E030DA0E2039A9620006AB89 /* LGReportApplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030DA0D2039A9620006AB89 /* LGReportApplyTableViewCell.swift */; };
@@ -67,8 +68,10 @@
 		E05BA3D32020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05BA3D22020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift */; };
 		E05DDEC3203CFE9D00D44395 /* LGCreditReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05DDEC2203CFE9D00D44395 /* LGCreditReportModel.swift */; };
 		E0600C2C2021E3980007B732 /* LGDropMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0600C2B2021E3980007B732 /* LGDropMenuTableViewCell.swift */; };
+		E063A719204EDE1900C88FD2 /* LGBannerDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E063A718204EDE1900C88FD2 /* LGBannerDatabaseModel.swift */; };
 		E067CF52201F5B0E001193FD /* LGRecommendCheckDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E067CF51201F5B0E001193FD /* LGRecommendCheckDetailTableViewCell.swift */; };
 		E072DB93201B2DA000368FD3 /* LGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072DB92201B2DA000368FD3 /* LGViewController.swift */; };
+		E07474DB204ED01F000BCB42 /* LGCreditProductDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07474DA204ED01F000BCB42 /* LGCreditProductDatabaseModel.swift */; };
 		E07537352027583E00C68424 /* LGLoanFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07537342027583E00C68424 /* LGLoanFlowModel.swift */; };
 		E075373720283B9F00C68424 /* LGNormalDetailFlowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E075373620283B9F00C68424 /* LGNormalDetailFlowTableViewCell.swift */; };
 		E075373920283FF000C68424 /* LGNormalDetailFlowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E075373820283FF000C68424 /* LGNormalDetailFlowCollectionViewCell.swift */; };
@@ -138,6 +141,7 @@
 		E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailViewController.swift; sourceTree = "<group>"; };
 		E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailViewController.swift; sourceTree = "<group>"; };
 		E02AB1BA201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailHeadTableViewCell.swift; sourceTree = "<group>"; };
+		E02D0B51204E19EB00388AE3 /* LGLoanProductDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoanProductDatabaseModel.swift; sourceTree = "<group>"; };
 		E030DA0920399F400006AB89 /* LGReportContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGReportContentTableViewCell.swift; sourceTree = "<group>"; };
 		E030DA0B2039A3F60006AB89 /* LGReportRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGReportRecordTableViewCell.swift; sourceTree = "<group>"; };
 		E030DA0D2039A9620006AB89 /* LGReportApplyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGReportApplyTableViewCell.swift; sourceTree = "<group>"; };
@@ -186,8 +190,10 @@
 		E05BA3D22020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendDetailInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E05DDEC2203CFE9D00D44395 /* LGCreditReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditReportModel.swift; sourceTree = "<group>"; };
 		E0600C2B2021E3980007B732 /* LGDropMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGDropMenuTableViewCell.swift; sourceTree = "<group>"; };
+		E063A718204EDE1900C88FD2 /* LGBannerDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGBannerDatabaseModel.swift; sourceTree = "<group>"; };
 		E067CF51201F5B0E001193FD /* LGRecommendCheckDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendCheckDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E072DB92201B2DA000368FD3 /* LGViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGViewController.swift; sourceTree = "<group>"; };
+		E07474DA204ED01F000BCB42 /* LGCreditProductDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditProductDatabaseModel.swift; sourceTree = "<group>"; };
 		E07537342027583E00C68424 /* LGLoanFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGLoanFlowModel.swift; sourceTree = "<group>"; };
 		E075373620283B9F00C68424 /* LGNormalDetailFlowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailFlowTableViewCell.swift; sourceTree = "<group>"; };
 		E075373820283FF000C68424 /* LGNormalDetailFlowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGNormalDetailFlowCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -338,6 +344,16 @@
 			path = RecommendDetail;
 			sourceTree = "<group>";
 		};
+		E02D0B50204E19CA00388AE3 /* DatabaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				E02D0B51204E19EB00388AE3 /* LGLoanProductDatabaseModel.swift */,
+				E07474DA204ED01F000BCB42 /* LGCreditProductDatabaseModel.swift */,
+				E063A718204EDE1900C88FD2 /* LGBannerDatabaseModel.swift */,
+			);
+			path = DatabaseModel;
+			sourceTree = "<group>";
+		};
 		E0380F9D2022B2010029EF12 /* NormalDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +389,7 @@
 		E04C75BD2023032400F56F0B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				E02D0B50204E19CA00388AE3 /* DatabaseModel */,
 				E0B2139B2023F85A000DEA4F /* Service */,
 				E0B2139A2023F84B000DEA4F /* BaseService */,
 			);
@@ -781,7 +798,7 @@
 				TargetAttributes = {
 					E0C8BBD1201B112F000D56F1 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -837,6 +854,8 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
@@ -853,6 +872,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
@@ -892,7 +913,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKPromptResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -978,6 +999,7 @@
 				E0380F9F2022B5680029EF12 /* LGNormalDetailHeadTableViewCell.swift in Sources */,
 				E0F83BBB202FD3BB00F8C2BB /* Enum.swift in Sources */,
 				E0DEDD052033D01C0025F4AF /* LGCreditCheckModel.swift in Sources */,
+				E07474DB204ED01F000BCB42 /* LGCreditProductDatabaseModel.swift in Sources */,
 				E0FBCC202025936500BC7DCC /* LGAboutUsTableViewController.swift in Sources */,
 				E08E8D30201C689A008A4FCC /* LGCreditCheckTableViewCell.swift in Sources */,
 				E07537352027583E00C68424 /* LGLoanFlowModel.swift in Sources */,
@@ -989,6 +1011,8 @@
 				E028664220302EEE00D0AC54 /* String+Index.swift in Sources */,
 				E030DA0A20399F400006AB89 /* LGReportContentTableViewCell.swift in Sources */,
 				E0E173BB2026C1670081B7C3 /* LGLoanModel.swift in Sources */,
+				E063A719204EDE1900C88FD2 /* LGBannerDatabaseModel.swift in Sources */,
+				E02D0B52204E19EB00388AE3 /* LGLoanProductDatabaseModel.swift in Sources */,
 				E0D8E297203513100027D34A /* LGRecommendCodeViewController.swift in Sources */,
 				E0EAAB7720442F6A001D9931 /* RxWebViewNavigationViewController.m in Sources */,
 				E0FBCC182025689E00BC7DCC /* LGSettingViewController.swift in Sources */,
@@ -1136,8 +1160,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LoanGuide.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EPHDXDU97;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1149,8 +1173,8 @@
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoshudian.loanguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2ebbb400-2ae2-4302-926f-c360e4440688";
-				PROVISIONING_PROFILE_SPECIFIER = com.test;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/App/LoanGuide-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1163,8 +1187,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LoanGuide.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2EPHDXDU97;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1176,8 +1200,8 @@
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoshudian.loanguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2ebbb400-2ae2-4302-926f-c360e4440688";
-				PROVISIONING_PROFILE_SPECIFIER = com.test;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/App/LoanGuide-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

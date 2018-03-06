@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
 class LGHomeService {
     static let sharedService = LGHomeService()
@@ -70,6 +71,105 @@ class LGHomeService {
                 complete(array, nil)
             } else {
                 complete(nil, error)
+            }
+        }
+    }
+    
+    /// 获取本地首页缓存贷款数据
+    func loadHomeLoanArray() -> [LGLoanProductModel] {
+        let realm = try! Realm()
+        let loanDatabaseArray = realm.objects(LGLoanProductDatabaseModel.self).filter("isForHome == true")
+        var loanArray = [LGLoanProductModel]()
+        for databaseItem in loanDatabaseArray {
+            let item = LGLoanProductModel(databaseModel: databaseItem)
+            loanArray.append(item)
+        }
+        
+        return loanArray
+    }
+    
+    /// 获取本地首页缓存banner
+    func loadHomeBannerArray() -> [LGHomeBannerModel] {
+        let realm = try! Realm()
+        let bannerDatabaseArray = realm.objects(LGBannerDatabaseModel.self)
+        var bannerArray = [LGHomeBannerModel]()
+        for databaseItem in bannerDatabaseArray {
+            let item = LGHomeBannerModel(databaseModel: databaseItem)
+            bannerArray.append(item)
+        }
+        
+        return bannerArray
+    }
+    
+    /// 获取本地首页缓存信用卡
+    func loadHomeCreditArray() -> [LGCreditProductModel] {
+        let realm = try! Realm()
+        let creditDatabaseArray = realm.objects(LGCreditProductDatabaseModel.self).filter("isForHome == true")
+        var creditArray = [LGCreditProductModel]()
+        for databaseItem in creditDatabaseArray {
+            let item = LGCreditProductModel(databaseModel: databaseItem)
+            creditArray.append(item)
+        }
+        
+        return creditArray
+    }
+    
+    /// 保存首页缓存贷款数据
+    func saveHomeLoanArray(array: [LGLoanProductModel]) {
+        let realm = try! Realm()
+        let loanDatabaseArray = realm.objects(LGLoanProductDatabaseModel.self).filter("isForHome == true")
+        if loanDatabaseArray.count > 0 {
+            try! realm.write {
+                realm.delete(loanDatabaseArray)
+            }
+        }
+        
+        for item in array {
+            let databaseItem = LGLoanProductDatabaseModel()
+            databaseItem.setup(isForHome: true, model: item)
+        
+            try! realm.write {
+                realm.add(databaseItem)
+            }
+        }
+    }
+    
+    /// 保存首页缓存信用卡数据
+    func saveHomeCreditArray(array: [LGCreditProductModel]) {
+        let realm = try! Realm()
+        let creditDatabaseArray = realm.objects(LGCreditProductDatabaseModel.self).filter("isForHome == true")
+        if creditDatabaseArray.count > 0 {
+            try! realm.write {
+                realm.delete(creditDatabaseArray)
+            }
+        }
+        
+        for item in array {
+            let databaseItem = LGCreditProductDatabaseModel()
+            databaseItem.setup(isForHome: true, model: item)
+            
+            try! realm.write {
+                realm.add(databaseItem)
+            }
+        }
+    }
+    
+    /// 保存首页缓存banner
+    func saveHomeBannerArray(array: [LGHomeBannerModel]) {
+        let realm = try! Realm()
+        let bannerDatabaseArray = realm.objects(LGBannerDatabaseModel.self)
+        if bannerDatabaseArray.count > 0 {
+            try! realm.write {
+                realm.delete(bannerDatabaseArray)
+            }
+        }
+        
+        for item in array {
+            let databaseItem = LGBannerDatabaseModel()
+            databaseItem.setup(model: item)
+            
+            try! realm.write {
+                realm.add(databaseItem)
             }
         }
     }

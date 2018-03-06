@@ -28,4 +28,11 @@ class LGHomeBannerModel {
         name = json["name"].stringValue
         type = json["type"].intValue
     }
+    
+    init(databaseModel model: LGBannerDatabaseModel) {
+        id = model.id
+        imageURLString = model.imageURLString
+        name = model.bannerName
+        type = model.type
+    }
 }

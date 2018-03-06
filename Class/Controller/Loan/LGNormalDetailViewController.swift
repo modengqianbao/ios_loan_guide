@@ -254,6 +254,7 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
             }
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailApplyTableViewCell.identifier) as! LGNormalDetailApplyTableViewCell
+            cell.configCell(title: "立即申请", enable: model.isDetailed)
             cell.delegate = self
             return cell
         }

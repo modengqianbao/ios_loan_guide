@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class LGLoanService {
     static let sharedService = LGLoanService()
@@ -121,6 +122,39 @@ class LGLoanService {
                 complete(array, nil)
             } else {
                 complete(nil, error)
+            }
+        }
+    }
+    
+    /// 获取本地贷款列表页缓存贷款数据
+    func loadLoanArray() -> [LGLoanProductModel] {
+        let realm = try! Realm()
+        let loanDatabaseArray = realm.objects(LGLoanProductDatabaseModel.self).filter("isForHome == false")
+        var loanArray = [LGLoanProductModel]()
+        for databaseItem in loanDatabaseArray {
+            let item = LGLoanProductModel(databaseModel: databaseItem)
+            loanArray.append(item)
+        }
+        
+        return loanArray
+    }
+    
+    /// 保存贷款列表缓存贷款数据
+    func saveLoanArray(array: [LGLoanProductModel]) {
+        let realm = try! Realm()
+        let loanDatabaseArray = realm.objects(LGLoanProductDatabaseModel.self).filter("isForHome == false")
+        if loanDatabaseArray.count > 0 {
+            try! realm.write {
+                realm.delete(loanDatabaseArray)
+            }
+        }
+        
+        for item in array {
+            let databaseItem = LGLoanProductDatabaseModel()
+            databaseItem.setup(isForHome: false, model: item)
+            
+            try! realm.write {
+                realm.add(databaseItem)
             }
         }
     }

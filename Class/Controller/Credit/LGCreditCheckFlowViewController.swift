@@ -96,7 +96,7 @@ extension LGCreditCheckFlowViewController: UITableViewDataSource, UITableViewDel
             let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailApplyTableViewCell.identifier) as! LGNormalDetailApplyTableViewCell
             cell.backgroundColor = UIColor.clear
             cell.delegate = self
-            cell.configCell(title: "申请查询")
+            cell.configCell(title: "申请查询", enable: true)
             return cell
         }
     }

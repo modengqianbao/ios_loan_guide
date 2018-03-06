@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class LGCreditCarService {
     static let sharedService = LGCreditCarService()
@@ -55,6 +56,39 @@ class LGCreditCarService {
                 complete(array, nil)
             } else {
                 complete(nil, error)
+            }
+        }
+    }
+    
+    /// 获取本地信用卡页缓存信用卡
+    func loadCreditArray() -> [LGCreditProductModel] {
+        let realm = try! Realm()
+        let creditDatabaseArray = realm.objects(LGCreditProductDatabaseModel.self).filter("isForHome == false")
+        var creditArray = [LGCreditProductModel]()
+        for databaseItem in creditDatabaseArray {
+            let item = LGCreditProductModel(databaseModel: databaseItem)
+            creditArray.append(item)
+        }
+        
+        return creditArray
+    }
+    
+    /// 保存信用卡缓存信用卡数据
+    func saveCreditArray(array: [LGCreditProductModel]) {
+        let realm = try! Realm()
+        let creditDatabaseArray = realm.objects(LGCreditProductDatabaseModel.self).filter("isForHome == false")
+        if creditDatabaseArray.count > 0 {
+            try! realm.write {
+                realm.delete(creditDatabaseArray)
+            }
+        }
+        
+        for item in array {
+            let databaseItem = LGCreditProductDatabaseModel()
+            databaseItem.setup(isForHome: false, model: item)
+            
+            try! realm.write {
+                realm.add(databaseItem)
             }
         }
     }

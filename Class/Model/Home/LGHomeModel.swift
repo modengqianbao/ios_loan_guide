@@ -23,11 +23,15 @@ class LGHomeModel {
     private var bannerReady: Bool!
     
     init() {
-        loanProductArray = [LGLoanProductModel]()
-        creditProductArray = [LGCreditProductModel]()
+//        loanProductArray = [LGLoanProductModel]()
+        loanProductArray = LGHomeService.sharedService.loadHomeLoanArray()
+//        creditProductArray = [LGCreditProductModel]()
+        creditProductArray = LGHomeService.sharedService.loadHomeCreditArray()
         loanProductCurrentPage = 1
         creditProductCurrentPage = 1
         bannerArray = [LGHomeBannerModel]()
+        let array = LGHomeService.sharedService.loadHomeBannerArray()
+        processBannerModel(bannerArray: array)
     }
     
     private let pageSize = 10
@@ -98,11 +102,10 @@ class LGHomeModel {
         LGHomeService.sharedService.getLoanGroom(count: pageSize, page: loanProductCurrentPage) { [weak self] array, error in
             if error == nil {
                 self!.loanProductArray = array!
-//                if array!.count < self!.pageSize {
-//                    complete(false, nil)
-//                } else {
-//                    complete(true, nil)
-//                }
+                
+                // 持久化
+                LGHomeService.sharedService.saveHomeLoanArray(array: array!)
+                
                 complete(nil)
             } else {
                 complete(error)
@@ -116,6 +119,10 @@ class LGHomeModel {
         LGHomeService.sharedService.getCreditGroom(count: pageSize, page: creditProductCurrentPage) { [weak self] array, error in
             if error == nil {
                 self!.creditProductArray = array!
+                
+                // 持久化
+                LGHomeService.sharedService.saveHomeCreditArray(array: array!)
+                
                 complete(nil)
             } else {
                 complete(error)
@@ -128,19 +135,28 @@ class LGHomeModel {
         LGHomeService.sharedService.getHomeBanner { [weak self] array, error in
             if error == nil {
                 // 处理banner模型
-                if array!.count > 2 {
-                    self!.bannerArray = [array![0], array![1]]
-                    let articleItem = array![2]
-                    let urlArray = articleItem.imageURLString.components(separatedBy: ",")
-                    self!.bannerArticleImageURLString = urlArray[0]
-                    self!.bannerArticleURLString = urlArray[1]
-                } else {
-                    self!.bannerArray = array!
-                }
+                self!.processBannerModel(bannerArray: array!)
+                
+                // 持久化
+                LGHomeService.sharedService.saveHomeBannerArray(array: array!)
+                
                 complete(nil)
             } else {
                 complete(error)
             }
+        }
+    }
+    
+    /// 处理Banner对象
+    private func processBannerModel(bannerArray array: [LGHomeBannerModel]) {
+        if array.count > 2 {
+            bannerArray = [array[0], array[1]]
+            let articleItem = array[2]
+            let urlArray = articleItem.imageURLString.components(separatedBy: ",")
+            bannerArticleImageURLString = urlArray[0]
+            bannerArticleURLString = urlArray[1]
+        } else {
+            bannerArray = array
         }
     }
 }

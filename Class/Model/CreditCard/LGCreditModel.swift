@@ -9,7 +9,7 @@
 import Foundation
 
 class LGCreditModel {
-    var creditCardArray = [LGCreditProductModel]()
+    var creditCardArray: [LGCreditProductModel]
     
     var bankTypeArray: [LGCreditBankModel]
     var selectedBankType = 0
@@ -29,6 +29,7 @@ class LGCreditModel {
 //        let bank3 = LGCreditBankModel(bankName: "兴业银行", bankID: 3)
 //        let bank4 = LGCreditBankModel(bankName: "民生银行", bankID: 4)
         bankTypeArray = [bank0]//, bank1, bank2, bank3, bank4]
+        creditCardArray = LGCreditCarService.sharedService.loadCreditArray()
     }
     
     /// 获取信用卡列表
@@ -37,6 +38,9 @@ class LGCreditModel {
         LGCreditCarService.sharedService.getCreditCarList(bank: bankItem.id, grade: selectedLevelType, purpose: selectedUsageType) { [weak self] array, error in
             if error == nil {
                 self!.creditCardArray = array!
+                
+                // 持久化
+                LGCreditCarService.sharedService.saveCreditArray(array: array!)
                 
                 complete(nil)
             } else {
