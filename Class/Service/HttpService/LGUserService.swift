@@ -119,7 +119,7 @@ class LGUserService {
     
     /// 提交邀请码
     func verifyInviteCode(_ code: String, complete: @escaping (_ error: String?) -> Void) {
-        let urlString = kDomain.appending("commit_invite")
+        let urlString = kDomain.appending("add_invite_code")
         let parameters = ["inviteCode": code]
         service.post(urlString: urlString, parameters: parameters) { json, error in
              complete(error)

@@ -51,6 +51,7 @@ class LGLoanService {
         service.post(urlString: urlString, parameters: parameters) { json, error in
             if error == nil {
                 let jsonItem = json!["data"]["loanDetail"]
+                loanItem.inviteCode = jsonItem["inviteCode"].string
                 loanItem.condition = jsonItem["loanCondition"].stringValue
                 loanItem.cycle = jsonItem["loanCycle"].stringValue
                 loanItem.loanTime = jsonItem["loanTime"].intValue

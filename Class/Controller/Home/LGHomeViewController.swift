@@ -103,6 +103,12 @@ class LGHomeViewController: LGViewController {
             }
         }
     }
+    
+    private func showLogin() {
+        let loginVC = LGLoginViewController()
+        let nc = LGNavigationController(rootViewController: loginVC)
+        present(nc, animated: true, completion: nil)
+    }
 }
 
 //MAKR:- UITableView delegate, datasource
@@ -200,25 +206,23 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         } else if indexPath.section == 1 {
-            let loanItem = model.loanProductArray[indexPath.row]
-            if loanItem.isRecommended {
-                if LGUserModel.currentUser.isLogin {
+            if LGUserModel.currentUser.isLogin {
+                let loanItem = model.loanProductArray[indexPath.row]
+                if loanItem.isRecommended {
                     let detailVC = LGRecommendDetailViewController()
                     detailVC.model = loanItem
                     detailVC.hidesBottomBarWhenPushed = true
                     show(detailVC, sender: nil)
                     LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
                 } else {
-                    let loginVC = LGLoginViewController()
-                    let nc = LGNavigationController(rootViewController: loginVC)
-                    present(nc, animated: true, completion: nil)
+                    let detailVC = LGNormalDetailViewController()
+                    detailVC.model = loanItem
+                    detailVC.hidesBottomBarWhenPushed = true
+                    show(detailVC, sender: nil)
+                    LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
                 }
             } else {
-                let detailVC = LGNormalDetailViewController()
-                detailVC.model = loanItem
-                detailVC.hidesBottomBarWhenPushed = true
-                show(detailVC, sender: nil)
-                LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
+                showLogin()
             }
         } else {
             if LGUserModel.currentUser.isLogin {
@@ -229,9 +233,7 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                 webVC.hidesBottomBarWhenPushed = true
                 show(webVC, sender: nil)
             } else {
-                let loginVC = LGLoginViewController()
-                let nc = LGNavigationController(rootViewController: loginVC)
-                present(nc, animated: true, completion: nil)
+                showLogin()
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)

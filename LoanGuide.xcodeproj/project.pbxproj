@@ -89,6 +89,9 @@
 		E0906C6C20295250007DE25E /* LGHomeBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0906C6B20295250007DE25E /* LGHomeBannerModel.swift */; };
 		E099E79F20381079001AB41F /* LGReportHeadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E099E79E20381079001AB41F /* LGReportHeadTableViewCell.swift */; };
 		E099E7A220381A29001AB41F /* LGCreditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E099E7A120381A29001AB41F /* LGCreditView.swift */; };
+		E09B42BE20577E3C001DEBCB /* LGInviteCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09B42BD20577E3C001DEBCB /* LGInviteCodeTableViewCell.swift */; };
+		E09B42C02057B009001DEBCB /* LGProductRecommendCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09B42BF2057B009001DEBCB /* LGProductRecommendCodeViewController.swift */; };
+		E09B42C22057B038001DEBCB /* LGRecommendCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09B42C12057B038001DEBCB /* LGRecommendCodeView.swift */; };
 		E0B0419B202495DB002F6CDC /* LGChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B0419A202495DB002F6CDC /* LGChangePasswordViewController.swift */; };
 		E0B213992023F7DF000DEA4F /* LGHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B213982023F7DF000DEA4F /* LGHomeModel.swift */; };
 		E0B2139D2023F866000DEA4F /* LGHomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B2139C2023F866000DEA4F /* LGHomeService.swift */; };
@@ -211,6 +214,9 @@
 		E0906C6B20295250007DE25E /* LGHomeBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeBannerModel.swift; sourceTree = "<group>"; };
 		E099E79E20381079001AB41F /* LGReportHeadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGReportHeadTableViewCell.swift; sourceTree = "<group>"; };
 		E099E7A120381A29001AB41F /* LGCreditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGCreditView.swift; sourceTree = "<group>"; };
+		E09B42BD20577E3C001DEBCB /* LGInviteCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGInviteCodeTableViewCell.swift; sourceTree = "<group>"; };
+		E09B42BF2057B009001DEBCB /* LGProductRecommendCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGProductRecommendCodeViewController.swift; sourceTree = "<group>"; };
+		E09B42C12057B038001DEBCB /* LGRecommendCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGRecommendCodeView.swift; sourceTree = "<group>"; };
 		E0B0419A202495DB002F6CDC /* LGChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGChangePasswordViewController.swift; sourceTree = "<group>"; };
 		E0B213982023F7DF000DEA4F /* LGHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeModel.swift; sourceTree = "<group>"; };
 		E0B2139C2023F866000DEA4F /* LGHomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGHomeService.swift; sourceTree = "<group>"; };
@@ -340,6 +346,7 @@
 				E05BA3D22020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift */,
 				E077C79520215E8600DDEDC0 /* LGRecommendDetailCreditTableViewCell.swift */,
 				E011E5F32023419100FC3BF0 /* LGProductDetailTableViewCell.swift */,
+				E09B42BD20577E3C001DEBCB /* LGInviteCodeTableViewCell.swift */,
 			);
 			path = RecommendDetail;
 			sourceTree = "<group>";
@@ -390,7 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				E02D0B50204E19CA00388AE3 /* DatabaseModel */,
-				E0B2139B2023F85A000DEA4F /* Service */,
+				E0B2139B2023F85A000DEA4F /* HttpService */,
 				E0B2139A2023F84B000DEA4F /* BaseService */,
 			);
 			path = Service;
@@ -422,6 +429,7 @@
 				E02AB1B5201F0D5000F90E69 /* LGRecommendDetailViewController.swift */,
 				E02AB1B7201F0D9E00F90E69 /* LGNormalDetailViewController.swift */,
 				E011E5F12023092F00FC3BF0 /* LGProductDetailViewController.swift */,
+				E09B42BF2057B009001DEBCB /* LGProductRecommendCodeViewController.swift */,
 			);
 			path = Loan;
 			sourceTree = "<group>";
@@ -455,6 +463,7 @@
 				E02AB1B9201F11F000F90E69 /* RecommendDetail */,
 				E0380F9D2022B2010029EF12 /* NormalDetail */,
 				E077C79B2021ADAA00DDEDC0 /* DropDownMenu */,
+				E09B42C12057B038001DEBCB /* LGRecommendCodeView.swift */,
 			);
 			path = Loan;
 			sourceTree = "<group>";
@@ -606,7 +615,7 @@
 			path = BaseService;
 			sourceTree = "<group>";
 		};
-		E0B2139B2023F85A000DEA4F /* Service */ = {
+		E0B2139B2023F85A000DEA4F /* HttpService */ = {
 			isa = PBXGroup;
 			children = (
 				E0B2139C2023F866000DEA4F /* LGHomeService.swift */,
@@ -616,7 +625,7 @@
 				E0E93A2C20242EE800992FB3 /* LGUserService.swift */,
 				E0173BC5203140510036D814 /* LGCreditService.swift */,
 			);
-			path = Service;
+			path = HttpService;
 			sourceTree = "<group>";
 		};
 		E0C8BBC9201B112F000D56F1 = {
@@ -980,6 +989,7 @@
 				E04C75BA2022F54100F56F0B /* LGNormalDetailContentTableViewCell.swift in Sources */,
 				E099E79F20381079001AB41F /* LGReportHeadTableViewCell.swift in Sources */,
 				E0762373202B2DE40073968F /* LGCreditCheckFlowViewController.swift in Sources */,
+				E09B42C22057B038001DEBCB /* LGRecommendCodeView.swift in Sources */,
 				E053F3B5201B2B010066FD1E /* LGCreditCardViewController.swift in Sources */,
 				E0532D2C2025AA1400020ED1 /* LGQuestionHeaderTableViewCell.swift in Sources */,
 				E0FBCC1B202569D400BC7DCC /* LGSettingTableViewCell.swift in Sources */,
@@ -993,6 +1003,7 @@
 				E05BA3D32020AA6D00E2D53D /* LGRecommendDetailInfoTableViewCell.swift in Sources */,
 				E05DDEC3203CFE9D00D44395 /* LGCreditReportModel.swift in Sources */,
 				E0B2139D2023F866000DEA4F /* LGHomeService.swift in Sources */,
+				E09B42BE20577E3C001DEBCB /* LGInviteCodeTableViewCell.swift in Sources */,
 				E04C75BC2022F7B500F56F0B /* LGNormalDetailApplyTableViewCell.swift in Sources */,
 				E030DA102039A96F0006AB89 /* LGReportRecommendTableViewCell.swift in Sources */,
 				E0B213992023F7DF000DEA4F /* LGHomeModel.swift in Sources */,
@@ -1025,6 +1036,7 @@
 				E077C79A2021A90600DDEDC0 /* LGDropBarCollectionViewCell.swift in Sources */,
 				E0E93A312024316900992FB3 /* Notification.swift in Sources */,
 				E0C8BBD6201B112F000D56F1 /* AppDelegate.swift in Sources */,
+				E09B42C02057B009001DEBCB /* LGProductRecommendCodeViewController.swift in Sources */,
 				E0FCD0352026E64600412CA4 /* LGEmptyTableViewCell.swift in Sources */,
 				E02AB1BB201F121300F90E69 /* LGRecommendDetailHeadTableViewCell.swift in Sources */,
 				E08E8D2C201C1F2E008A4FCC /* LGMineTableViewCell.swift in Sources */,

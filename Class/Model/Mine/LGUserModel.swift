@@ -44,9 +44,9 @@ class LGUserModel {
     var name: String?
     
     /// 芝麻分
-    var mark: String?
+    var mark: String?        
     
-    /// 用户是否需要验证码
+    /// 用户是否需要邀请码
     var isNeedInviteCode: Bool = true
     
     /// 用户登录成功

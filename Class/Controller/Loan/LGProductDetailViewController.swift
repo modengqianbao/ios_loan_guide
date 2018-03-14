@@ -12,6 +12,8 @@ import SnapKit
 class LGProductDetailViewController: LGViewController {
     /// 传入
     var model: LGLoanProductModel!
+    
+    private var detailTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,7 @@ class LGProductDetailViewController: LGViewController {
     private func setup() {
         title = "产品详情"
         
-        let detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
+        detailTableView = UITableView(frame: CGRect.zero, style: .grouped)
         detailTableView.backgroundColor = kColorSeperatorBackground
         detailTableView.rowHeight = UITableViewAutomaticDimension
         detailTableView.estimatedRowHeight = 80
@@ -42,6 +44,8 @@ class LGProductDetailViewController: LGViewController {
                                  forCellReuseIdentifier: LGProductDetailFlowTableViewCell.identifier)
         detailTableView.register(LGNormalDetailInfoTableViewCell.self,
                                  forCellReuseIdentifier: LGNormalDetailInfoTableViewCell.identifier)
+        detailTableView.register(LGInviteCodeTableViewCell.self,
+                                 forCellReuseIdentifier: LGInviteCodeTableViewCell.identifier)
         detailTableView.delegate = self
         detailTableView.dataSource = self
         view.addSubview(detailTableView)
@@ -54,7 +58,7 @@ class LGProductDetailViewController: LGViewController {
 //MARK:- UITableView delegate, datasource
 extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,8 +69,10 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
             return 1 + model.flowArray!.count
         } else if section == 2 {
             return 2
-        } else {
+        } else if section == 3{
             return 5
+        } else {
+            return 1
         }
     }
     
@@ -116,7 +122,7 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
                 cell.configCell(content: model.condition)
                 return cell
             }
-        } else {
+        } else if indexPath.section == 3 {
             // 审核说明
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LGRecommendTitleTableViewCell.identifier) as! LGRecommendTitleTableViewCell
@@ -135,7 +141,25 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
                 }
                 return cell
             }
+        } else {
+            // 经理人邀请码
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGInviteCodeTableViewCell.identifier) as! LGInviteCodeTableViewCell
+            cell.configCell(inviteCode: model.inviteCode)
+            
+            return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 4 {
+            // 点击了输入邀请码
+            if model.inviteCode == nil {
+                let recommendCodeVC = LGProductRecommendCodeViewController()
+                recommendCodeVC.delegate = self
+                present(recommendCodeVC, animated: true, completion: nil)
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -152,5 +176,12 @@ extension LGProductDetailViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+}
+
+extension LGProductDetailViewController: LGProductRecommendCodeViewControllerDelegate {
+    func recommendCodeViewController(_ codeViewController: LGProductRecommendCodeViewController, didCompleteWithCode code: String) {
+        model.inviteCode = code
+        detailTableView.reloadData()
     }
 }

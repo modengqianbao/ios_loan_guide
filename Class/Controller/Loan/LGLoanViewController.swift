@@ -125,29 +125,30 @@ extension LGLoanViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if model.loanArray.count != 0 {
-            let item = model.loanArray[indexPath.row]
-            if item.isRecommended {
-                // 特殊推荐需要登录
-                if LGUserModel.currentUser.isLogin {
+        if LGUserModel.currentUser.isLogin {
+            if model.loanArray.count != 0 {
+                let item = model.loanArray[indexPath.row]
+                if item.isRecommended {
+                    // 特殊推荐                    
                     let detailVC = LGRecommendDetailViewController()
                     detailVC.hidesBottomBarWhenPushed = true
                     detailVC.model = item
                     show(detailVC, sender: nil)
                     LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
                 } else {
-                    let loginVC = LGLoginViewController()
-                    let nc = LGNavigationController(rootViewController: loginVC)
-                    present(nc, animated: true, completion: nil)
+                    let detailVC = LGNormalDetailViewController()
+                    detailVC.hidesBottomBarWhenPushed = true
+                    detailVC.model = item
+                    show(detailVC, sender: nil)
+                    LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
                 }
-            } else {
-                let detailVC = LGNormalDetailViewController()
-                detailVC.hidesBottomBarWhenPushed = true
-                detailVC.model = item
-                show(detailVC, sender: nil)
-                LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
             }
+        } else {
+            let loginVC = LGLoginViewController()
+            let nc = LGNavigationController(rootViewController: loginVC)
+            present(nc, animated: true, completion: nil)
         }
+ 
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

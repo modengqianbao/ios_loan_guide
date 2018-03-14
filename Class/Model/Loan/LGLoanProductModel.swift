@@ -40,6 +40,8 @@ class LGLoanProductModel {
     /*-------------------------------------------------------*/
     // 详情
     var isDetailed = false
+    /// 中介邀请码
+    var inviteCode: String?
     /// 申请条件
     var condition: String?
     /// 审核周期
