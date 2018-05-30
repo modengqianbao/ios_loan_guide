@@ -25,6 +25,8 @@ class LGInviteCodeTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        backgroundColor = kColorBackground
+        
         let titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         titleLabel.textColor = kColorTitleText

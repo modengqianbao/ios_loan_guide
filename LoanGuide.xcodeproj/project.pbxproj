@@ -807,7 +807,7 @@
 				TargetAttributes = {
 					E0C8BBD1201B112F000D56F1 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1172,8 +1172,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LoanGuide.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2EPHDXDU97;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1185,8 +1186,8 @@
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoshudian.loanguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "e2396f2f-7d7a-4a57-a1df-a249fc560a36";
+				PROVISIONING_PROFILE_SPECIFIER = LoanGuide;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/App/LoanGuide-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1199,8 +1200,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LoanGuide.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2EPHDXDU97;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1212,8 +1214,8 @@
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoshudian.loanguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "e2396f2f-7d7a-4a57-a1df-a249fc560a36";
+				PROVISIONING_PROFILE_SPECIFIER = LoanGuide;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/App/LoanGuide-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

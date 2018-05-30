@@ -93,6 +93,8 @@ class LGNormalDetailViewController: LGViewController {
                                  forCellReuseIdentifier: LGNormalDetailFlowTableViewCell.identifier)
         detailTableView.register(LGNormalDetailInfoTableViewCell.self,
                                  forCellReuseIdentifier: LGNormalDetailInfoTableViewCell.identifier)
+        detailTableView.register(LGInviteCodeTableViewCell.self,
+                                 forCellReuseIdentifier: LGInviteCodeTableViewCell.identifier)
         detailTableView.delegate = self
         detailTableView.dataSource = self
         view.addSubview(detailTableView)
@@ -137,7 +139,7 @@ class LGNormalDetailViewController: LGViewController {
 
 extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -156,6 +158,9 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
         } else if section == 4 {
             // 产品介绍
             return 2
+        } else if section == 5 {
+            // 邀请码
+            return 1
         } else {
             // 立即申请
             return 1
@@ -252,7 +257,14 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
                 cell.configCell(content: model.introduction)
                 return cell
             }
+        } else if indexPath.section == 5 {
+            // 邀请码
+            let cell = tableView.dequeueReusableCell(withIdentifier: LGInviteCodeTableViewCell.identifier) as! LGInviteCodeTableViewCell
+            cell.configCell(inviteCode: model.inviteCode)
+            
+            return cell
         } else {
+            // 立即申请
             let cell = tableView.dequeueReusableCell(withIdentifier: LGNormalDetailApplyTableViewCell.identifier) as! LGNormalDetailApplyTableViewCell
             cell.configCell(title: "立即申请", enable: model.isDetailed)
             cell.delegate = self
@@ -260,8 +272,20 @@ extension LGNormalDetailViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 5 {
+            if model.inviteCode == nil {
+                let inviteVC = LGProductRecommendCodeViewController()
+                inviteVC.delegate = self
+                present(inviteVC, animated: true, completion: nil)
+            }
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section <= 3 {
+        if section <= 5 {
             return 12
         } else {
             return CGFloat.leastNormalMagnitude
@@ -301,5 +325,12 @@ extension LGNormalDetailViewController: LGNormalDetailApplyTableViewCellDelegate
         let url = URL(string: model.url!)
         let webVC = LGWebViewController(url: url!)
         show(webVC!, sender: nil)
+    }
+}
+
+extension LGNormalDetailViewController: LGProductRecommendCodeViewControllerDelegate {
+    func recommendCodeViewController(_ codeViewController: LGProductRecommendCodeViewController, didCompleteWithCode code: String) {
+        model.inviteCode = code
+        detailTableView.reloadData()
     }
 }

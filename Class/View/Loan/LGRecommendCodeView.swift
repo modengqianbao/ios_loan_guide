@@ -77,7 +77,7 @@ class LGRecommendCodeView: UIView {
         t.tintColor = UIColor.clear // 隐藏光标
         t.textAlignment = .center
         t.textColor = kColorTitleText
-        t.keyboardType = .default
+        t.keyboardType = .asciiCapable
         t.backgroundColor = UIColor.clear
         t.layer.borderColor = kColorBorder.cgColor
         t.layer.borderWidth = 1

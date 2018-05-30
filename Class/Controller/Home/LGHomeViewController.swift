@@ -109,6 +109,27 @@ class LGHomeViewController: LGViewController {
         let nc = LGNavigationController(rootViewController: loginVC)
         present(nc, animated: true, completion: nil)
     }
+    
+    private func showDetail(withLoanItem loanItem: LGLoanProductModel) {
+        if LGUserModel.currentUser.isLogin {
+            if loanItem.isRecommended {
+                let detailVC = LGRecommendDetailViewController()
+                detailVC.model = loanItem
+                detailVC.hidesBottomBarWhenPushed = true
+                show(detailVC, sender: nil)
+            } else {
+                let detailVC = LGNormalDetailViewController()
+                detailVC.model = loanItem
+                detailVC.hidesBottomBarWhenPushed = true
+                show(detailVC, sender: nil)
+            }
+        } else {
+            // 未登录弹出登录框
+            let loginVC = LGLoginViewController()
+            let nc = LGNavigationController(rootViewController: loginVC)
+            present(nc, animated: true, completion: nil)
+        }
+    }
 }
 
 //MAKR:- UITableView delegate, datasource
@@ -206,24 +227,8 @@ extension LGHomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         } else if indexPath.section == 1 {
-            if LGUserModel.currentUser.isLogin {
-                let loanItem = model.loanProductArray[indexPath.row]
-                if loanItem.isRecommended {
-                    let detailVC = LGRecommendDetailViewController()
-                    detailVC.model = loanItem
-                    detailVC.hidesBottomBarWhenPushed = true
-                    show(detailVC, sender: nil)
-                    LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
-                } else {
-                    let detailVC = LGNormalDetailViewController()
-                    detailVC.model = loanItem
-                    detailVC.hidesBottomBarWhenPushed = true
-                    show(detailVC, sender: nil)
-                    LGUserService.sharedService.recordBehavior(behavior: .clickLoanProduct, complete: nil)
-                }
-            } else {
-                showLogin()
-            }
+            let loanItem = model.loanProductArray[indexPath.row]
+            showDetail(withLoanItem: loanItem)           
         } else {
             if LGUserModel.currentUser.isLogin {
                 let creditItem = model.creditProductArray[indexPath.row]
@@ -256,46 +261,16 @@ extension LGHomeViewController: LGRecommendTableViewCellDelegate {
     func recommendTableViewCellDidSelectLeftBanner(cell: LGRecommendTableViewCell) {
         let bannerModel = model.bannerArray[0]
         let loanItem = LGLoanProductModel(bannerModel: bannerModel)
-        if loanItem.isRecommended {
-            if LGUserModel.currentUser.isLogin {
-                let detailVC = LGRecommendDetailViewController()
-                detailVC.model = loanItem
-                detailVC.hidesBottomBarWhenPushed = true
-                show(detailVC, sender: nil)
-            } else {
-                let loginVC = LGLoginViewController()
-                let nc = LGNavigationController(rootViewController: loginVC)
-                present(nc, animated: true, completion: nil)
-            }
-        } else {
-            let detailVC = LGNormalDetailViewController()
-            detailVC.model = loanItem
-            detailVC.hidesBottomBarWhenPushed = true
-            show(detailVC, sender: nil)
-        }
+        showDetail(withLoanItem: loanItem)
+        
         LGUserService.sharedService.recordBehavior(behavior: .clickBanner, complete: nil)
     }
     
     func recommendTableViewCellDidSelectRightBanner(cell: LGRecommendTableViewCell) {
         let bannerModel = model.bannerArray[1]
         let loanItem = LGLoanProductModel(bannerModel: bannerModel)
-        if loanItem.isRecommended {
-            if LGUserModel.currentUser.isLogin {
-                let detailVC = LGRecommendDetailViewController()
-                detailVC.model = loanItem
-                detailVC.hidesBottomBarWhenPushed = true
-                show(detailVC, sender: nil)
-            } else {
-                let loginVC = LGLoginViewController()
-                let nc = LGNavigationController(rootViewController: loginVC)
-                present(nc, animated: true, completion: nil)
-            }
-        } else {
-            let detailVC = LGNormalDetailViewController()
-            detailVC.model = loanItem
-            detailVC.hidesBottomBarWhenPushed = true
-            show(detailVC, sender: nil)
-        }
+        showDetail(withLoanItem: loanItem)
+
         LGUserService.sharedService.recordBehavior(behavior: .clickBanner, complete: nil)
     }
 }
